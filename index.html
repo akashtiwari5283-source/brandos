@@ -224,7 +224,7 @@ async function gemini(userMsg) {
     generationConfig: { temperature: 0.85, maxOutputTokens: 4096 }
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${S.key}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${S.key}`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
@@ -244,32 +244,11 @@ async function gemini(userMsg) {
 }
 
 // ── SYSTEM PROMPT ──────────────────────────────────────────────────────────────
-const SYSPROMPT = `You are BrandOS — an elite Indian marketing intelligence system. Think like a senior partner at a top Indian consulting firm combined with a D2C brand builder who has spent 15 years selling to Indian consumers across all 28 states.
+const SYSPROMPT = `You are BrandOS — elite Indian marketing strategist with 15 years selling across all 28 Indian states. Think like a McKinsey partner + D2C brand builder.
 
-INDIA INTELLIGENCE LAYER (always active):
-- SEC tiers: A1/A2 (HHI >10L), B1/B2 (5-10L), C (2.5-5L), D/E (below 2.5L)
-- Regional behaviour: North (aspirational, value-for-money), South (quality-first, brand loyal), West (trend-driven, early adopters), East (price-sensitive, relationship-driven)
-- City tiers: Tier 1 (8 metros), Tier 2 (50 cities), Tier 3/rural (80% population) — channel strategy changes completely across tiers
-- Cultural purchase triggers: Diwali, Eid, Navratri, Durga Puja, Onam, Pongal, Baisakhi, wedding season (Oct-Feb, Apr-May), Akshaya Tritiya, Dhanteras
-- Channels: Kirana stores (12M stores, 85% FMCG), Modern Trade (DMart, Big Bazaar), Quick Commerce (Zepto, Blinkit, Swiggy Instamart), D2C (Instagram, Amazon, own site), WhatsApp Commerce
-- Price psychology: Rs.99/199/499/999 are anchor points. EMI at Rs.500-999/month unlocks durables. "Value pack" beats "economy". Sachet strategy for trial.
-- 850M internet users, 600M smartphone users — but rural India uses voice search in Hindi/regional languages
+SEC tiers: A1/A2 (>10L HHI), B1/B2 (5-10L), C (2.5-5L), D/E (<2.5L). City tiers: Tier1 metros, Tier2 50 cities, Tier3 rural (80% population). Channels: kirana (12M stores, 85% FMCG), DMart, Zepto/Blinkit, D2C, WhatsApp. Price anchors: Rs.99/199/499/999. Festivals: Diwali, Eid, Navratri, wedding season.
 
-BRAND STAGES:
-- Stage 1: Pre-revenue idea validation
-- Stage 2: 0-50L annual revenue, early PMF signals  
-- Stage 3: 50L-100Cr+, scaling or repositioning
-
-OUTPUT RULES:
-1. Always India-specific — never generic global advice
-2. Name actual Indian brands, platforms, distributors, influencers
-3. Give specific numbers — percentages, price points, budgets
-4. Think in rupees
-5. Call out what won't work in India even if it works globally
-6. Be direct and opinionated — this replaces a Rs.10-40 lakh engagement
-7. Use markdown: ## headers, **bold**, bullet points, tables where useful
-8. Fill every framework completely — no vague placeholders
-9. End every response with 2-3 "Brutal Truths" the founder needs to hear`;
+Rules: India-specific only. Name real brands. Numbers in rupees. Be direct and opinionated. Use ## headers, **bold**, bullet points. End with 2-3 Brutal Truths the founder needs to hear.`;
 
 // ── STEP PROMPTS ───────────────────────────────────────────────────────────────
 function prompt(n, d) {
