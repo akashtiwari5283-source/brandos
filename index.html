@@ -4,1292 +4,963 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BrandOS — Indian Marketing Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0b;--s1:#111114;--s2:#1a1a1f;--s3:#22222a;--b1:#2a2a35;--b2:#383844;--acc:#ff6b2b;--acc2:#ff9f5a;--glow:rgba(255,107,43,0.12);--gold:#f5c842;--tx:#f0eff5;--tx2:#9090a0;--tx3:#555560;--grn:#3dd68c;--red:#ff4d6a;}
+:root {
+  --bg:#0a0a0b; --surface:#111114; --surface2:#1a1a1f; --surface3:#22222a;
+  --border:#2a2a35; --border2:#353545;
+  --accent:#ff6b2b; --accent2:#ff9f5a; --glow:rgba(255,107,43,0.15);
+  --gold:#f5c842; --text:#f0eff5; --text2:#9998aa; --text3:#605f70;
+  --green:#3dd68c; --red:#ff4d6a;
+}
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;overflow:hidden;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
 .app{display:flex;height:100vh;overflow:hidden;}
 
 /* SIDEBAR */
-.sb{width:240px;min-width:240px;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;height:100vh;}
-.logo{padding:20px 18px 16px;border-bottom:1px solid var(--b1);flex-shrink:0;}
-.logo-t{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;}
-.logo-t span{color:var(--acc);}
-.logo-s{font-size:10.5px;color:var(--tx3);font-family:'DM Mono',monospace;margin-top:3px;letter-spacing:.07em;text-transform:uppercase;}
-.steps{flex:1;overflow-y:auto;padding:8px 0;}
+.sidebar{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
+.steps{flex:1;overflow-y:auto;padding:10px 0;}
 .steps::-webkit-scrollbar{width:3px;}
-.steps::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
-.si{display:flex;align-items:center;gap:10px;padding:8px 16px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
-.si:hover{background:var(--s2);}
-.si.active{background:var(--glow);border-left-color:var(--acc);}
-.si.done{opacity:1;}
-.sn{width:22px;height:22px;border-radius:50%;background:var(--s3);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--tx3);flex-shrink:0;}
-.si.active .sn{background:var(--acc);color:#fff;border-color:var(--acc);}
-.si.done .sn{background:var(--grn);color:#000;border-color:var(--grn);}
-.sl{font-size:12px;color:var(--tx2);line-height:1.3;}
-.si.active .sl{color:var(--tx);font-weight:500;}
-.sb-foot{padding:12px 16px;border-top:1px solid var(--b1);flex-shrink:0;font-size:11px;color:var(--tx3);font-family:'DM Mono',monospace;display:flex;align-items:center;gap:7px;}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--grn);animation:blink 2s infinite;}
+.steps::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.si{display:flex;align-items:center;gap:11px;padding:9px 18px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
+.si:hover{background:var(--surface2);}
+.si.active{background:var(--glow);border-left-color:var(--accent);}
+.snum{width:24px;height:24px;border-radius:50%;background:var(--surface3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);flex-shrink:0;transition:all .2s;}
+.si.active .snum{background:var(--accent);color:#fff;border-color:var(--accent);}
+.si.done .snum{background:var(--green);color:#000;border-color:var(--green);}
+.slabel{font-size:12.5px;color:var(--text2);line-height:1.3;}
+.si.active .slabel{color:var(--text);font-weight:500;}
+.sidebar-foot{padding:14px 18px;border-top:1px solid var(--border);flex-shrink:0;}
+.api-dot-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
-.tb{padding:12px 26px;border-bottom:1px solid var(--b1);background:var(--s1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.tb-l{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--tx2);}
-.tb-l b{color:var(--acc);}
-.badge{font-family:'DM Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:20px;background:var(--s3);border:1px solid var(--b2);color:var(--tx3);}
-.badge.on{color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.07);}
+.topbar{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);flex-shrink:0;}
+.topbar-left{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text2);}
+.topbar-left b{color:var(--accent);}
+.sbadge{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;background:var(--surface3);border:1px solid var(--border2);color:var(--text3);}
+.sbadge.on{color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.08);}
 
-.content{flex:1;overflow-y:auto;padding:24px 28px;display:flex;flex-direction:column;gap:20px;min-height:0;}
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:22px;min-height:0;}
 .content::-webkit-scrollbar{width:5px;}
-.content::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
+.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 
-.botnav{padding:12px 26px;border-top:1px solid var(--b1);background:var(--s1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.ni{font-size:11px;color:var(--tx3);font-family:'DM Mono',monospace;}
+/* BOTTOM NAV */
+.botnav{padding:14px 28px;border-top:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.navinfo{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;}
 
 /* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;}
-.bp{background:var(--acc);color:#fff;}
-.bp:hover{background:var(--acc2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,107,43,.3);}
-.bg{background:var(--s2);border:1px solid var(--b2);color:var(--tx2);}
-.bg:hover{border-color:var(--b1);color:var(--tx);}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .15s;}
+.btn-p{background:var(--accent);color:#fff;}
+.btn-p:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 18px rgba(255,107,43,.3);}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-g{background:var(--surface2);border:1px solid var(--border2);color:var(--text2);}
+.btn-g:hover{border-color:var(--border);color:var(--text);}
+
+/* WELCOME */
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:65vh;text-align:center;gap:18px;padding:20px;}
+.wicon{width:68px;height:68px;background:var(--glow);border:1px solid rgba(255,107,43,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:4px;}
+.welcome h1{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;line-height:1.2;}
+.welcome h1 em{color:var(--accent);font-style:normal;}
+.welcome p{font-size:14.5px;color:var(--text2);max-width:460px;line-height:1.75;}
+.wtags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 11px;border-radius:20px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);}
+.api-box{width:100%;max-width:440px;background:var(--surface2);border:1px solid rgba(245,200,66,.25);border-radius:13px;padding:22px;margin-top:4px;}
+.api-box h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:7px;}
+.api-box p{font-size:13px;color:var(--text2);margin-bottom:15px;line-height:1.6;}
+.api-box a{color:var(--accent);text-decoration:none;}
+.api-box a:hover{text-decoration:underline;}
 
 /* CARD */
-.card{background:var(--s1);border:1px solid var(--b1);border-radius:13px;}
-.ch{padding:16px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;gap:12px;}
-.cbadge{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--acc);background:var(--glow);border:1px solid rgba(255,107,43,.2);padding:3px 8px;border-radius:6px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-.ct{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
-.cd{font-size:12.5px;color:var(--tx2);margin-top:3px;line-height:1.5;}
-.cb{padding:20px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;}
+.card-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px;}
+.card-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--glow);border:1px solid rgba(255,107,43,.25);padding:4px 9px;border-radius:7px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.card-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;}
+.card-desc{font-size:13px;color:var(--text2);margin-top:3px;line-height:1.55;}
+.card-body{padding:22px;}
 
 /* FORM */
-label{display:block;font-size:12.5px;color:var(--tx2);margin-bottom:6px;font-weight:500;}
-label span{color:var(--acc);}
-input[type=text],textarea,select{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:8px;padding:10px 13px;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;}
-input:focus,textarea:focus,select:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--glow);}
-select option{background:var(--s2);}
-.fr{margin-bottom:16px;}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+label{display:block;font-size:13px;color:var(--text2);margin-bottom:7px;font-weight:500;}
+label span{color:var(--accent);}
+input[type=text],textarea,select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow);}
+select option{background:var(--surface2);}
+.frow{margin-bottom:18px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 
-/* OUTPUT */
-.out{background:var(--s2);border:1px solid var(--b1);border-radius:11px;padding:20px;margin-top:16px;}
-.out-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--b1);}
-.out-label{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--grn);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.07em;}
-.out-label::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--grn);}
-.out-body{font-size:13.5px;line-height:1.9;color:var(--tx);}
-.out-body h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--acc);margin:0 0 14px;}
-.out-body h3{font-family:'Syne',sans-serif;font-size:14.5px;font-weight:700;color:var(--tx);margin:20px 0 8px;padding-top:14px;border-top:1px solid var(--b1);}
-.out-body h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--acc2);margin:14px 0 6px;}
-.out-body strong{color:var(--acc2);font-weight:600;}
-.out-body em{color:var(--gold);font-style:normal;}
-.out-body ul{padding-left:18px;margin:8px 0;}
-.out-body li{margin:5px 0;}
-.out-body p{margin:8px 0;}
-.out-body table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
-.out-body th{background:var(--s3);padding:7px 11px;text-align:left;font-weight:600;border:1px solid var(--b2);color:var(--acc2);}
-.out-body td{padding:6px 11px;border:1px solid var(--b2);color:var(--tx2);}
-.out-body hr{border:none;border-top:1px solid var(--b1);margin:16px 0;}
-.out-body .brutal{background:rgba(255,77,106,.08);border:1px solid rgba(255,77,106,.2);border-radius:8px;padding:14px 16px;margin-top:16px;}
-.out-body .brutal h4{color:var(--red);margin-top:0;}
+/* CONTEXT BAR */
+.ctx{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:16px 20px;}
+.ctx h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text3);margin-bottom:11px;text-transform:uppercase;letter-spacing:.06em;}
+.ctx-row{display:flex;gap:10px;margin-bottom:8px;font-size:13px;}
+.ctx-k{color:var(--text3);font-family:'DM Mono',monospace;min-width:110px;}
+.ctx-v{color:var(--text);}
 
-/* CTX */
-.ctx{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:14px 18px;display:flex;gap:24px;flex-wrap:wrap;}
-.cx{display:flex;flex-direction:column;gap:2px;}
-.ck{font-size:10.5px;color:var(--tx3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em;}
-.cv{font-size:13px;color:var(--tx);}
+/* RESPONSE */
+.rbox{background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:22px;margin-top:18px;}
+.rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.rlabel{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.07em;}
+.rlabel::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+.rcontent{font-size:13.5px;line-height:1.9;color:var(--text);word-break:break-word;overflow-wrap:break-word;}
+.rcontent h2{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--accent);margin:0 0 14px;}
+.rcontent h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin:22px 0 9px;padding-top:14px;border-top:1px solid var(--border);}
+.rcontent h4{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--accent2);margin:16px 0 7px;}
+.rcontent strong{color:var(--accent2);font-weight:600;}
+.rcontent em{color:var(--gold);font-style:normal;}
+.rcontent ul{padding-left:18px;margin:8px 0;}
+.rcontent li{margin:5px 0;}
+.rcontent p{margin:9px 0;}
+.rcontent table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
+.rcontent th{background:var(--surface3);padding:8px 12px;text-align:left;font-weight:600;border:1px solid var(--border2);}
+.rcontent td{padding:7px 12px;border:1px solid var(--border2);color:var(--text2);}
+.rcontent hr{border:none;border-top:1px solid var(--border);margin:18px 0;}
+
+/* LOADING */
+.loading{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:11px;margin-top:18px;}
+.spin{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-size:13.5px;color:var(--text2);}
+.lsub{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:3px;}
 
 /* CHIPS */
-.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
-.chip{font-size:11px;font-family:'DM Mono',monospace;padding:3px 9px;border-radius:5px;background:var(--s3);border:1px solid var(--b2);color:var(--tx3);}
-.chip.g{color:var(--grn);border-color:rgba(61,214,140,.2);background:rgba(61,214,140,.06);}
-.chip.o{color:var(--acc);border-color:rgba(255,107,43,.2);background:var(--glow);}
-.chip.gd{color:var(--gold);border-color:rgba(245,200,66,.2);background:rgba(245,200,66,.06);}
-
-/* SCORE */
-.score-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0;}
-.sc{background:var(--s3);border:1px solid var(--b2);border-radius:10px;padding:14px 10px;text-align:center;}
-.sc-val{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--acc);}
-.sc-lbl{font-size:10.5px;color:var(--tx3);margin-top:4px;line-height:1.3;}
-.score-total{text-align:center;padding:16px;background:var(--glow);border:1px solid rgba(255,107,43,.25);border-radius:10px;margin-top:8px;}
-.score-total .big{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--acc);}
-.score-total .verdict{font-size:13px;color:var(--tx2);margin-top:4px;}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;}
+.chip{font-size:11px;font-family:'DM Mono',monospace;padding:4px 10px;border-radius:6px;background:var(--surface3);border:1px solid var(--border2);color:var(--text3);}
+.chip.g{color:var(--green);border-color:rgba(61,214,140,.2);background:rgba(61,214,140,.07);}
+.chip.o{color:var(--accent);border-color:rgba(255,107,43,.25);background:var(--glow);}
+.chip.gld{color:var(--gold);border-color:rgba(245,200,66,.2);background:rgba(245,200,66,.07);}
 
 /* TOAST */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--s1);border:1px solid var(--b2);border-radius:8px;padding:11px 16px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:999;transform:translateY(14px);opacity:0;transition:all .25s;max-width:280px;}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:12px 18px;font-size:13px;color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.4);z-index:999;transform:translateY(16px);opacity:0;transition:all .25s;max-width:300px;}
 .toast.show{transform:translateY(0);opacity:1;}
-.toast.ok{border-color:rgba(61,214,140,.3);}
+.toast.ok{border-color:rgba(61,214,140,.35);}
+.toast.err{border-color:rgba(255,77,106,.35);color:var(--red);}
 
-@media print{.sb,.tb,.botnav,.btn{display:none!important;}.main{width:100%;}.content{padding:16px;}body{background:#fff;color:#000;}.out{background:#f9f9f9;border:1px solid #ddd;}.out-body h3{border-top:1px solid #ddd;color:#000;}.out-body h2{color:#ff6b2b;}}
+@media print{.sidebar,.topbar,.botnav,.btn,.api-box{display:none!important;}.main{width:100%;}.content{padding:16px;}body{background:#fff;color:#000;}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sb">
-  <div class="logo">
-    <div class="logo-t">Brand<span>OS</span></div>
-    <div class="logo-s">Indian Marketing Intelligence</div>
-  </div>
-  <div class="steps" id="sbSteps"></div>
-  <div class="sb-foot"><div class="dot"></div>No API needed · 100% Free</div>
-</aside>
-<main class="main">
-  <div class="tb">
-    <div class="tb-l">Step <b id="tStep">1</b> · <span id="tName">Brand Brief</span></div>
-    <div class="badge on" id="tBadge">Stage not set</div>
-  </div>
-  <div class="content" id="content"></div>
-  <div class="botnav">
-    <button class="btn bg" id="bPrev" onclick="nav(-1)">← Prev</button>
-    <div class="ni" id="ni">Step 1 of 13</div>
-    <button class="btn bg" id="bNext" onclick="nav(1)">Next →</button>
-  </div>
-</main>
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <div class="logo">Brand<span>OS</span></div>
+      <div class="logo-sub">Indian Marketing Intelligence</div>
+    </div>
+    <div class="steps" id="sidebarSteps"></div>
+    <div class="sidebar-foot">
+      <div class="api-dot-row"><div class="dot"></div><span>Gemini 2.0 Flash Lite</span></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left">Step <b id="tStep">—</b> · <span id="tName">Welcome</span></div>
+      <div class="sbadge" id="tBadge">Stage not set</div>
+    </div>
+    <div class="content" id="content"></div>
+    <div class="botnav">
+      <button class="btn btn-g" id="btnPrev" onclick="nav(-1)">← Prev</button>
+      <div class="navinfo" id="navInfo">— of 13</div>
+      <button class="btn btn-g" id="btnNext" onclick="nav(1)">Next →</button>
+    </div>
+  </main>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── STATE ────────────────────────────────────────────────────────────────────
+// ── STATE ──────────────────────────────────────────────────────────────────────
 const S = {
-  step: 1,
+  key: 'AIzaSyDokl7yirUdJ8-ddpiCinrMdUADhLa2dwA',
+  step: 0,
   done: new Set(),
-  b: {}, // brand data
-  out: {}, // step outputs
+  brand: {},
+  resp: {},    // step responses {n: {out, inp}}
   stage: ''
 };
 
 const STEPS = [
-  'Brand Brief Intake','Consumer Personas','MarketFit Score',
-  'TAM / SAM / SOM','Competitor Map','Framework Battery',
-  'Challenger Positioning','PriceSense','GTM 90-Day Plan',
-  'Budget Allocator','Risk Flags','Open Q&A','Final Report'
+  {id:1,  label:'Brand Brief Intake'},
+  {id:2,  label:'Consumer Persona Builder'},
+  {id:3,  label:'MarketFit Score'},
+  {id:4,  label:'Market Sizing TAM/SAM/SOM'},
+  {id:5,  label:'Competitor Intelligence'},
+  {id:6,  label:'Framework Battery'},
+  {id:7,  label:'Challenger Positioning'},
+  {id:8,  label:'PriceSense — Pricing'},
+  {id:9,  label:'GTM Sequencer 90 Days'},
+  {id:10, label:'Budget Allocator'},
+  {id:11, label:'Risk Flags'},
+  {id:12, label:'Open Q&A'},
+  {id:13, label:'Final Consultancy Report'},
 ];
 
-// ─── SIDEBAR ──────────────────────────────────────────────────────────────────
-function renderSB() {
-  document.getElementById('sbSteps').innerHTML = STEPS.map((l,i) => {
-    const n = i+1;
-    return `<div class="si ${S.step===n?'active':''} ${S.done.has(n)?'done':''}" onclick="goStep(${n})">
-      <div class="sn">${S.done.has(n)?'✓':n}</div>
-      <div class="sl">${l}</div>
-    </div>`;
-  }).join('');
-  document.getElementById('tStep').textContent = S.step;
-  document.getElementById('tName').textContent = STEPS[S.step-1];
-  document.getElementById('ni').textContent = `Step ${S.step} of 13`;
-  document.getElementById('tBadge').className = 'badge' + (S.stage?' on':'');
-  document.getElementById('tBadge').textContent = S.stage || 'Stage not set';
-  document.getElementById('bPrev').style.visibility = S.step<=1?'hidden':'visible';
-  document.getElementById('bNext').style.visibility = S.step>=13?'hidden':'visible';
-}
+// ── GEMINI API ─────────────────────────────────────────────────────────────────
+async function gemini(userMsg) {
+  const contents = [];
+  contents.push({ role:'user', parts:[{text: 'You are BrandOS. Instructions:\n' + SYSPROMPT + '\nAcknowledge in 5 words.'}] });
+  contents.push({ role:'model', parts:[{text: 'Ready. BrandOS India intelligence activated.'}] });
+  for (let i = 1; i <= 13; i++) {
+    if (S.resp[i]) {
+      contents.push({ role:'user',  parts:[{text: S.resp[i].inp}] });
+      contents.push({ role:'model', parts:[{text: S.resp[i].out}] });
+    }
+  }
+  contents.push({ role:'user', parts:[{text: userMsg}] });
+  const body = { contents, generationConfig: { temperature: 0.85, maxOutputTokens: 4096 } };
 
-function nav(d) { const n=S.step+d; if(n>=1&&n<=13) goStep(n); }
-
-function goStep(n) {
-  S.step = n; renderSB();
-  const fns = [s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13];
-  fns[n-1]();
-}
-
-// ─── HELPERS ──────────────────────────────────────────────────────────────────
-function v(id){const e=document.getElementById(id);return e?e.value.trim():'';}
-function set(html){document.getElementById('content').innerHTML=html; document.getElementById('content').scrollTop=0;}
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.className='toast ok show';setTimeout(()=>t.className='toast',3000);}
-function ctxBar(){
-  if(!S.b.brand) return '';
-  return `<div class="ctx">
-    <div class="cx"><div class="ck">Brand</div><div class="cv">${S.b.brand}</div></div>
-    <div class="cx"><div class="ck">Stage</div><div class="cv">${S.stage||'—'}</div></div>
-    <div class="cx"><div class="ck">Location</div><div class="cv">${S.b.loc||'—'}</div></div>
-    <div class="cx"><div class="ck">Revenue</div><div class="cv">${S.b.rev||'—'}</div></div>
-  </div>`;
-}
-function outBox(title, html) {
-  return `<div class="out">
-    <div class="out-head"><div class="out-label">${title}</div>
-    <button class="btn bg" style="font-size:11px;padding:4px 10px;" onclick="window.print()">🖨️ Print</button></div>
-    <div class="out-body">${html}</div>
-  </div>`;
-}
-
-// ─── STEP 1: BRAND BRIEF ──────────────────────────────────────────────────────
-function s1() {
-  const prev = S.out[1] ? outBox('Brand Analysis', S.out[1]) : '';
-  set(`<div class="card">
-    <div class="ch"><div class="cbadge">Step 1 · 📋</div><div>
-      <div class="ct">Brand Brief Intake</div>
-      <div class="cd">Tell BrandOS everything. The more detail, the sharper every step that follows.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fg">
-        <div class="fr"><label>Brand Name <span>*</span></label>
-          <input type="text" id="f1" value="${S.b.brand||'MP Sharbati Atta'}"></div>
-        <div class="fr"><label>Brand Stage <span>*</span></label>
-          <select id="f2">
-            <option value="">Select...</option>
-            <option value="Stage 1 — New Idea" ${S.b.stage?.includes('1')?'selected':''}>Stage 1 — New Idea (pre-revenue)</option>
-            <option value="Stage 2 — Early Brand" ${(!S.b.stage||S.b.stage?.includes('2'))?'selected':''}>Stage 2 — Early Brand (some sales)</option>
-            <option value="Stage 3 — Established" ${S.b.stage?.includes('3')?'selected':''}>Stage 3 — Established (scaling)</option>
-          </select></div>
-      </div>
-      <div class="fr"><label>Product Description <span>*</span></label>
-        <textarea id="f3" rows="2">${S.b.prod||'Premium MP Sharbati wheat atta — single-origin, stone-ground, zero additives or bleaching'}</textarea></div>
-      <div class="fg">
-        <div class="fr"><label>Geography / Launch Market</label>
-          <input type="text" id="f4" value="${S.b.loc||'Delhi NCR, targeting North India'}"></div>
-        <div class="fr"><label>Current Annual Revenue</label>
-          <input type="text" id="f5" value="${S.b.rev||'₹10 crore'}"></div>
-      </div>
-      <div class="fr"><label>Target Customer</label>
-        <input type="text" id="f6" value="${S.b.target||'Health-conscious homemakers, SEC A/B, 28-45 yrs, Delhi NCR'}"></div>
-      <div class="fr"><label>Current Channels</label>
-        <input type="text" id="f7" value="${S.b.ch||'Local kirana, some DMart'}"></div>
-      <div class="fr"><label>Your USP — Why choose you over Aashirvaad?</label>
-        <textarea id="f8" rows="2">${S.b.usp||'Single-origin MP Sharbati wheat, traditional stone grinding, zero additives — visibly different taste'}</textarea></div>
-      <div class="fr"><label>Monthly Marketing Budget</label>
-        <input type="text" id="f9" value="${S.b.budget||'₹5-8 lakh/month'}"></div>
-      <div class="fr"><label>Key Competitors / Anything else</label>
-        <textarea id="f10" rows="2">${S.b.notes||'Main competitor Aashirvaad (ITC) ~60% packaged atta share. Also Pillsbury, Fortune.'}</textarea></div>
-      <div style="margin-top:18px;"><button class="btn bp" onclick="run1()">Generate Brand Analysis →</button></div>
-    </div>
-  </div>${prev}`);
-}
-
-function run1() {
-  const brand=v('f1'), stage=v('f2');
-  if(!brand||!stage){toast('Fill brand name and stage');return;}
-  S.b = {brand,stage,prod:v('f3'),loc:v('f4'),rev:v('f5'),target:v('f6'),ch:v('f7'),usp:v('f8'),budget:v('f9'),notes:v('f10')};
-  S.stage = stage;
-  renderSB();
-
-  const stageNum = stage.includes('1')?1:stage.includes('2')?2:3;
-  const stageAdvice = stageNum===1
-    ? 'Focus on validation first — find 100 customers before spending on marketing.'
-    : stageNum===2
-    ? 'You have PMF signals. Now build distribution depth before going wide.'
-    : 'Scale what works. Do not rebuild what already has traction.';
-
-  const html = `<h2>${brand} — Brand Analysis</h2>
-<h3>Brand Snapshot</h3>
-<p><strong>${brand}</strong> is a ${S.b.prod} brand targeting ${S.b.target} in ${S.b.loc}. Currently at ${S.b.rev} revenue, operating through ${S.b.ch}.</p>
-
-<h3>The Real Opportunity</h3>
-<p>Indian packaged atta is a <strong>₹25,000+ crore market</strong> dominated by Aashirvaad with ~60% share — but dominated on distribution, not quality. There is a clear white space for a <strong>provenance-led, quality-first brand</strong> targeting SEC A/B consumers who are willing to pay a premium for traceability and health credentials. The opportunity is not to beat Aashirvaad at their game — it is to own the <em>premium artisanal atta</em> position they have deliberately vacated.</p>
-
-<h3>Initial Positioning Hypothesis</h3>
-<p>Position as <strong>"The atta that tastes like your grandmother's"</strong> — nostalgia + quality + origin story. The Sharbati wheat of Madhya Pradesh is a legitimate differentiator with a story to tell. Stone-grinding is a verifiable process claim. This is a brand that can charge <strong>₹80-120 per kg</strong> vs Aashirvaad's ₹35-45 without apology.</p>
-
-<h3>Three Critical Questions</h3>
-<ul>
-  <li>Can you guarantee consistent sourcing from the same Sharbati wheat belt farmers — this is your moat?</li>
-  <li>What is your cost of production per kg and what gross margin does ₹80-100/kg give you?</li>
-  <li>Do you have distribution relationships in Delhi NCR kirana or are you starting from zero?</li>
-</ul>
-
-<h3>Stage Assessment — ${stage}</h3>
-<p>${stageAdvice}</p>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>Aashirvaad is not your real enemy.</strong> Your real enemy is consumer inertia — people buy atta on autopilot. You need a reason so strong it breaks a decade-old habit.</li>
-    <li><strong>Taste is not enough.</strong> Every premium atta brand says it tastes better. You need a proof mechanism — farm visits, QR codes to the source farm, third-party nutrition tests.</li>
-    <li><strong>Delhi NCR kirana is expensive to crack.</strong> Distributor margins of 8-10% + retailer margins of 15-18% + promoter costs will eat your margin if your MRP is not set correctly from Day 1.</li>
-  </ul>
-</div>`;
-
-  S.out[1] = html; S.done.add(1); renderSB(); s1();
-  toast('Step 1 complete! ✓');
-}
-
-// ─── STEP 2: PERSONAS ─────────────────────────────────────────────────────────
-function s2() {
-  const prev = S.out[2] ? outBox('Consumer Personas', S.out[2]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 2 · 👤</div><div>
-      <div class="ct">Indian Consumer Persona Builder</div>
-      <div class="cd">3 real Indian personas with purchase triggers, cultural context, and channel behaviour.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Any specific segment to focus on? (optional)</label>
-        <input type="text" id="p1" placeholder="e.g., working women Tier 2, health-conscious men 30-40..."></div>
-      <div style="margin-top:16px;"><button class="btn bp" onclick="run2()">Build Personas →</button></div>
-    </div>
-  </div>${prev}`);
-}
-
-function run2() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const brand = S.b.brand;
-  const html = `<h2>${brand} — Consumer Personas</h2>
-
-<h3>Persona 1: Priya Sharma — The Conscious Urban Mom</h3>
-<p><strong>35 years | South Delhi | SEC A2 | HHI ₹18L/year | Nuclear family of 4</strong></p>
-<h4>Daily Life</h4>
-<p>Wakes at 6am, makes rotis for school tiffins. Uses Blinkit/Zepto for daily groceries. Reads ingredient labels. Follows nutrition influencers on Instagram. Already switched to organic vegetables — atta is the next frontier.</p>
-<h4>Purchase Trigger</h4>
-<p>A Reels video showing stone-grinding process + a dietitian she follows mentions Sharbati wheat's low GI. She orders a 5kg trial on Blinkit same day.</p>
-<h4>Price Sensitivity</h4>
-<p>Will pay <strong>₹95-120 for 5kg</strong> without hesitation if quality is verified. Price is not the objection — <em>proof</em> is.</p>
-<h4>Channel</h4><p>Primarily Blinkit/Zepto (quick commerce). Also Amazon Subscribe & Save for regular orders.</p>
-<h4>The Non-Obvious Insight</h4>
-<p>She doesn't want to feel guilty. She buys premium atta not just for health — but so she can tell herself she's being a good mother. The emotional job is <em>absolution</em>.</p>
-
-<h3>Persona 2: Rakesh Gupta — The Value-Seeker</h3>
-<p><strong>42 years | Janakpuri, West Delhi | SEC B1 | HHI ₹8L/year | Joint family of 6</strong></p>
-<h4>Daily Life</h4>
-<p>Buys atta from the neighbourhood kirana once a week — always the same brand his wife tells him to. 10kg pack. Looks at the price per kg. Brand switched once when kirana ran out and he liked the alternative.</p>
-<h4>Purchase Trigger</h4>
-<p>Kirana owner recommends a new brand ("saab, ye wali bahut achhi hai, customers baar baar maang rahe hain"). Free 500g sample convinces the family. Wife approves the taste. Habit switched in 2 weeks.</p>
-<h4>Price Sensitivity</h4>
-<p>Ceiling at <strong>₹65-75 for 5kg</strong>. Above that needs active justification to wife.</p>
-<h4>Channel</h4><p>Kirana store exclusively. Will not order groceries online.</p>
-<h4>The Non-Obvious Insight</h4>
-<p>The real decision-maker is his wife, but she's not in the kirana. The kirana owner IS the influencer for this persona.</p>
-
-<h3>Persona 3: Ananya Iyer — The Health Optimizer</h3>
-<p><strong>29 years | Noida Sector 62 | SEC A1 | HHI ₹28L | Single, fitness-focused</strong></p>
-<h4>Daily Life</h4>
-<p>Tracks macros on MyFitnessPal. Buys whey protein, quinoa, and multigrain bread. Shifted to roti from bread after reading about gut health. Googles glycaemic index of different wheat varieties.</p>
-<h4>Purchase Trigger</h4>
-<p>A Google search for "low GI atta India" or "Sharbati wheat benefits" brings her to a detailed brand blog post. She cross-references on Reddit r/IndiaFitness. Three positive comments = she orders 2kg trial.</p>
-<h4>Price Sensitivity</h4>
-<p>Completely inelastic up to <strong>₹140-150 for 5kg</strong> if health credentials are solid.</p>
-<h4>Channel</h4><p>Amazon, brand website, Instagram DM to place order. Never uses kirana.</p>
-<h4>The Non-Obvious Insight</h4>
-<p>She will become your most powerful marketing asset if you convert her — she posts reviews, recommends to gym friends, and has 4,000 Instagram followers who trust her nutrition advice.</p>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>Persona 1 and 3 want premium but live on quick commerce.</strong> If you are not on Blinkit and Zepto, you don't exist for them.</li>
-    <li><strong>Persona 2 — the volume buyer — will only switch through the kirana owner.</strong> Your trade marketing budget matters more than your digital budget for this segment.</li>
-    <li><strong>One brand cannot own all three personas simultaneously</strong> at launch. Pick one, dominate it, then expand.</li>
-  </ul>
-</div>`;
-
-  S.out[2]=html; S.done.add(2); renderSB(); s2(); toast('Step 2 complete! ✓');
-}
-
-// ─── STEP 3: MARKETFIT SCORE ──────────────────────────────────────────────────
-function s3() {
-  const prev = S.out[3] ? outBox('MarketFit Score', S.out[3]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 3 · 📊</div><div>
-      <div class="ct">MarketFit Score</div>
-      <div class="cd">Score your product-market fit across 5 India-specific dimensions. 100-point scale.</div>
-    </div></div>
-    <div class="cb">
-      <p style="font-size:13px;color:var(--tx2);margin-bottom:16px;">Rate your brand honestly on each dimension:</p>
-      ${['Problem Severity — How acutely painful is the problem?','India Readiness — Is Indian consumer behaviour ready for this?','White Space — How uncrowded is your exact position?','Unit Economics — Can this work at Indian price points?','Distribution — Can you realistically reach buyers?'].map((q,i)=>`
-      <div class="fr"><label>${i+1}. ${q}</label>
-        <select id="sc${i}">
-          ${[20,17,14,11,8,5].map(v=>`<option value="${v}" ${v===14?'selected':''}>${v}/20 — ${v>=18?'Excellent':v>=14?'Good':v>=10?'Average':'Weak'}</option>`).join('')}
-        </select></div>`).join('')}
-      <div style="margin-top:16px;"><button class="btn bp" onclick="run3()">Calculate MarketFit Score →</button></div>
-    </div>
-  </div>${prev}`);
-}
-
-function run3() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const scores = [0,1,2,3,4].map(i=>parseInt(v('sc'+i)||14));
-  const total = scores.reduce((a,b)=>a+b,0);
-  const labels = ['Problem Severity','India Readiness','White Space','Unit Economics','Distribution'];
-  const descs = [
-    scores[0]>=16?'Strong pain point — Indian homemakers actively seek better atta quality':'Moderate pain — exists but not urgent enough to change habits',
-    scores[1]>=16?'Indian consumers are ready — health-consciousness is at all-time high':'Some readiness but behaviour change needed',
-    scores[2]>=16?'Clear white space in premium provenance atta — nobody owns this position':'Some competition but differentiation possible',
-    scores[3]>=16?'Unit economics work at premium price points in this category':'Margins will be tight — needs careful pricing architecture',
-    scores[4]>=16?'Distribution path is clear — kirana + quick commerce is established':'Distribution will require significant investment and time'
+  const MODELS = [
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
+    'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent',
+    'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent',
   ];
-  const verdict = total>=70?{c:'var(--grn)',t:'GREEN — Strong PMF',a:'Accelerate. The fundamentals are in your favour. Execute fast.'}
-    :total>=50?{c:'var(--gold)',t:'YELLOW — Moderate PMF',a:'Proceed with caution. Fix the weak dimensions before scaling spend.'}
-    :{c:'var(--red)',t:'RED — Weak PMF',a:'Do not scale yet. Address the core gaps first or reposition the brand.'};
 
-  const html = `<h2>${S.b.brand} — MarketFit Score</h2>
-<div class="score-grid">
-  ${scores.map((s,i)=>`<div class="sc"><div class="sc-val">${s}/20</div><div class="sc-lbl">${labels[i]}</div></div>`).join('')}
-</div>
-<div class="score-total">
-  <div class="big">${total}/100</div>
-  <div class="verdict" style="color:${verdict.c};font-weight:600;">${verdict.t}</div>
-  <div class="verdict">${verdict.a}</div>
-</div>
-<h3>Dimension Analysis</h3>
-${labels.map((l,i)=>`<h4>${l}: ${scores[i]}/20</h4><p>${descs[i]}</p>`).join('')}
-<h3>What Would Improve Your Score</h3>
-<ul>
-  <li><strong>Distribution (+3 pts):</strong> Sign 1 regional distributor covering 500+ kirana outlets in Delhi NCR within 90 days</li>
-  <li><strong>Unit Economics (+2 pts):</strong> Lock in Sharbati wheat procurement at ₹28-32/kg to ensure 35%+ gross margin at ₹95/5kg MRP</li>
-  <li><strong>White Space (+2 pts):</strong> File a trademark on "MP Sharbati" origin claim before a competitor does</li>
-</ul>
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>A MarketFit score means nothing if distribution is zero.</strong> The best product in India dies in a warehouse.</li>
-    <li><strong>Your PMF window is 18-24 months</strong> before a large player (ITC, Adani Wilmar) launches a "premium" SKU to block you.</li>
-  </ul>
-</div>`;
-
-  S.out[3]=html; S.done.add(3); renderSB(); s3(); toast('Step 3 complete! ✓');
+  let lastErr = '';
+  for (const modelUrl of MODELS) {
+    try {
+      const res = await fetch(`${modelUrl}?key=${S.key}`, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      });
+      if (!res.ok) {
+        const e = await res.json().catch(()=>({}));
+        lastErr = e.error?.message || `HTTP ${res.status}`;
+        if (lastErr.includes('quota') || lastErr.includes('RESOURCE_EXHAUSTED')) throw new Error('Quota exceeded: ' + lastErr);
+        continue;
+      }
+      const data = await res.json();
+      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) { lastErr = 'Empty response'; continue; }
+      return text;
+    } catch(e) {
+      if (e.message.includes('quota') || e.message.includes('Failed to fetch')) throw e;
+      lastErr = e.message;
+    }
+  }
+  throw new Error('All models failed. Last: ' + lastErr);
 }
 
-// ─── STEP 4: TAM/SAM/SOM ─────────────────────────────────────────────────────
-function s4() {
-  const prev = S.out[4] ? outBox('Market Sizing', S.out[4]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 4 · 🌍</div><div>
-      <div class="ct">Market Sizing — TAM / SAM / SOM</div>
-      <div class="cd">Calculate your addressable market in rupees, bottom-up and top-down.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fg">
-        <div class="fr"><label>Primary Geography</label>
-          <input type="text" id="t1" value="${S.b.loc||'Delhi NCR'}"></div>
-        <div class="fr"><label>Target Price Point (per 5kg)</label>
-          <input type="text" id="t2" placeholder="e.g., ₹95" value="₹95"></div>
+// ── SYSTEM PROMPT ──────────────────────────────────────────────────────────────
+const SYSPROMPT = `You are BrandOS — elite Indian marketing strategist with 15 years selling across all 28 Indian states. Think like a McKinsey partner + D2C brand builder.
+
+SEC tiers: A1/A2 (>10L HHI), B1/B2 (5-10L), C (2.5-5L), D/E (<2.5L). City tiers: Tier1 metros, Tier2 50 cities, Tier3 rural (80% population). Channels: kirana (12M stores, 85% FMCG), DMart, Zepto/Blinkit, D2C, WhatsApp. Price anchors: Rs.99/199/499/999. Festivals: Diwali, Eid, Navratri, wedding season.
+
+Rules: India-specific only. Name real brands. Numbers in rupees. Be direct and opinionated. Use ## headers, **bold**, bullet points. End with 2-3 Brutal Truths the founder needs to hear.`;
+
+// ── STEP PROMPTS ───────────────────────────────────────────────────────────────
+function prompt(n, d) {
+  const b = S.brand;
+  const ps = {
+    1: `STEP 1 — BRAND BRIEF INTAKE
+
+Analyze this brand and provide:
+## 1. Brand Snapshot
+What this brand actually is — 2-3 sentences of clarity.
+
+## 2. The Real Opportunity  
+What specific Indian consumer need does this fill? Why now?
+
+## 3. Initial Positioning Hypothesis
+Your first instinct on where this brand should sit in the consumer's mind.
+
+## 4. Three Critical Questions
+Things you need answered before full strategy can begin.
+
+## 5. Stage Assessment
+Confirm the brand stage and what strategic approach that unlocks.
+
+## 6. Brutal Truths
+2-3 hard realities about this category the founder must accept.
+
+---
+Brand: ${b.brand}
+Product: ${b.product}
+Stage: ${b.stage}
+Location: ${b.location}
+Revenue: ${b.revenue || 'Not disclosed'}
+Target Customer: ${b.target}
+Current Channels: ${b.channels}
+USP: ${b.usp}
+Budget: ${b.budget || 'Not disclosed'}
+Founder Notes: ${b.notes || 'None'}`,
+
+    2: `STEP 2 — INDIAN CONSUMER PERSONA BUILDER
+
+For brand: ${b.brand} (${b.product})
+
+Build 3 distinct Indian consumer personas. For each:
+- **Name, Age, City, SEC Tier**
+- **Daily Life** — how does this product fit into their actual day?
+- **Purchase Triggers** — what makes them buy? What blocks them?
+- **Channel Preference** — kirana/DMart/Instagram/Zepto/WhatsApp?
+- **Price Sensitivity** — exact price points that unlock vs block purchase
+- **Cultural Context** — festivals, family influence, reference groups
+- **Media Touchpoints** — YouTube? Instagram? TV? Regional language?
+- **The Non-Obvious Insight** — one thing about this person competitors miss
+
+Make them real Indians from real cities with real aspirations. Not demographic boxes.
+${d.extra || ''}`,
+
+    3: `STEP 3 — MARKETFIT SCORE
+
+Score ${b.brand}'s product-market fit on 100 points across 5 dimensions:
+
+**1. Problem Severity (20 pts)** — How acutely painful is the problem in India?
+**2. India Market Readiness (20 pts)** — Is Indian consumer behavior ready for this?
+**3. Competitive White Space (20 pts)** — How uncrowded is the position?
+**4. Unit Economics Viability (20 pts)** — Can this work at Indian price points?
+**5. Distribution Feasibility (20 pts)** — Can you realistically reach buyers?
+
+For each: score X/20, reasoning, and what would change the score.
+
+Then give: **Total MarketFit Score: XX/100** — Red (<50) / Yellow (50-70) / Green (70+) verdict with specific action items.
+${d.extra || ''}`,
+
+    4: `STEP 4 — MARKET SIZING (TAM/SAM/SOM)
+
+For ${b.brand} in India:
+
+## TAM — Total Addressable Market
+- Define the total Indian market for this category
+- Calculate using BOTH bottom-up and top-down methods
+- Show your math in rupees (crore/billion)
+- CAGR and growth trajectory
+
+## SAM — Serviceable Addressable Market  
+- Which segments can ${b.brand} realistically serve given price, geography, channels?
+- 3-year SAM projection
+
+## SOM — Serviceable Obtainable Market
+- Year 1, Year 3, Year 5 realistic targets
+- What % market share = profitability?
+- What does it take to become the #1 brand in this segment?
+
+## Market Dynamics
+- Top 3 growth drivers
+- Top 3 headwinds  
+- Regulatory landscape
+- Where is the real money in this market?
+${d.extra || ''}`,
+
+    5: `STEP 5 — COMPETITOR INTELLIGENCE MAP
+
+For ${b.brand}:
+
+## Tier 1: Direct Competitors (same product, same customer)
+For each: positioning, price points, distribution strength, digital presence, weaknesses, estimated revenue
+
+## Tier 2: Indirect Competitors (different solution, same need)
+Same analysis
+
+## Tier 3: Future Threats (who will enter this space)
+
+## Competitive Matrix
+Create a comparison table: Brand | Price | Quality | Distribution | Brand Equity | Digital | Overall Score
+
+## The White Space
+Where is the unclaimed position? What does no brand own?
+
+## Their Biggest Mistakes
+What are competitors doing wrong that ${b.brand} can exploit RIGHT NOW?
+${d.extra || ''}`,
+
+    6: `STEP 6 — FRAMEWORK BATTERY (10 Frameworks)
+
+Apply all 10 to ${b.brand}. Fill each completely — no vague placeholders:
+
+## 1. SWOT Analysis
+4-5 India-specific points per quadrant
+
+## 2. PESTLE Analysis  
+Political/Regulatory, Economic (India macro), Social (demographics), Technology (Digital India), Legal (GST/FSSAI/BIS), Environmental
+
+## 3. STP Analysis
+Segmentation → Targeting → Positioning statement
+
+## 4. 7Ps Marketing Mix
+Product, Price, Place, Promotion, People, Process, Physical Evidence — all India-specific
+
+## 5. AIDA Model
+How to move Indian consumers: Awareness → Interest → Desire → Action (with specific tactics)
+
+## 6. Porter's Five Forces
+Rate each High/Medium/Low with India context and implication
+
+## 7. Blue Ocean Strategy
+Eliminate / Reduce / Raise / Create grid vs competition
+
+## 8. Ansoff Matrix
+Which quadrant is the priority and exact rationale
+
+## 9. BCG Matrix
+Where does this product sit and what it implies for investment
+
+## 10. Jobs To Be Done
+The real functional + emotional + social job Indian consumers hire this for
+${d.extra || ''}`,
+
+    7: `STEP 7 — CHALLENGER POSITIONING ADVISOR
+
+For ${b.brand} challenging incumbents in its category:
+
+## The Incumbent's Problem
+What does the market leader get wrong? What narrative do they own? What's unclaimed?
+
+## Three Challenger Positions
+Each with a name, tagline, and rationale:
+1. **[Position Name]** — targeting customer who is frustrated by [specific thing]
+2. **[Position Name]** — the values/mission-based play
+3. **[Position Name]** — the performance/results play
+
+## Recommended Position
+Which one to own, why, and the final positioning statement.
+
+## Proof Points
+What evidence makes this position credible to a skeptical Indian consumer?
+
+## The Villain
+What concept/habit/status quo is ${b.brand} fighting against? (not a competitor by name)
+
+## Communication Rules
+5 rules for how this brand must always communicate
+
+## Never Say / Never Be
+3 associations this brand must never have
+${d.extra || ''}`,
+
+    8: `STEP 8 — PRICESENSE (PRICING STRATEGY)
+
+For ${b.brand}:
+
+## Price Point Analysis
+Current/planned price, where it sits in Indian consumer's mental map, psychological anchor analysis
+
+## Pricing Strategy
+Choose and justify one: Penetration / Skimming / Value-Based / Competitive / Premium
+
+## Pack Architecture
+Design 3-4 pack sizes/variants with prices that maximize reach AND margin
+
+## Price-Value Perception
+How to make the price FEEL right across SEC A, B, and C tiers
+
+## Channel-Wise Pricing
+- MRP on pack
+- Kirana trade margin
+- Modern Trade (DMart etc)
+- Quick Commerce (Blinkit/Zepto)
+- D2C website
+- Why each differs
+
+## Promotions That Work
+Festival pricing, bundle mechanics, sachet strategy, cashback vs discount psychology in India
+
+## Price Escalation Path
+How to increase price over 2 years without losing customers
+
+Current price: ${d.price || 'To be determined'}
+Target margin: ${d.margin || 'To be determined'}`,
+
+    9: `STEP 9 — GO-TO-MARKET SEQUENCER (90-DAY PLAN)
+
+For ${b.brand}:
+
+## Month 1 (Days 1-30): Foundation
+- Week 1: [exact actions]
+- Week 2: [exact actions]  
+- Week 3: [exact actions]
+- Week 4: [exact actions]
+- KPIs by end of Month 1:
+- Budget: 
+
+## Month 2 (Days 31-60): Activation
+- Weeks 5-6: [exact actions]
+- Weeks 7-8: [exact actions]
+- KPIs by end of Month 2:
+- Budget:
+
+## Month 3 (Days 61-90): Scale
+- Weeks 9-10: [exact actions]
+- Weeks 11-12: [exact actions]
+- KPIs by end of Month 3:
+- Budget:
+
+## Channel Rollout Sequence
+Which channels to open in which order and exactly why
+
+## The One Big Bet
+Single highest-leverage activity in 90 days
+
+## Early Warning System
+3 metrics = GTM is working | 3 metrics = pivot immediately
+
+Geography: ${d.geo || b.location || 'As per brief'}
+Budget: ${d.budget || b.budget || 'As per brief'}`,
+
+    10: `STEP 10 — BUDGET ALLOCATOR
+
+For ${b.brand}, build an exact rupee-split marketing budget:
+
+Total Monthly Budget: ${d.budget || b.budget || 'Estimate based on stage'}
+
+## Channel Budget Split
+| Channel | % | Monthly Rs. | What it buys | Expected ROI |
+|---|---|---|---|---|
+Fill this table completely for:
+- Digital (Meta/Instagram/Google)
+- Influencer Marketing  
+- Trade/Distribution Push
+- Content Production
+- PR & Earned Media
+- Events/Sampling/Activation
+- Research & Testing
+- Reserve
+
+## Priority Stack
+If you had to cut 50% today — what stays, in what order?
+
+## Zero-Budget Alternatives
+For each paid channel, what's the free/organic equivalent?
+
+## Budget Scaling Milestones
+At what revenue/traction trigger do you increase budget, and by how much?`,
+
+    11: `STEP 11 — RISK FLAGS
+
+For ${b.brand}:
+
+## Category A: Existential Risks
+Could kill the business. For each: What is it | Likelihood | Early warning sign | Mitigation
+
+## Category B: Growth Blockers
+Could prevent scaling. Same format.
+
+## Category C: Execution Risks
+Common startup mistakes in this category.
+
+## Category D: India-Specific Risks
+- Regulatory (GST/FSSAI/BIS/sector-specific)
+- Distribution (kirana stockout, distributor conflict, MT listing fees)
+- Consumer (cultural misstep, regional backlash, festival timing failure)
+- Competitive (when the market leader copies you — and they will)
+- Macro (inflation hitting your buyer's discretionary spend)
+
+## Red Lines
+5 things that, if they happen, mean PIVOT not persist
+
+## Green Lights
+5 signals that confirm you're on the right track
+
+Founder's worry: ${d.worry || 'Not specified'}`,
+
+    12: `STEP 12 — OPEN Q&A
+
+Brand: ${b.brand}
+Question: ${d.q}
+
+Answer with the depth of a senior strategy consultant who knows India intimately. Be direct, opinionated, and give a concrete recommendation. No hedging.`,
+
+    13: `STEP 13 — FINAL CONSULTANCY REPORT
+
+Generate the complete BrandOS Consultancy Report for ${b.brand}.
+
+# BRANDOS CONSULTANCY REPORT
+## ${b.brand} — Go-To-Market Strategy for India
+**Prepared:** ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}
+**Stage:** ${S.stage}
+**Category:** ${b.product}
+
+---
+
+## 1. Executive Summary
+The opportunity, the strategy, and the 3 things that determine success or failure. (400-500 words)
+
+## 2. Market Opportunity
+TAM/SAM/SOM with key dynamics and growth thesis
+
+## 3. Target Consumer  
+Top 2 personas with the insight that shapes everything
+
+## 4. Competitive Position
+Where we sit, the white space we own, who to watch
+
+## 5. Brand Positioning
+The positioning statement and what it means operationally
+
+## 6. Pricing Architecture
+Pack design, price points, channel margins
+
+## 7. 90-Day Go-To-Market Plan
+Sequenced plan with channel priorities and week-by-week actions
+
+## 8. Budget Blueprint
+Monthly spend allocation with ROI targets
+
+## 9. Risk Register
+Top 5 risks and mitigation plans
+
+## 10. Success Metrics
+30 / 60 / 90 / 180-day KPI targets with specific numbers
+
+## 11. The One Thing
+If the founder does only ONE thing from this entire report — what is it and why?
+
+---
+Synthesize all previous steps. Make this worthy of a Rs.20 lakh consulting fee.`
+  };
+  return ps[n] || `Analyze step ${n} for ${b.brand}`;
+}
+
+// ── RENDER SIDEBAR ─────────────────────────────────────────────────────────────
+function renderSidebar() {
+  document.getElementById('sidebarSteps').innerHTML = STEPS.map(s => `
+    <div class="si ${S.step===s.id?'active':''} ${S.done.has(s.id)?'done':''}" onclick="goStep(${s.id})">
+      <div class="snum">${S.done.has(s.id)?'✓':s.id}</div>
+      <div class="slabel">${s.label}</div>
+    </div>`).join('');
+
+  const step = STEPS.find(s=>s.id===S.step);
+  document.getElementById('tStep').textContent = S.step || '—';
+  document.getElementById('tName').textContent = step ? step.label : 'Welcome';
+  document.getElementById('navInfo').textContent = S.step ? `Step ${S.step} of 13` : '— of 13';
+  document.getElementById('tBadge').className = 'sbadge' + (S.stage?' on':'');
+  document.getElementById('tBadge').textContent = S.stage || 'Stage not set';
+  document.getElementById('btnPrev').style.visibility = S.step <= 1 ? 'hidden' : 'visible';
+  document.getElementById('btnNext').style.visibility = S.step >= 13 ? 'hidden' : 'visible';
+}
+
+function nav(d) {
+  const n = S.step + d;
+  if (n >= 1 && n <= 13) goStep(n);
+  else if (n === 0) showWelcome();
+}
+
+// ── WELCOME ────────────────────────────────────────────────────────────────────
+function showWelcome() {
+  S.step = 0;
+  renderSidebar();
+  document.getElementById('content').innerHTML = `
+    <div class="welcome">
+      <div class="wicon">🇮🇳</div>
+      <h1>The complete Indian<br><em>go-to-market engine</em></h1>
+      <p>BrandOS delivers what a Rs. 10–40 lakh consulting engagement would — market sizing, consumer personas, 15 frameworks, positioning, pricing, and a full GTM plan. Built for Indian brands.</p>
+      <div class="wtags">
+        <span class="tag">28 States Intelligence</span>
+        <span class="tag">SEC Income Tiers</span>
+        <span class="tag">Kirana → Quick Commerce</span>
+        <span class="tag">13-Step Framework</span>
+        <span class="tag">Free via Gemini</span>
       </div>
-      <div style="margin-top:16px;"><button class="btn bp" onclick="run4()">Calculate Market Size →</button></div>
-    </div>
-  </div>${prev}`);
-}
-
-function run4() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const geo = v('t1')||'Delhi NCR'; const price = v('t2')||'₹95';
-  const html = `<h2>${S.b.brand} — Market Sizing</h2>
-
-<h3>TAM — Total Addressable Market</h3>
-<h4>India Packaged Atta Market</h4>
-<table><tr><th>Method</th><th>Calculation</th><th>TAM</th></tr>
-<tr><td>Top-Down</td><td>India wheat flour consumption ~25MT/year × ~30% packaged penetration × avg ₹40/kg</td><td><strong>₹30,000 Crore</strong></td></tr>
-<tr><td>Bottom-Up</td><td>140M urban households × 10kg/month × ₹40/kg × 12 months</td><td><strong>₹67,200 Crore</strong></td></tr>
-</table>
-<p><strong>Blended TAM estimate: ₹30,000–40,000 Crore</strong> | CAGR: 8-10% | Premium segment (>₹60/kg) growing at 18-22% CAGR</p>
-
-<h3>SAM — Serviceable Addressable Market</h3>
-<h4>Premium Atta (₹70+/kg) in Urban India</h4>
-<table><tr><th>Segment</th><th>Households</th><th>Annual Spend</th><th>SAM</th></tr>
-<tr><td>SEC A1/A2 urban</td><td>12M households</td><td>₹6,000/year on atta</td><td>₹7,200 Crore</td></tr>
-<tr><td>Health-conscious SEC B1</td><td>8M households</td><td>₹4,500/year</td><td>₹3,600 Crore</td></tr>
-<tr><td><strong>Total SAM</strong></td><td><strong>20M HH</strong></td><td>—</td><td><strong>₹10,800 Crore</strong></td></tr>
-</table>
-<p><strong>3-Year SAM Projection:</strong> ₹14,000 Crore by 2027 (health + premiumisation tailwind)</p>
-
-<h3>SOM — Serviceable Obtainable Market</h3>
-<table><tr><th>Timeframe</th><th>Target</th><th>Market Share</th><th>Revenue</th></tr>
-<tr><td>Year 1</td><td>${geo} premium households</td><td>0.05% of SAM</td><td>₹5-8 Crore</td></tr>
-<tr><td>Year 3</td><td>North India + online India</td><td>0.3% of SAM</td><td>₹30-40 Crore</td></tr>
-<tr><td>Year 5</td><td>Pan India premium</td><td>1% of SAM</td><td>₹100-140 Crore</td></tr>
-</table>
-<p><strong>Profitability threshold:</strong> ₹15 crore ARR at 35% gross margin funds a lean 20-person team and ₹3-4L/month marketing. Achievable by end of Year 2.</p>
-
-<h3>Market Dynamics</h3>
-<h4>Growth Drivers</h4>
-<ul>
-  <li>Health consciousness post-COVID — diabetes, obesity concerns driving low-GI food search</li>
-  <li>Quick commerce making premium impulse trial frictionless (Blinkit 10-min delivery)</li>
-  <li>Instagram/Reels food content creating massive awareness of provenance and ingredients</li>
-</ul>
-<h4>Headwinds</h4>
-<ul>
-  <li>ITC and Adani Wilmar can launch premium SKUs within 6 months of seeing your traction</li>
-  <li>Commodity wheat price volatility — Sharbati wheat can swing ±30% in a bad monsoon year</li>
-  <li>Consumer habit stickiness — atta is the hardest FMCG category to switch</li>
-</ul>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>The SAM is large but the actual conversion pool in Year 1 is tiny.</strong> You are selling to maybe 50,000 households in ${geo}. Know them by name if possible.</li>
-    <li><strong>Market size is not your opportunity — distribution reach is.</strong> Without being in the right stores, TAM is fiction.</li>
-  </ul>
-</div>`;
-
-  S.out[4]=html; S.done.add(4); renderSB(); s4(); toast('Step 4 complete! ✓');
-}
-
-// ─── STEP 5: COMPETITORS ──────────────────────────────────────────────────────
-function s5() {
-  const prev = S.out[5] ? outBox('Competitor Intelligence', S.out[5]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 5 · 🔍</div><div>
-      <div class="ct">Competitor Intelligence Map</div>
-      <div class="cd">Full competitor analysis — direct, indirect, future threats, and white space.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Competitors to include (optional)</label>
-        <input type="text" id="c1" placeholder="e.g., Aashirvaad, Pillsbury, Fortune, local brands" value="${S.b.notes?.includes('Aashirvaad')?'Aashirvaad, Pillsbury, Fortune, Organic India, local mills':''}"></div>
-      <div style="margin-top:16px;"><button class="btn bp" onclick="run5()">Map Competitors →</button></div>
-    </div>
-  </div>${prev}`);
-}
-
-function run5() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const html = `<h2>${S.b.brand} — Competitor Intelligence</h2>
-
-<h3>Tier 1: Direct Competitors</h3>
-<table>
-<tr><th>Brand</th><th>Price/5kg</th><th>Positioning</th><th>Distribution</th><th>Weakness</th></tr>
-<tr><td><strong>Aashirvaad (ITC)</strong></td><td>₹175-220</td><td>Trusted, consistent, family</td><td>Pan-India, 6M+ outlets</td><td>Generic — no origin story, factory-processed, no premium story</td></tr>
-<tr><td><strong>Pillsbury (General Mills)</strong></td><td>₹170-210</td><td>Western trust, soft rotis</td><td>Modern trade heavy</td><td>Perceived as foreign brand, no Indian provenance angle</td></tr>
-<tr><td><strong>Fortune (Adani Wilmar)</strong></td><td>₹155-190</td><td>Value, availability</td><td>Strong in Tier 2/3</td><td>Commodity brand — no aspirational pull, zero health story</td></tr>
-<tr><td><strong>Organic India</strong></td><td>₹280-350</td><td>Organic, health</td><td>Health stores, Amazon</td><td>Very expensive, tastes different, niche audience only</td></tr>
-</table>
-
-<h3>Tier 2: Indirect Competitors</h3>
-<ul>
-  <li><strong>Local chakki (neighbourhood mill):</strong> "Fresh ground atta" — strong freshness story, hyper-local trust. Your biggest unbranded competitor in Delhi NCR. Cannot scale but very sticky.</li>
-  <li><strong>D2C atta startups (Atta Chakki, Desi Atta Co):</strong> Instagram-native, premium, direct delivery. Small but growing. Watch closely.</li>
-  <li><strong>Multigrain/functional atta (Saffola Atta, Millet brands):</strong> Competing for the same health-conscious SEC A consumer with a different product angle.</li>
-</ul>
-
-<h3>Tier 3: Future Threats (18-24 months)</h3>
-<ul>
-  <li><strong>ITC launching a "Sharbati Select" premium SKU</strong> the moment you hit ₹15Cr revenue — they watch small brands closely</li>
-  <li><strong>BigBasket/Blinkit private label premium atta</strong> — they have the distribution and will undercut on price</li>
-  <li><strong>Funded D2C atta startups</strong> from Bangalore or Mumbai entering your exact positioning with VC money</li>
-</ul>
-
-<h3>Competitive Matrix</h3>
-<table>
-<tr><th>Brand</th><th>Price</th><th>Quality Story</th><th>Distribution</th><th>Brand Equity</th><th>Digital</th></tr>
-<tr><td>Aashirvaad</td><td>Mid</td><td>★★☆</td><td>★★★★★</td><td>★★★★★</td><td>★★★</td></tr>
-<tr><td>Pillsbury</td><td>Mid-High</td><td>★★☆</td><td>★★★★</td><td>★★★★</td><td>★★☆</td></tr>
-<tr><td><strong>${S.b.brand}</strong></td><td>Premium</td><td>★★★★★</td><td>★★☆</td><td>★★☆</td><td>★★★</td></tr>
-<tr><td>Local Chakki</td><td>Low-Mid</td><td>★★★★</td><td>★</td><td>★★</td><td>★</td></tr>
-</table>
-
-<h3>The White Space</h3>
-<p>Nobody owns the <strong>"single-origin, traceable, premium Indian atta"</strong> position. Aashirvaad owns "trusted family atta." Organic India owns "certified organic." The position of <em>"you know exactly which farm this wheat came from"</em> — with QR codes, farmer stories, and stone-grinding transparency — is completely unclaimed by any brand with real distribution.</p>
-
-<h3>Competitor Mistakes to Exploit</h3>
-<ul>
-  <li><strong>Aashirvaad never talks about wheat origin</strong> — because theirs is blended from multiple states. Your single-origin story is a direct attack on their biggest weakness.</li>
-  <li><strong>No major brand has cracked quick commerce atta</strong> as a premium repeat purchase category — the first to own that habit wins it for years.</li>
-  <li><strong>All major brands ignore Hindi/regional content</strong> — their Instagram is English. A brand that talks to homemakers in Hindi on Reels owns a massive underserved audience.</li>
-</ul>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>You cannot out-distribute Aashirvaad.</strong> Do not try. Win in a narrow channel (quick commerce + premium kirana in 3 Delhi NCR neighbourhoods) before expanding.</li>
-    <li><strong>The local chakki is harder to beat than Aashirvaad</strong> in many households. The emotional trust in "fresh ground" is almost impossible to replicate with packaged product.</li>
-  </ul>
-</div>`;
-
-  S.out[5]=html; S.done.add(5); renderSB(); s5(); toast('Step 5 complete! ✓');
-}
-
-// ─── STEP 6: FRAMEWORK BATTERY ────────────────────────────────────────────────
-function s6() {
-  const prev = S.out[6] ? outBox('Framework Battery', S.out[6]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 6 · 🧠</div><div>
-      <div class="ct">Framework Battery — 10 Frameworks</div>
-      <div class="cd">SWOT, PESTLE, STP, 7Ps, AIDA, Porter's 5 Forces, Blue Ocean, Ansoff, BCG, JTBD — fully filled.</div>
-    </div></div>
-    <div class="cb">
-      <p style="color:var(--tx2);font-size:13px;margin-bottom:16px;">This generates all 10 frameworks applied to your brand. Takes 2 seconds.</p>
-      <button class="btn bp" onclick="run6()">Run All 10 Frameworks →</button>
-    </div>
-  </div>${prev}`);
-}
-
-function run6() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b = S.b.brand;
-  const html = `<h2>${b} — Framework Battery</h2>
-
-<h3>1. SWOT Analysis</h3>
-<table>
-<tr><th>Strengths</th><th>Weaknesses</th></tr>
-<tr><td>• Single-origin MP Sharbati wheat — verifiable provenance<br>• Stone-grinding process — real differentiation claim<br>• Zero additives — clean label premium<br>• Existing ₹10Cr revenue — PMF signal<br>• Founder's sourcing relationships in MP wheat belt</td>
-<td>• Limited distribution — kirana coverage low<br>• Brand awareness near zero outside current customers<br>• Higher price vs mainstream brands<br>• No quick commerce presence yet<br>• Small team — capacity constraints</td></tr>
-<tr><th>Opportunities</th><th>Threats</th></tr>
-<tr><td>• Premium atta segment growing 18-22% CAGR<br>• Quick commerce enabling premium impulse trial<br>• Instagram food content driving provenance interest<br>• Diabetic/health-conscious consumer base expanding<br>• Farm-to-fork storytelling trend</td>
-<td>• ITC/Adani can launch premium SKU in 6 months<br>• Sharbati wheat price volatility (±30% monsoon risk)<br>• BigBasket/Blinkit private label threat<br>• Consumer atta habit extremely sticky<br>• Local chakki has unbeatable freshness story</td></tr>
-</table>
-
-<h3>2. PESTLE Analysis</h3>
-<ul>
-  <li><strong>Political:</strong> FSSAI packaging norms — ensure compliance on nutrition labels, ingredient claims, and "stone-ground" claim definition</li>
-  <li><strong>Economic:</strong> India's premiumisation wave — urban middle class trading up across food categories. Inflation making consumers more label-conscious ("paying more, need to know why")</li>
-  <li><strong>Social:</strong> Post-COVID health obsession. Diabetes epidemic (77M diabetics in India — low GI atta is directly relevant). Joint family buying shifting to nuclear + individual</li>
-  <li><strong>Technology:</strong> QR code traceability is now expected by premium consumers. Reels/Shorts as primary food discovery channel. Zepto/Blinkit changing repeat grocery behaviour</li>
-  <li><strong>Legal:</strong> AGMARK certification strengthens premium claim. "Stone ground" claim needs process documentation. Organic claims require PGS-India or NPOP certification</li>
-  <li><strong>Environmental:</strong> Regenerative farming story is emerging premium signal. Water-intensive wheat growing — sustainability narrative possible</li>
-</ul>
-
-<h3>3. STP Analysis</h3>
-<h4>Segmentation</h4>
-<ul>
-  <li>Psychographic: Health-conscious, ingredient-aware, willing to pay for quality, urban/semi-urban</li>
-  <li>Demographic: SEC A/B, 28-45 years, nuclear families, Tier 1/2 cities</li>
-  <li>Behavioural: Quick commerce users, Instagram food content consumers, label readers</li>
-</ul>
-<h4>Targeting</h4>
-<p><strong>Primary:</strong> SEC A2 urban homemakers, 28-40, Delhi NCR, quick commerce users<br>
-<strong>Secondary:</strong> Health-optimising singles/couples, SEC A1, 25-35, fitness-focused</p>
-<h4>Positioning Statement</h4>
-<p><em>"For health-conscious Indian families who refuse to compromise on what goes into their rotis, ${b} is the only atta that traces every grain back to its source farm in Madhya Pradesh — because what you eat should have a story."</em></p>
-
-<h3>4. 7Ps Marketing Mix</h3>
-<table>
-<tr><th>P</th><th>Strategy</th></tr>
-<tr><td><strong>Product</strong></td><td>Single-origin MP Sharbati atta, stone-ground, 1kg/2kg/5kg/10kg SKUs. QR code on pack linking to source farm video.</td></tr>
-<tr><td><strong>Price</strong></td><td>₹42-50/kg (vs Aashirvaad ₹35-40/kg). Premium of 15-25% justified by provenance story. Never discount — kills premium perception.</td></tr>
-<tr><td><strong>Place</strong></td><td>Phase 1: Blinkit + Zepto + 200 premium kirana in South/West Delhi. Phase 2: Amazon, brand website. Phase 3: Modern trade.</td></tr>
-<tr><td><strong>Promotion</strong></td><td>Instagram Reels (farm-to-chakki story), micro-influencers (nutrition + mommy bloggers), kirana owner incentive program, PR in food/health media</td></tr>
-<tr><td><strong>People</strong></td><td>Field sales for kirana, a dedicated quick commerce account manager, a content creator as employee</td></tr>
-<tr><td><strong>Process</strong></td><td>QR code traceability system, Blinkit/Zepto 48hr restocking SLA, WhatsApp reorder for B2B kirana</td></tr>
-<tr><td><strong>Physical Evidence</strong></td><td>Premium kraft paper packaging, farm photo on pack, stone-grinding imagery, clear nutritional claim on front of pack</td></tr>
-</table>
-
-<h3>5. AIDA Model</h3>
-<ul>
-  <li><strong>Awareness:</strong> Reels showing the stone-grinding process + Sharbati wheat fields of MP. Target: health food pages, parenting pages, Delhi NCR food pages. Budget: ₹50K/month boosted content</li>
-  <li><strong>Interest:</strong> Blog content: "Why your atta's wheat source matters for your family's health." Nutrition influencer partnerships. The origin story told in 60 seconds.</li>
-  <li><strong>Desire:</strong> Free 500g sample packs via Blinkit. Kirana free sample campaign. First order discount ₹20 off via Instagram link. User-generated content — "my roti test"</li>
-  <li><strong>Action:</strong> Blinkit/Zepto listing with Subscribe & Save. Amazon auto-delivery. WhatsApp reorder link sent post-purchase. Kirana owner push at point of sale.</li>
-</ul>
-
-<h3>6. Porter's Five Forces</h3>
-<table>
-<tr><th>Force</th><th>Level</th><th>Implication</th></tr>
-<tr><td>Competitive Rivalry</td><td>🔴 High</td><td>Aashirvaad + 20 regional brands. You must occupy a distinct position — not compete head-to-head</td></tr>
-<tr><td>Supplier Power</td><td>🟡 Medium</td><td>MP Sharbati wheat farmers — single-source dependency is a risk. Lock in 2-3 farmer groups via long-term contracts</td></tr>
-<tr><td>Buyer Power</td><td>🟡 Medium</td><td>Consumers have many options. Loyalty built through taste + story, not switching cost</td></tr>
-<tr><td>Threat of Substitutes</td><td>🟡 Medium</td><td>Local chakki, multigrain blends, millet flour. Each serves a different need — manageable</td></tr>
-<tr><td>New Entrants</td><td>🔴 High</td><td>Low capital barrier for D2C atta. Your only real moat is the origin story + established distribution</td></tr>
-</table>
-
-<h3>7. Blue Ocean Strategy</h3>
-<table>
-<tr><th>Eliminate</th><th>Reduce</th><th>Raise</th><th>Create</th></tr>
-<tr><td>• Generic wheat sourcing<br>• Celebrity endorsements<br>• Mass TV advertising<br>• Discount-led promotions</td>
-<td>• Pack size range (start with 3 SKUs)<br>• Trade marketing complexity<br>• Distribution width (go deep, not wide)</td>
-<td>• Provenance transparency<br>• Pack design premium<br>• Nutritional information depth<br>• Farmer partnership story</td>
-<td>• QR code farm traceability<br>• Subscription atta model<br>• "Adopt a farmer" premium tier<br>• Regional wheat variety education</td></tr>
-</table>
-
-<h3>8. Ansoff Matrix</h3>
-<p><strong>Priority: Market Penetration (existing product, existing market)</strong><br>
-Win deeper in Delhi NCR premium segment before any geographic or product expansion. Get to 50,000 loyal households in Delhi NCR first. This funds the next move.<br>
-<strong>Year 2:</strong> Market Development (same product → Pune, Bengaluru premium consumers)<br>
-<strong>Year 3:</strong> Product Development (multigrain variants, millet blend, baby atta)</p>
-
-<h3>9. BCG Matrix</h3>
-<p><strong>${b} currently sits as a Question Mark</strong> — high market growth (premium atta growing 18%+ CAGR) but low relative market share (sub-1%). The strategic imperative is to invest aggressively to move to Star before a well-funded competitor claims the premium position. The risk of under-investment here is permanent relegation to niche brand status.</p>
-
-<h3>10. Jobs To Be Done</h3>
-<ul>
-  <li><strong>Functional Job:</strong> Make soft, nutritious rotis that my family eats without complaint and that don't spike blood sugar</li>
-  <li><strong>Emotional Job:</strong> Feel like a responsible, caring parent who makes smart food choices — not just a consumer of whatever's cheapest</li>
-  <li><strong>Social Job:</strong> Be the person who "discovered" ${b} before their friends did — social currency in health-aware circles</li>
-</ul>
-<p><strong>The insight:</strong> People don't hire ${b} to make rotis. They hire it to feel like a good parent who is making the right call.</p>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>10 frameworks all say the same thing:</strong> your positioning is right but your distribution is the only thing that matters right now. Every framework is theory until you have a distributor.</li>
-    <li><strong>Blue Ocean only works if you execute the "Create" column.</strong> The QR code farm traceability is your most powerful differentiator — and if you don't build it in Year 1, someone else will.</li>
-  </ul>
-</div>`;
-
-  S.out[6]=html; S.done.add(6); renderSB(); s6(); toast('Step 6 complete! ✓');
-}
-
-// ─── STEP 7: POSITIONING ──────────────────────────────────────────────────────
-function s7() {
-  const prev = S.out[7] ? outBox('Challenger Positioning', S.out[7]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 7 · 🎯</div><div>
-      <div class="ct">Challenger Positioning Advisor</div>
-      <div class="cd">Design your positioning against the category incumbent. Find the story no one else can tell.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Your positioning instinct (optional)</label>
-        <textarea id="pos1" rows="2" placeholder="What positioning feels right to you?"></textarea></div>
-      <button class="btn bp" onclick="run7()">Build Challenger Position →</button>
-    </div>
-  </div>${prev}`);
-}
-
-function run7() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b = S.b.brand;
-  const html = `<h2>${b} — Challenger Positioning</h2>
-
-<h3>The Incumbent's Problem</h3>
-<p>Aashirvaad owns <strong>"trusted, consistent, family atta"</strong> — it is the safe, reliable default. This positioning is powerful but carries a fatal weakness: <em>it has no story</em>. It cannot tell you where the wheat came from, who grew it, or why it tastes the way it does. In an age where Indian consumers increasingly want to know what they're eating, Aashirvaad's scale is also its prison — they cannot make claims they cannot keep at 200,000 tonnes per year.</p>
-
-<h3>Three Challenger Positions</h3>
-
-<h4>Position A: "The Origin Brand" — Know Your Atta</h4>
-<p><em>Tagline: "Har daane ki kahani" (Every grain has a story)</em><br>
-For consumers frustrated by anonymous, factory-processed food. Owns the traceability narrative. QR code to source farm. Farmer names on the pack. The first Indian atta brand you can actually trust with your eyes open — not just from habit.</p>
-
-<h4>Position B: "The Taste Purist" — The Way Atta Used To Be</h4>
-<p><em>Tagline: "Woh wali softness wapas" (That softness, back again)</em><br>
-Nostalgia-led. Your grandmother's chakki, but available on Blinkit. Stone-ground = the process your family used before factory atta arrived. Appeals to the emotional memory of what rotis tasted like in a village home.</p>
-
-<h4>Position C: "The Health Validator" — Atta That Earns Its Price</h4>
-<p><em>Tagline: "Premium ka matlab — proof"</em><br>
-For the sceptical health-conscious consumer. Third-party GI testing. Nutritionist endorsements. Published fibre and protein content. The atta that doesn't just claim to be healthy — it proves it with data.</p>
-
-<h3>Recommended Position: Position A — "The Origin Brand"</h3>
-<p>Own <strong>provenance and transparency</strong>. This is the hardest position for Aashirvaad to copy (their supply chain prevents it), the most defensible long-term, and the most aligned with where premium food consumer values are heading globally and in India.</p>
-<p><strong>Final Positioning Statement:</strong><br>
-<em>"${b} is India's first single-origin atta — every pack traced to a specific Sharbati wheat farmer in Madhya Pradesh, stone-ground within 48 hours of milling. For families who believe the best food starts with knowing exactly where it comes from."</em></p>
-
-<h3>The Villain</h3>
-<p>${b} is not fighting Aashirvaad. It is fighting <strong>anonymous food</strong> — the idea that what goes into your family's daily meal doesn't need to have a face, a place, or a story. The villain is the normalisation of eating without knowing.</p>
-
-<h3>Communication Rules</h3>
-<ul>
-  <li>Always show the source — farm, farmer, field. Never just the product.</li>
-  <li>Speak in Hindi and English equally. Your consumer code-switches. So should your brand.</li>
-  <li>Never use the word "healthy" alone — back every claim with a specific fact.</li>
-  <li>Celebrate the process — stone grinding is theatre. Show it every chance you get.</li>
-  <li>Be confident about the price. Never apologise for costing more. Explain why.</li>
-</ul>
-
-<h3>Never Say / Never Be</h3>
-<ul>
-  <li>Never claim "best rotis" without proof — this is what every atta brand says</li>
-  <li>Never run a price discount during non-festival seasons — it destroys the premium story</li>
-  <li>Never partner with a celebrity who doesn't authentically connect to food or health</li>
-</ul>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>Positioning on paper is not positioning in the market.</strong> You need 10,000 people who know exactly what ${b} stands for before this matters.</li>
-    <li><strong>The origin story only works if the origin is real, verifiable, and consistent.</strong> If you ever blend wheat sources, the whole positioning collapses overnight when one consumer finds out.</li>
-  </ul>
-</div>`;
-
-  S.out[7]=html; S.done.add(7); renderSB(); s7(); toast('Step 7 complete! ✓');
-}
-
-// ─── STEP 8: PRICING ──────────────────────────────────────────────────────────
-function s8() {
-  const prev = S.out[8] ? outBox('PriceSense', S.out[8]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 8 · 💰</div><div>
-      <div class="ct">PriceSense — Pricing Strategy</div>
-      <div class="cd">Complete pricing architecture: pack design, channel margins, and the Indian price psychology.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fg">
-        <div class="fr"><label>Current/planned price per kg</label>
-          <input type="text" id="pr1" placeholder="e.g., ₹80/kg" value="₹80-95/kg"></div>
-        <div class="fr"><label>Target gross margin %</label>
-          <input type="text" id="pr2" placeholder="e.g., 35%" value="35%"></div>
+      <div class="api-box">
+        <h3>🔑 Enter Gemini API Key</h3>
+        <p>Get your free key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> — no credit card needed.</p>
+        <div class="frow">
+          <input type="text" id="keyInp" placeholder="AIzaSy..." style="font-family:'DM Mono',monospace;" value="${S.key}">
+        </div>
+        <button class="btn btn-p" onclick="connectKey()" style="width:100%;justify-content:center;">Connect & Start →</button>
       </div>
-      <button class="btn bp" onclick="run8()">Build Pricing Architecture →</button>
-    </div>
-  </div>${prev}`);
+      ${S.key ? `<button class="btn btn-p" onclick="goStep(1)" style="margin-top:-8px;">Continue to Step 1 →</button>` : ''}
+    </div>`;
 }
 
-function run8() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b = S.b.brand; const price = v('pr1')||'₹80-95/kg'; const margin = v('pr2')||'35%';
-  const html = `<h2>${b} — Pricing Architecture</h2>
-
-<h3>Price Point Analysis</h3>
-<p>At ${price}, ${b} sits at a <strong>15-25% premium over Aashirvaad</strong> (₹35-40/kg). In the Indian consumer's mental map, this is the "considered premium" zone — priced like a quality upgrade, not a luxury. The psychological sweet spot.</p>
-<p><strong>Indian price anchors that matter:</strong> ₹99/5kg feels like "under ₹100" — a major unlock. ₹199/5kg feels expensive. ₹95/5kg is the exact sweet spot — quality price without sticker shock.</p>
-
-<h3>Pricing Strategy: Value-Based Pricing</h3>
-<p>Do not price based on cost-plus. Price based on the premium the origin story, stone-grinding, and clean label commands. The consumer is paying for <em>trust</em>, not just wheat flour. This justifies and requires a 15-25% premium maintained consistently — never eroded by discounts.</p>
-
-<h3>Pack Architecture</h3>
-<table>
-<tr><th>SKU</th><th>MRP</th><th>Per Kg</th><th>Target Consumer</th><th>Primary Channel</th></tr>
-<tr><td>Trial Pack 1kg</td><td><strong>₹49</strong></td><td>₹49/kg</td><td>First-time trialists</td><td>Blinkit impulse, kirana</td></tr>
-<tr><td>Regular 5kg</td><td><strong>₹219</strong></td><td>₹43.8/kg</td><td>Nuclear families</td><td>All channels — hero SKU</td></tr>
-<tr><td>Value 10kg</td><td><strong>₹399</strong></td><td>₹39.9/kg</td><td>Joint families, loyal customers</td><td>Kirana, Amazon bulk</td></tr>
-<tr><td>Premium 2kg Gift</td><td><strong>₹129</strong></td><td>₹64.5/kg</td><td>Gifting, corporate</td><td>D2C website, gifting platforms</td></tr>
-</table>
-<p><strong>Hero SKU = 5kg at ₹219.</strong> This is where 60-70% of volume will flow. Build everything around making this the right decision.</p>
-
-<h3>Channel-Wise Pricing</h3>
-<table>
-<tr><th>Channel</th><th>MRP</th><th>Trade Margin</th><th>Net Realisation</th></tr>
-<tr><td>Kirana (5kg)</td><td>₹219</td><td>Retailer 15% + Distributor 8%</td><td>~₹166/unit</td></tr>
-<tr><td>DMart/Modern Trade</td><td>₹219</td><td>MT margin 18-22% + listing fee</td><td>~₹158/unit</td></tr>
-<tr><td>Blinkit/Zepto</td><td>₹219</td><td>Commission 18-22%</td><td>~₹165/unit</td></tr>
-<tr><td>Amazon</td><td>₹219</td><td>Referral 8% + FBA 12%</td><td>~₹175/unit</td></tr>
-<tr><td>D2C website</td><td>₹219</td><td>0 trade margin (only shipping ₹25)</td><td>~₹194/unit</td></tr>
-</table>
-<p><strong>Insight:</strong> D2C gives best margins but highest CAC. Kirana gives volume at lower margin. Quick commerce gives both if you can manage out-of-stock. Build all three simultaneously.</p>
-
-<h3>Indian Promotions That Work</h3>
-<ul>
-  <li><strong>Navratri/Diwali:</strong> Gift pack (2x1kg) at ₹99 — drives trial in gifting context</li>
-  <li><strong>First order offer:</strong> Free 500g trial + ₹20 off first 5kg — remove the trial barrier</li>
-  <li><strong>Subscribe & Save:</strong> 5% off on Blinkit/Amazon repeat subscription — lock in loyal customers</li>
-  <li><strong>Kirana push:</strong> Buy 5, get 1 free for kirana owner on bulk purchase — drives kirana recommendation behaviour</li>
-</ul>
-
-<h3>Price Escalation Path</h3>
-<p>Year 1: ₹219 for 5kg. Year 2: ₹229 (post-brand building, justify with "new season Sharbati crop"). Year 3: ₹239-249 (add premium variant at ₹279). Never reduce MRP — introduce new SKUs instead.</p>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>The 1kg trial pack at ₹49 is more important than any ad campaign.</strong> Indian consumers do not switch atta brands without tasting first. Remove the trial friction.</li>
-    <li><strong>Modern trade listing fees will destroy your margin in Year 1.</strong> Delay modern trade entry until Year 2 when you have the revenue to absorb it.</li>
-  </ul>
-</div>`;
-
-  S.out[8]=html; S.done.add(8); renderSB(); s8(); toast('Step 8 complete! ✓');
+function connectKey() {
+  const inp = document.getElementById('keyInp');
+  if (!inp) return;
+  const k = inp.value.trim();
+  if (!k || k.length < 15) { toast('Paste your API key first', 'err'); return; }
+  S.key = k;
+  inp.disabled = true;
+  const btn = inp.nextElementSibling;
+  if (btn) { btn.textContent = '✓ Connected — opening Step 1...'; btn.disabled = true; }
+  setTimeout(() => goStep(1), 500);
 }
 
-// ─── STEP 9: GTM ──────────────────────────────────────────────────────────────
-function s9() {
-  const prev = S.out[9] ? outBox('GTM 90-Day Plan', S.out[9]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 9 · 🚀</div><div>
-      <div class="ct">GTM Sequencer — 90 Day Plan</div>
-      <div class="cd">Week-by-week go-to-market plan with channels, actions, KPIs, and budget.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fg">
-        <div class="fr"><label>Launch geography</label>
-          <input type="text" id="g1" value="${S.b.loc||'Delhi NCR'}"></div>
-        <div class="fr"><label>Total 90-day budget</label>
-          <input type="text" id="g2" value="${S.b.budget?.includes('lakh')?S.b.budget:'₹15-20 lakh'}"></div>
-      </div>
-      <button class="btn bp" onclick="run9()">Generate GTM Plan →</button>
-    </div>
-  </div>${prev}`);
-}
+// ── STEP RENDER ────────────────────────────────────────────────────────────────
+function goStep(n) {
+  S.step = n;
+  renderSidebar();
+  const c = document.getElementById('content');
 
-function run9() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b=S.b.brand; const geo=v('g1')||'Delhi NCR'; const budget=v('g2')||'₹15-20 lakh';
-  const html = `<h2>${b} — 90-Day GTM Plan</h2>
-<p><strong>Geography:</strong> ${geo} | <strong>Budget:</strong> ${budget}</p>
-
-<h3>Month 1 (Days 1-30): Foundation</h3>
-<table>
-<tr><th>Week</th><th>Actions</th></tr>
-<tr><td><strong>Week 1</strong></td><td>• Finalise 5kg and 1kg pack design with QR code<br>• Identify and contact 3 ${geo} distributors<br>• Set up Blinkit & Zepto seller accounts<br>• Build Instagram page — first 3 farm origin Reels</td></tr>
-<tr><td><strong>Week 2</strong></td><td>• Sign 1 distributor covering 300+ kirana in target area<br>• Launch on Blinkit and Zepto with 1kg trial pack listed<br>• Contact 20 micro-influencers (nutrition/mommy, 10K-100K followers)<br>• Set up WhatsApp Business for B2B kirana reorders</td></tr>
-<tr><td><strong>Week 3</strong></td><td>• Begin kirana seeding — free 5 units to 50 kirana owners with tasting<br>• Launch 2 influencer posts (farm visit Reels format)<br>• Run ₹20 off first order Meta ad — target: South/West Delhi women 28-42<br>• Set up Amazon listing with A+ content</td></tr>
-<tr><td><strong>Week 4</strong></td><td>• Follow up with kirana — collect feedback, identify champions<br>• First Instagram Live: farm-to-chakki story with founder<br>• Review Blinkit/Zepto data — which SKU converts?<br>• Collect first 50 customer reviews</td></tr>
-</table>
-<p><strong>Month 1 KPIs:</strong> 500 units sold | 200 kirana stocked | 5,000 Instagram followers | 3.5★+ Blinkit rating</p>
-<p><strong>Month 1 Budget:</strong> ₹4-5 lakh (₹1.5L distributor advance, ₹1.5L digital ads, ₹1L influencers, ₹0.5L kirana sampling, ₹0.5L content)</p>
-
-<h3>Month 2 (Days 31-60): Activation</h3>
-<table>
-<tr><th>Week</th><th>Actions</th></tr>
-<tr><td><strong>Week 5-6</strong></td><td>• Scale kirana to 200 outlets via distributor<br>• Launch Subscribe & Save on Amazon<br>• 3 more influencer posts — now focus on UGC (ask customers to share roti photos)<br>• Begin PR outreach — pitch to food journalists at HT City, Times Food</td></tr>
-<tr><td><strong>Week 7-8</strong></td><td>• Launch 10kg bulk SKU for joint family households<br>• First loyalty program — "Atta Club" WhatsApp group for top 200 customers<br>• Increase Meta ad budget if CPA is below ₹300/customer<br>• Target RWA bulletin boards + housing society WhatsApp groups in target neighbourhoods</td></tr>
-</table>
-<p><strong>Month 2 KPIs:</strong> 2,000 units/month | 400 kirana outlets | 15,000 Instagram followers | 100 Subscribe & Save customers</p>
-<p><strong>Month 2 Budget:</strong> ₹5-6 lakh (₹2L digital ads, ₹1.5L influencers, ₹1L trade push, ₹1L ops + sampling)</p>
-
-<h3>Month 3 (Days 61-90): Scale</h3>
-<table>
-<tr><th>Week</th><th>Actions</th></tr>
-<tr><td><strong>Week 9-10</strong></td><td>• Expand to second geography if Month 2 KPIs are met (Noida or Gurgaon)<br>• First PR coverage should land — amplify with paid promotion<br>• Launch "Adopt a Farmer" premium subscription tier at ₹999/month (5kg × 2/month + farmer story)</td></tr>
-<tr><td><strong>Week 11-12</strong></td><td>• Review entire 90-day data — identify top 5 kirana champions, top 3 influencers, best ad creative<br>• Double down only on what is working<br>• Plan Month 4 budget based on actual CPA and repeat purchase rate<br>• Begin conversations with 1 modern trade buyer for Year 2</td></tr>
-</table>
-<p><strong>Month 3 KPIs:</strong> 5,000 units/month | ₹10L+ monthly revenue run rate | 30%+ repeat purchase rate | 25,000 Instagram followers</p>
-<p><strong>Month 3 Budget:</strong> ₹6-8 lakh (scale what worked in Month 1-2)</p>
-
-<h3>The One Big Bet</h3>
-<p><strong>Win Blinkit in South Delhi within 45 days.</strong> If your Blinkit rating is 4.2+ and you're in the top 3 atta results in South Delhi pin codes, everything else follows. Quick commerce is the fastest trial mechanism India has ever seen.</p>
-
-<h3>Early Warning System</h3>
-<table>
-<tr><th>GTM is Working ✓</th><th>Pivot Immediately ✗</th></tr>
-<tr><td>Repeat purchase rate >25% by Day 60</td><td>Repeat rate below 15% — product issue</td></tr>
-<tr><td>Kirana reorder rate >60% of stocked outlets</td><td>Kirana reorder below 40% — distribution or product issue</td></tr>
-<tr><td>Blinkit rating 4.0+ within 30 days</td><td>More than 3 negative reviews citing taste/texture</td></tr>
-</table>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>This plan fails if you run out of stock on Blinkit even once in Month 1.</strong> Out-of-stock on quick commerce = permanent ranking drop. Overstock rather than understock.</li>
-    <li><strong>Do not expand to Month 2 geography if Month 1 KPIs are not met.</strong> Geographic expansion before product-channel fit is how startups burn through money.</li>
-  </ul>
-</div>`;
-
-  S.out[9]=html; S.done.add(9); renderSB(); s9(); toast('Step 9 complete! ✓');
-}
-
-// ─── STEP 10: BUDGET ──────────────────────────────────────────────────────────
-function s10() {
-  const prev = S.out[10] ? outBox('Budget Allocation', S.out[10]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 10 · 📈</div><div>
-      <div class="ct">Budget Allocator</div>
-      <div class="cd">Exact rupee split across channels with ROI targets.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Monthly marketing budget</label>
-        <input type="text" id="bu1" value="${S.b.budget||'₹5 lakh/month'}"></div>
-      <button class="btn bp" onclick="run10()">Allocate Budget →</button>
-    </div>
-  </div>${prev}`);
-}
-
-function run10() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b=S.b.brand; const budget=v('bu1')||'₹5 lakh';
-  const budgetNum = 500000;
-  const html = `<h2>${b} — Budget Allocation (${budget}/month)</h2>
-
-<h3>Channel Split</h3>
-<table>
-<tr><th>Channel</th><th>%</th><th>Monthly ₹</th><th>What it buys</th><th>Expected Return</th></tr>
-<tr><td><strong>Meta/Instagram Ads</strong></td><td>30%</td><td>₹1.5L</td><td>3-4 creatives/week, 3 ad sets targeting SEC A/B Delhi women 28-42. Reach: ~2L impressions/month</td><td>150-200 new customers/month at ₹750-1000 CPA</td></tr>
-<tr><td><strong>Influencer Marketing</strong></td><td>20%</td><td>₹1L</td><td>2 micro-influencers (50K-200K), 4 nano-influencers (5K-20K). Focus: nutrition + mommy content</td><td>500-800 profile visits per influencer post, 50-100 trial orders per campaign</td></tr>
-<tr><td><strong>Trade / Kirana Push</strong></td><td>20%</td><td>₹1L</td><td>Kirana owner free samples (100 outlets), buy-5-get-1 trade scheme, field sales person (part-time)</td><td>100+ new kirana stocked, 40% reorder rate = ₹2-3L monthly kirana revenue</td></tr>
-<tr><td><strong>Content Production</strong></td><td>12%</td><td>₹60K</td><td>1 dedicated content creator (freelance), 8 Reels/month, farm visit video quarterly</td><td>Organic reach 20K-50K/month, builds long-term brand equity</td></tr>
-<tr><td><strong>Sampling / Activation</strong></td><td>10%</td><td>₹50K</td><td>500g free trial packs for Blinkit first-order campaign, RWA events, gym tie-ups</td><td>300-500 trials → 30-35% conversion = 100-175 new customers</td></tr>
-<tr><td><strong>PR & Earned Media</strong></td><td>5%</td><td>₹25K</td><td>Press release distribution, food journalist pitching, award entries</td><td>1-2 media mentions/month — long tail SEO + credibility</td></tr>
-<tr><td><strong>Reserve / Testing</strong></td><td>3%</td><td>₹15K</td><td>A/B test new ad formats, experiment with Google search ads, contingency</td><td>Learnings for Month 2 optimisation</td></tr>
-</table>
-
-<h3>Priority Stack (if budget cut 50%)</h3>
-<ol>
-  <li><strong>Trade/Kirana Push</strong> — cannot build without distribution</li>
-  <li><strong>Sampling/Activation</strong> — trial is the only conversion mechanism that works in atta</li>
-  <li><strong>Content Production</strong> — organic content compounds over time</li>
-  <li><strong>Meta Ads</strong> — paid can wait if organic + trade are working</li>
-  <li><strong>Influencer</strong> — nice to have, not need to have in Month 1</li>
-</ol>
-
-<h3>Zero-Budget Alternatives</h3>
-<table>
-<tr><th>Paid Channel</th><th>Free Alternative</th></tr>
-<tr><td>Meta Ads</td><td>Personal founder Instagram + engaging in Delhi food/parenting communities + Reels with trending audio</td></tr>
-<tr><td>Influencer fees</td><td>Product gifting in exchange for honest review — many nano-influencers accept this</td></tr>
-<tr><td>PR agency</td><td>Direct email pitch to HT City / Times Food / The Hindu food desk with compelling farm story</td></tr>
-<tr><td>Sampling events</td><td>Partner with local gyms, yoga studios, RWA for free — they want value for their members</td></tr>
-</table>
-
-<h3>Budget Scaling Milestones</h3>
-<table>
-<tr><th>Revenue Milestone</th><th>Budget Increase</th><th>Where to add</th></tr>
-<tr><td>₹5L/month GMV</td><td>+₹1L/month</td><td>Double Meta ads (CPA is proven)</td></tr>
-<tr><td>₹15L/month GMV</td><td>+₹3L/month</td><td>Expand to second geography, add 1 full-time sales person</td></tr>
-<tr><td>₹30L/month GMV</td><td>+₹5L/month</td><td>Launch modern trade, regional PR, add larger influencer</td></tr>
-</table>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>₹5L/month is tight for a CPG brand.</strong> Every rupee must be tracked. Set up a simple Google Sheet with spend vs customer acquired vs revenue generated per channel. Kill what doesn't work by Month 2.</li>
-    <li><strong>The biggest waste in Indian FMCG marketing is sponsoring events.</strong> Don't do it. No stalls, no fairs, no expos until you're at ₹1Cr/month.</li>
-  </ul>
-</div>`;
-
-  S.out[10]=html; S.done.add(10); renderSB(); s10(); toast('Step 10 complete! ✓');
-}
-
-// ─── STEP 11: RISKS ───────────────────────────────────────────────────────────
-function s11() {
-  const prev = S.out[11] ? outBox('Risk Flags', S.out[11]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 11 · ⚠️</div><div>
-      <div class="ct">Risk Flags</div>
-      <div class="cd">Every risk that could kill or block your brand — in plain language with mitigation.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Your biggest worry</label>
-        <textarea id="r1" rows="2" placeholder="What keeps you up at night?"></textarea></div>
-      <button class="btn bp" onclick="run11()">Identify Risks →</button>
-    </div>
-  </div>${prev}`);
-}
-
-function run11() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b=S.b.brand; const worry=v('r1');
-  const html = `<h2>${b} — Risk Register</h2>
-${worry?`<p><strong>Founder's worry:</strong> "${worry}" — addressed in the analysis below.</p>`:''}
-
-<h3>Category A: Existential Risks</h3>
-<table>
-<tr><th>Risk</th><th>Likelihood</th><th>Early Warning</th><th>Mitigation</th></tr>
-<tr><td><strong>Wheat sourcing failure</strong> — MP Sharbati crop fails or farmers switch buyers</td><td>Medium</td><td>Farmer group not responding to reorders by Month 3</td><td>Sign minimum guarantee contracts with 3 farmer groups, not 1. Maintain 60-day inventory buffer always.</td></tr>
-<tr><td><strong>Quality inconsistency</strong> — batch variation in grinding or wheat quality breaks the brand promise</td><td>Medium</td><td>3+ customer complaints about texture/colour variation</td><td>Standardise stone-grinding process documentation. Third-party quality testing every batch. QR code traceability catches this fast.</td></tr>
-<tr><td><strong>Cash flow crisis</strong> — distributor payment delays + Blinkit settlement delays create working capital crunch</td><td>High</td><td>Payables exceed ₹15L with receivables pending >45 days</td><td>Negotiate maximum 30-day credit with distributor. Maintain ₹10L cash reserve at all times. D2C cash sales improve cash cycle.</td></tr>
-</table>
-
-<h3>Category B: Growth Blockers</h3>
-<table>
-<tr><th>Risk</th><th>Mitigation</th></tr>
-<tr><td><strong>Blinkit out-of-stock</strong> — ranking drops to page 3 and never recovers</td><td>Assign one person solely responsible for Blinkit inventory. Never let stock drop below 3-day buffer.</td></tr>
-<tr><td><strong>Distributor conflict</strong> — distributor pushes competing brands over yours</td><td>Build direct relationships with top 50 kirana owners independently. Do not be 100% distributor-dependent.</td></tr>
-<tr><td><strong>Modern trade listing fees</strong> — DMart/BigBazaar demand ₹5-10L listing fees you can't afford</td><td>Delay modern trade until Year 2. Build enough pull-demand through digital so MT comes to you.</td></tr>
-</table>
-
-<h3>Category C: Execution Risks</h3>
-<ul>
-  <li><strong>Founder doing everything:</strong> Sales + marketing + operations + sourcing cannot be one person. Hire a field sales person by Month 2 if traction is there.</li>
-  <li><strong>Wrong influencer selection:</strong> A lifestyle influencer with no food credibility will generate impressions, not sales. Insist on food/nutrition/mommy content creators only.</li>
-  <li><strong>Over-investing in packaging design:</strong> Beautiful packaging matters but a ₹5L premium pack does not justify itself unless distribution is ready. Don't over-engineer before you have customers.</li>
-</ul>
-
-<h3>Category D: India-Specific Risks</h3>
-<ul>
-  <li><strong>FSSAI compliance:</strong> "Stone-ground" and "single-origin" are marketing claims — ensure your label does not make claims that could be challenged. Get a food lawyer to review packaging before print.</li>
-  <li><strong>GST on atta:</strong> Branded packaged atta attracts 5% GST. Factor into pricing from Day 1. Unbranded atta is exempt — your competitor kirana chakki has this advantage.</li>
-  <li><strong>Competitor copy:</strong> When ITC launches "Aashirvaad Select — MP Sharbati Stone Ground" in 18 months, your response must be ready. Your moat = genuine farmer relationships + customer trust already built.</li>
-  <li><strong>Monsoon risk:</strong> A bad MP wheat harvest year pushes Sharbati prices up 25-30%. Your premium pricing gives you room — but communicate proactively with customers, don't silently raise prices.</li>
-</ul>
-
-<h3>Red Lines — Pivot, Not Persist</h3>
-<ul>
-  <li>Repeat purchase rate below 20% after 3 months — the product is not good enough</li>
-  <li>Cost of customer acquisition above ₹1,500 consistently — the economics don't work</li>
-  <li>Cannot secure reliable Sharbati wheat sourcing at viable price — the core product promise is broken</li>
-  <li>Two distributors cancel in the same month — distribution strategy needs fundamental rethink</li>
-  <li>A funded competitor launches the exact same positioning with >₹5Cr raise — need to find a more defensible niche fast</li>
-</ul>
-
-<h3>Green Lights — You're on Track</h3>
-<ul>
-  <li>Month 2 repeat purchase rate above 30%</li>
-  <li>Kirana owners asking your distributor for more stock without prompting</li>
-  <li>Customers tagging you in Instagram posts showing their rotis</li>
-  <li>Blinkit ranking in top 3 for "premium atta" in your pin codes</li>
-  <li>First inbound inquiry from a modern trade buyer</li>
-</ul>
-
-<div class="brutal">
-  <h4>⚡ Brutal Truths</h4>
-  <ul>
-    <li><strong>The risk you didn't list is usually the one that kills you.</strong> The biggest threat to ${b} is not competition — it is the founder's time. One person cannot build distribution, create content, manage quality, and handle finance simultaneously past Month 3.</li>
-    <li><strong>Indian FMCG is a cash business.</strong> Distributor credit, delayed settlements, festival advance orders — if your working capital management is weak, a great brand dies from a cash crunch, not from competition.</li>
-  </ul>
-</div>`;
-
-  S.out[11]=html; S.done.add(11); renderSB(); s11(); toast('Step 11 complete! ✓');
-}
-
-// ─── STEP 12: Q&A ─────────────────────────────────────────────────────────────
-function s12() {
-  const prev = S.out[12] ? outBox('Q&A Response', S.out[12]) : '';
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 12 · 💬</div><div>
-      <div class="ct">Open Q&A</div>
-      <div class="cd">Ask anything about your brand strategy. Get a direct, opinionated answer.</div>
-    </div></div>
-    <div class="cb">
-      <div class="fr"><label>Your question <span>*</span></label>
-        <textarea id="q1" rows="4" placeholder="e.g., Should I launch on Amazon first or Blinkit? What's my pricing for a gift pack? How do I approach a kirana distributor?"></textarea></div>
-      <button class="btn bp" onclick="run12()">Get Answer →</button>
-    </div>
-  </div>${prev}`);
-}
-
-function run12() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const q=v('q1');
-  if(!q){toast('Enter your question');return;}
-  const b=S.b.brand;
-
-  // Smart response logic based on question keywords
-  let ans = '';
-  const ql = q.toLowerCase();
-  if(ql.includes('amazon') || ql.includes('blinkit') || ql.includes('zepto') || ql.includes('quick commerce')) {
-    ans = `<h3>Amazon vs Quick Commerce — Which First?</h3>
-<p><strong>Blinkit first, Amazon second.</strong> Here's why:</p>
-<ul>
-  <li>Blinkit gives you <strong>real-time feedback</strong> — you see ratings within days, not weeks. If your product has a quality issue, you know in 72 hours.</li>
-  <li>Blinkit's algorithm rewards new products with organic visibility in a way Amazon's does not for a new brand with zero reviews.</li>
-  <li>The <strong>10-minute delivery = impulse trial.</strong> "Let me try this atta" is a Blinkit thought. Amazon is a planned purchase — harder for a new brand to capture.</li>
-  <li>Amazon Subscribe & Save is powerful for retention — but first you need the trial. Blinkit provides that.</li>
-</ul>
-<p><strong>Sequence:</strong> Blinkit/Zepto (Month 1) → Amazon (Month 2) → Swiggy Instamart (Month 3)</p>
-<p><strong>One non-obvious tip:</strong> On Blinkit, your product image and the first two lines of your product description are the only things a consumer sees before buying. Invest in professional food photography before listing. A bad image = zero conversion regardless of how good your product is.</p>`;
-  } else if(ql.includes('distribut') || ql.includes('kirana')) {
-    ans = `<h3>How to Approach a Kirana Distributor</h3>
-<p><strong>The most important thing:</strong> come with proof, not a pitch.</p>
-<p>A distributor hears 10 new brand pitches a week. Every founder says their product is great. What they actually care about:</p>
-<ul>
-  <li><strong>Does it move?</strong> Bring Blinkit order data, screenshots of customer reviews, names of 10 kirana owners who are already stocking you (even if through direct supply).</li>
-  <li><strong>What's my margin?</strong> Lead with 8% distributor margin + 15% retailer margin baked into your MRP. Have a clear margin sheet printed.</li>
-  <li><strong>Who will push it?</strong> Offer to put your own field sales person alongside their team for the first 30 days. De-risks the distributor completely.</li>
-  <li><strong>What if it doesn't sell?</strong> Offer a 3-month buyback on unsold stock. Distributors fear dead inventory more than anything.</li>
-</ul>
-<p><strong>Where to find distributors:</strong> Ask the kirana owners who already stock you — they know who the best local distributor is. The kirana owner referral is 10x more powerful than a cold approach.</p>`;
-  } else if(ql.includes('social media') || ql.includes('instagram') || ql.includes('content') || ql.includes('reel')) {
-    ans = `<h3>Instagram / Content Strategy for ${b}</h3>
-<p><strong>The one content format that will build this brand:</strong> Farm-origin Reels.</p>
-<p>A 45-60 second Reel showing: wheat field in MP → farmer harvesting → stone grinding process → bag of ${b} atta → perfect roti coming off the tawa. With Hindi voiceover. This format consistently gets 10x the engagement of product-only content in the food category.</p>
-<p><strong>Content calendar (8 posts/month):</strong></p>
-<ul>
-  <li>2 × Farm/origin stories (Reels, 45-60 sec)</li>
-  <li>2 × Roti-making tips/recipes using ${b} (Tutorial format)</li>
-  <li>2 × Customer UGC reposts (builds social proof)</li>
-  <li>1 × Founder story / behind the scenes</li>
-  <li>1 × Educational (why Sharbati wheat is different / what stone-grinding does)</li>
-</ul>
-<p><strong>Posting time:</strong> 7-9am and 8-10pm get 2x engagement for food content in India. Housewives scroll Instagram while making morning chai and after putting kids to bed.</p>
-<p><strong>Do NOT do:</strong> generic "healthy living" quotes, stock photos, English-only content, or posting without replying to every comment in the first hour.</p>`;
-  } else if(ql.includes('price') || ql.includes('pricing') || ql.includes('cost')) {
-    ans = `<h3>Pricing Question — Direct Answer</h3>
-<p>For ${b} at the premium end of the Indian atta market:</p>
-<ul>
-  <li><strong>Never price below ₹40/kg</strong> — you will destroy the premium positioning and attract the wrong consumer</li>
-  <li><strong>Sweet spot: ₹42-48/kg</strong> for mainstream premium. This means ₹210-240 for 5kg. ₹219 is the optimal price point — feels like "two hundred and something" not "two fifty"</li>
-  <li><strong>Trial SKU: ₹49 for 1kg</strong> — removes the trial barrier without cheapening the brand</li>
-  <li><strong>Never discount below 10%</strong> — and only during Diwali/Navratri. Discounts in atta category signal commodity, not premium</li>
-</ul>
-<p>The rule: price confidence is brand confidence. If you apologise for your price, the consumer will too.</p>`;
-  } else {
-    ans = `<h3>BrandOS Answer: ${q}</h3>
-<p>Based on everything we know about <strong>${b}</strong> — ${S.b.prod} targeting ${S.b.target} in ${S.b.loc}:</p>
-<p>The most important lens to apply to this question is: <strong>what does the Indian consumer in your exact target segment actually do</strong>, not what the global playbook says.</p>
-<p>For ${b} specifically, the answer depends on your current bottleneck. If distribution is the constraint (which it almost always is in Indian FMCG at your stage), every decision should be filtered through: "does this help me get into more homes or does it distract from that?"</p>
-<p>The principle: <strong>depth before width, proof before scale, distribution before awareness.</strong> Indian consumers cannot buy a brand they cannot find. Every strategic decision at your stage should serve the goal of getting ${b} into 10,000 loyal repeat-purchase households in ${S.b.loc} before expanding anywhere else.</p>
-<p>If you can share more specifics about this question, I can give a sharper answer in the next Q&A run.</p>`;
+  let ctxHtml = '';
+  if (S.brand.brand && n > 1) {
+    ctxHtml = `<div class="ctx">
+      <h4>Brand Context</h4>
+      <div class="ctx-row"><span class="ctx-k">Brand</span><span class="ctx-v">${S.brand.brand}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Product</span><span class="ctx-v">${S.brand.product||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Stage</span><span class="ctx-v">${S.stage||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Location</span><span class="ctx-v">${S.brand.location||'—'}</span></div>
+    </div>`;
   }
 
-  const html = `<h2>Q&A — ${b}</h2><p><strong>Q: ${q}</strong></p><hr>${ans}
-<div class="brutal"><h4>⚡ Brutal Truth</h4>
-<p>The best strategy advice is worth nothing if execution is weak. Write down the 3 actions from this answer you will do in the next 7 days. Then do them.</p></div>`;
+  const prevResp = S.resp[n] ? `
+    <div class="rbox">
+      <div class="rhead">
+        <div class="rlabel">BrandOS Analysis — Step ${n}</div>
+        <button class="btn btn-g" style="font-size:11.5px;padding:5px 12px;" onclick="clearAndRerun(${n})">Re-run ↺</button>
+      </div>
+      <div class="rcontent">${md(S.resp[n].out)}</div>
+    </div>` : '';
 
-  S.out[12]=html; S.done.add(12); renderSB(); s12(); toast('Step 12 complete! ✓');
+  const step = STEPS[n-1];
+  c.innerHTML = `
+    ${ctxHtml}
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge">Step ${n} · ${['📋','👤','📊','🌍','🔍','🧠','🎯','💰','🚀','📈','⚠️','💬','📄'][n-1]}</div>
+        <div>
+          <div class="card-title">${step.label}</div>
+          <div class="card-desc">${stepDesc(n)}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        ${stepForm(n)}
+        ${prevResp}
+      </div>
+    </div>`;
+
+  c.scrollTop = 0;
 }
 
-// ─── STEP 13: FINAL REPORT ────────────────────────────────────────────────────
-function s13() {
-  const prev = S.out[13] ? outBox('Final Consultancy Report', S.out[13]) : '';
-  const completedCount = S.done.size;
-  set(`${ctxBar()}<div class="card">
-    <div class="ch"><div class="cbadge">Step 13 · 📄</div><div>
-      <div class="ct">Final Consultancy Report</div>
-      <div class="cd">Your complete Rs. 20 lakh consulting deliverable — all steps synthesized into one report.</div>
-    </div></div>
-    <div class="cb">
-      <div class="chips">
-        <span class="chip g">${completedCount} of 12 steps completed</span>
-        <span class="chip o">Full report synthesized</span>
-        <span class="chip gd">Print to PDF</span>
-      </div>
-      <p style="font-size:13px;color:var(--tx2);margin-bottom:16px;line-height:1.6;">
-        ${completedCount < 3 ? '⚠️ Complete at least Steps 1-6 for a richer report. Currently showing available data.' : 'All completed steps will be synthesized into the final report below.'}
-      </p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn bp" onclick="run13()">Generate Final Report →</button>
-        ${S.out[13] ? `<button class="btn bg" onclick="window.print()">🖨️ Save as PDF</button>` : ''}
-      </div>
+function clearAndRerun(n) { delete S.resp[n]; S.done.delete(n); goStep(n); }
+
+function stepDesc(n) {
+  return ['Tell BrandOS everything. The more detail, the sharper the strategy.',
+    'Build 3 real Indian consumer personas with purchase triggers and cultural context.',
+    'Score your product-market fit across 5 India-specific dimensions.',
+    'Calculate TAM/SAM/SOM in ₹ using bottom-up and top-down methods.',
+    'Map every competitor, find white space, and expose their weaknesses.',
+    'Run 10 strategy frameworks — fully filled, India-specific, no placeholders.',
+    'Design your challenger position against the category incumbent.',
+    'Build complete pricing architecture across channels and consumer tiers.',
+    'Get a day-by-day 90-day GTM plan with channel sequence and KPIs.',
+    'Get an exact rupee split with expected ROI per channel.',
+    'Identify every risk that could kill or block your brand.',
+    'Ask anything. Get a senior consultant\'s direct answer.',
+    'Your complete Rs. 20 lakh consulting report — all 12 steps synthesized.'][n-1];
+}
+
+function stepForm(n) {
+  if (n === 1) return `
+    <div class="fgrid">
+      <div class="frow"><label>Brand Name <span>*</span></label>
+        <input type="text" id="f1" placeholder="e.g., HarvestKing" value="${S.brand.brand||'MP Sharbati Atta'}"></div>
+      <div class="frow"><label>Brand Stage <span>*</span></label>
+        <select id="f2">
+          <option value="">Select stage...</option>
+          <option value="Stage 1 — New Idea (pre-revenue)" ${S.brand.stage?.includes('1')?'selected':''}>Stage 1 — New Idea</option>
+          <option value="Stage 2 — Early Brand (some sales)" ${S.brand.stage?.includes('2')?'selected selected':''}>Stage 2 — Early Brand</option>
+          <option value="Stage 3 — Established Brand (scaling)" ${S.brand.stage?.includes('3')?'selected':''}>Stage 3 — Established Brand</option>
+        </select></div>
     </div>
-  </div>${prev}`);
+    <div class="frow"><label>Product Description <span>*</span></label>
+      <textarea id="f3" rows="2" placeholder="What exactly are you selling?">${S.brand.product||'Premium MP Sharbati wheat atta — single-origin, stone-ground, no additives or bleaching'}</textarea></div>
+    <div class="fgrid">
+      <div class="frow"><label>Geography / Launch Market</label>
+        <input type="text" id="f4" placeholder="e.g., Delhi NCR" value="${S.brand.location||'Delhi NCR, targeting North India expansion'}"></div>
+      <div class="frow"><label>Current Annual Revenue</label>
+        <input type="text" id="f5" placeholder="e.g., Rs. 10 crore" value="${S.brand.revenue||'₹10 crore'}"></div>
+    </div>
+    <div class="frow"><label>Target Customer</label>
+      <input type="text" id="f6" placeholder="Who buys this?" value="${S.brand.target||'Health-conscious homemakers, SEC A/B households, 28-45 years, Delhi NCR'}"></div>
+    <div class="frow"><label>Current Sales Channels</label>
+      <input type="text" id="f7" placeholder="e.g., kirana, Amazon" value="${S.brand.channels||'Local kirana stores, some modern trade (DMart)'}"></div>
+    <div class="frow"><label>Your USP — Why choose you over Aashirvaad?</label>
+      <textarea id="f8" rows="2">${S.brand.usp||'Single-origin MP Sharbati wheat, traditional stone grinding, zero additives — visibly different taste and texture'}</textarea></div>
+    <div class="frow"><label>Monthly Marketing Budget</label>
+      <input type="text" id="f9" placeholder="e.g., Rs. 5 lakh/month" value="${S.brand.budget||'₹5-8 lakh/month'}"></div>
+    <div class="frow"><label>Anything else to know?</label>
+      <textarea id="f10" rows="2">${S.brand.notes||'Main competitor is Aashirvaad (ITC) which has ~60% packaged atta market share. Also competing with Pillsbury and Fortune.'}</textarea></div>
+    <div style="margin-top:20px;">
+      <button class="btn btn-p" id="runBtn" onclick="runStep1()">Analyze Brand Brief →</button>
+    </div>`;
+
+  if (n === 12) return `
+    <div class="frow"><label>Your Question <span>*</span></label>
+      <textarea id="fq" rows="4" placeholder="Ask anything about your brand, market, competition, channels, pricing..."></textarea></div>
+    <div style="margin-top:16px;">
+      <button class="btn btn-p" id="runBtn" onclick="runQ()">Get Answer →</button>
+    </div>`;
+
+  if (n === 13) return `
+    <div class="chips">
+      <span class="chip g">All 12 steps synthesized</span>
+      <span class="chip o">Full consulting report</span>
+      <span class="chip gld">Print to PDF</span>
+    </div>
+    <p style="color:var(--text2);font-size:13.5px;line-height:1.7;margin-bottom:18px;">
+      BrandOS will now compile everything from all previous steps into one comprehensive report — the equivalent of a Rs. 20 lakh consulting engagement.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn btn-p" id="runBtn" onclick="runGeneric(13, {})">Generate Final Report →</button>
+      ${S.resp[13] ? `<button class="btn btn-g" onclick="window.print()">🖨️ Print / Save PDF</button>` : ''}
+    </div>`;
+
+  // Generic extra fields for steps 2-11
+  const extras = {
+    2:  `<div class="frow"><label>Additional context for persona building?</label><textarea id="fe" rows="2" placeholder="Specific regions, age groups, or use cases to explore..."></textarea></div>`,
+    3:  `<div class="frow"><label>Specific MarketFit concerns to probe?</label><textarea id="fe" rows="2" placeholder="e.g., worried about price sensitivity in Tier 2..."></textarea></div>`,
+    4:  `<div class="frow"><label>Specific segment to focus on?</label><input type="text" id="fe" placeholder="e.g., Tier 2 cities, SEC B households"></div>`,
+    5:  `<div class="frow"><label>Competitors to include (optional)</label><input type="text" id="fe" placeholder="e.g., Aashirvaad, Pillsbury, Fortune, local brands"></div>`,
+    6:  `<div class="frow"><label>Which frameworks need deepest focus?</label><input type="text" id="fe" placeholder="e.g., Blue Ocean + JTBD + SWOT"></div>`,
+    7:  `<div class="frow"><label>Your current positioning instinct</label><textarea id="fe" rows="2" placeholder="What positioning are you drawn to?"></textarea></div>`,
+    8:  `<div class="fgrid">
+          <div class="frow"><label>Current/planned price point</label><input type="text" id="fe" placeholder="e.g., ₹299 for 5kg"></div>
+          <div class="frow"><label>Target gross margin %</label><input type="text" id="fe2" placeholder="e.g., 35%"></div>
+        </div>`,
+    9:  `<div class="fgrid">
+          <div class="frow"><label>Launch geography priority</label><input type="text" id="fe" placeholder="e.g., Delhi NCR first, then Punjab"></div>
+          <div class="frow"><label>90-day budget</label><input type="text" id="fe2" placeholder="e.g., ₹15 lakh total"></div>
+        </div>`,
+    10: `<div class="frow"><label>Monthly budget to allocate</label><input type="text" id="fe" placeholder="e.g., ₹5 lakh/month"></div>`,
+    11: `<div class="frow"><label>Your biggest worry about this business</label><textarea id="fe" rows="2" placeholder="What keeps you up at night?"></textarea></div>`,
+  };
+
+  return `
+    ${extras[n] || ''}
+    <div style="margin-top:18px;">
+      <button class="btn btn-p" id="runBtn" onclick="runGeneric(${n}, getExtra())">Run Step ${n} Analysis →</button>
+    </div>`;
 }
 
-function run13() {
-  if(!S.b.brand){toast('Complete Step 1 first');return;}
-  const b=S.b.brand;
-  const date = new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-
-  const html = `<h2>BRANDOS CONSULTANCY REPORT</h2>
-<p style="color:var(--tx2);font-size:13px;">
-  <strong>Brand:</strong> ${b} &nbsp;|&nbsp;
-  <strong>Category:</strong> ${S.b.prod||'—'} &nbsp;|&nbsp;
-  <strong>Stage:</strong> ${S.stage||'—'} &nbsp;|&nbsp;
-  <strong>Date:</strong> ${date}
-</p><hr>
-
-<h3>1. Executive Summary</h3>
-<p><strong>${b}</strong> is a ${S.b.prod} brand targeting ${S.b.target} in ${S.b.loc}. At ${S.b.rev||'an early revenue stage'}, the brand has demonstrated initial product-market fit in the premium Indian atta segment — a ₹30,000+ crore market growing at 8-10% CAGR with a premium sub-segment expanding at 18-22%.</p>
-<p>The core opportunity: <strong>no Indian atta brand with real distribution owns the provenance/origin positioning</strong>. Aashirvaad owns "trusted family atta" through distribution scale. ${b} can own "you know exactly where this wheat came from" — a position that Aashirvaad structurally cannot occupy at their supply chain scale.</p>
-<p><strong>The three things that determine success or failure:</strong></p>
-<ul>
-  <li><strong>Distribution in 90 days:</strong> Get to 500+ kirana outlets in ${S.b.loc} AND Blinkit top-3 ranking for premium atta. Without this, nothing else matters.</li>
-  <li><strong>Repeat purchase rate above 30%:</strong> If people try and don't come back, the product has a problem that no marketing budget can fix.</li>
-  <li><strong>Origin story integrity:</strong> The entire positioning rests on the Sharbati wheat provenance claim being 100% verifiable and consistent. One supply chain compromise destroys years of brand equity.</li>
-</ul>
-
-<h3>2. Market Opportunity</h3>
-<p><strong>TAM:</strong> ₹30,000-40,000 crore (India packaged atta) | <strong>SAM:</strong> ₹10,800 crore (premium atta, urban India) | <strong>SOM Year 1:</strong> ₹5-8 crore (${S.b.loc} premium households)</p>
-<p>Premium atta is the fastest-growing sub-segment in the category driven by health consciousness, quick commerce-enabled trial, and Instagram food content driving provenance awareness. The window to establish the premium origin position is 18-24 months before a major FMCG player responds.</p>
-
-<h3>3. Target Consumer</h3>
-<p><strong>Primary — Priya, 35, South Delhi, SEC A2:</strong> Health-conscious urban mom, Blinkit power user, reads labels, will pay ₹95-120 for 5kg if quality is verified. Converts through nutrition influencer recommendations and farm-origin Reels content.</p>
-<p><strong>Secondary — Rakesh, 42, Janakpuri, SEC B1:</strong> Volume buyer, kirana-dependent, price ceiling ₹65-75/5kg. Converts only through kirana owner recommendation and free trial sample. The kirana owner is his influencer.</p>
-
-<h3>4. Competitive Position</h3>
-<p>The competitive landscape is dominated by Aashirvaad (60%+ share) competing on distribution and trust, with Pillsbury and Fortune occupying mid-market. <strong>The white space: single-origin, traceable, stone-ground premium atta</strong> — no brand with meaningful distribution currently occupies this position. ${b}'s strategy is not to compete with Aashirvaad on their terms (scale, distribution, price) but to own the premium provenance lane that their supply chain prevents them from entering authentically.</p>
-
-<h3>5. Brand Positioning</h3>
-<p><em>"${b} is India's first single-origin atta — every pack traced to a specific Sharbati wheat farmer in Madhya Pradesh, stone-ground within 48 hours of milling. For families who believe the best food starts with knowing exactly where it comes from."</em></p>
-<p><strong>The Villain:</strong> Anonymous food — the normalisation of eating without knowing what's in it or where it came from.</p>
-<p><strong>Communication principles:</strong> Always show the source. Speak in Hindi and English equally. Back every health claim with a specific fact. Show the stone-grinding process constantly. Never apologise for the premium price.</p>
-
-<h3>6. Pricing Architecture</h3>
-<table>
-<tr><th>SKU</th><th>MRP</th><th>Channel</th></tr>
-<tr><td>1kg Trial Pack</td><td>₹49</td><td>Blinkit impulse, kirana</td></tr>
-<tr><td>5kg Regular (hero SKU)</td><td>₹219</td><td>All channels</td></tr>
-<tr><td>10kg Value</td><td>₹399</td><td>Kirana, Amazon</td></tr>
-</table>
-<p>Pricing strategy: Value-based. Never discount below 10%, only during Diwali/Navratri. D2C gives best margin (₹194/unit net). Premium justified by origin story — never apologise for the price point.</p>
-
-<h3>7. 90-Day Go-To-Market Plan</h3>
-<p><strong>Month 1 — Foundation:</strong> Sign 1 distributor (300+ kirana), launch Blinkit + Zepto, begin Instagram Reels (farm origin content), kirana seeding with free samples. Budget: ₹4-5L.</p>
-<p><strong>Month 2 — Activation:</strong> Scale to 400 kirana, launch Amazon Subscribe & Save, 3-5 influencer posts, UGC campaign, PR pitching to food media. Budget: ₹5-6L.</p>
-<p><strong>Month 3 — Scale:</strong> Expand to second geography if Month 1-2 KPIs met, launch "Adopt a Farmer" premium subscription tier, review and double down on what is working. Budget: ₹6-8L.</p>
-<p><strong>The One Big Bet:</strong> Win Blinkit in ${S.b.loc} within 45 days — 4.2+ rating and top-3 ranking for premium atta in target pin codes.</p>
-
-<h3>8. Budget Blueprint (Monthly)</h3>
-<table>
-<tr><th>Channel</th><th>Allocation</th></tr>
-<tr><td>Meta/Instagram Ads</td><td>30% — ₹1.5L</td></tr>
-<tr><td>Influencer Marketing</td><td>20% — ₹1L</td></tr>
-<tr><td>Trade/Kirana Push</td><td>20% — ₹1L</td></tr>
-<tr><td>Content Production</td><td>12% — ₹60K</td></tr>
-<tr><td>Sampling/Activation</td><td>10% — ₹50K</td></tr>
-<tr><td>PR + Reserve</td><td>8% — ₹40K</td></tr>
-</table>
-
-<h3>9. Top 5 Risks</h3>
-<ul>
-  <li><strong>Wheat sourcing failure:</strong> Diversify to 3 farmer groups minimum. 60-day inventory buffer always maintained.</li>
-  <li><strong>Blinkit out-of-stock:</strong> One person owns Blinkit inventory exclusively. Never drop below 3-day buffer.</li>
-  <li><strong>Cash flow crunch:</strong> Maintain ₹10L cash reserve. Maximum 30-day credit terms with distributor.</li>
-  <li><strong>ITC/Adani competitive response:</strong> Build 10,000 loyal households before they respond — their brand cannot match your origin authenticity.</li>
-  <li><strong>Quality inconsistency:</strong> Standardise stone-grinding process. Third-party quality test every batch. QR code traceability catches issues fast.</li>
-</ul>
-
-<h3>10. KPI Targets</h3>
-<table>
-<tr><th>Milestone</th><th>Units/Month</th><th>Revenue</th><th>Key Metric</th></tr>
-<tr><td>Day 30</td><td>500</td><td>₹1L</td><td>Blinkit rating 3.8+</td></tr>
-<tr><td>Day 60</td><td>2,000</td><td>₹4L</td><td>Repeat rate 25%+</td></tr>
-<tr><td>Day 90</td><td>5,000</td><td>₹10L</td><td>Repeat rate 30%+, 400 kirana</td></tr>
-<tr><td>6 Months</td><td>15,000</td><td>₹30L</td><td>2 geographies, MT conversations</td></tr>
-</table>
-
-<h3>11. The One Thing</h3>
-<p style="font-size:15px;line-height:1.8;"><strong>If you do only one thing from this entire report:</strong> Get ${b} listed on Blinkit in your top 5 target pin codes in ${S.b.loc} with a 1kg trial pack at ₹49, and make sure you never go out of stock in Month 1. Quick commerce trial is the fastest, cheapest, most measurable way to prove your product works with real consumers. Everything else in this report — the positioning, the pricing, the personas — is validated or invalidated by whether people who try you come back and order again. Start there.</p>
-
-<hr>
-<p style="font-size:12px;color:var(--tx3);text-align:center;">BrandOS Indian Marketing Intelligence · Generated ${date} · This report is based on inputs provided and BrandOS's India market intelligence framework.</p>`;
-
-  S.out[13]=html; S.done.add(13); renderSB(); s13();
-  toast('Final report ready! Use Print button to save as PDF ✓');
+function getExtra() {
+  const fe = document.getElementById('fe');
+  const fe2 = document.getElementById('fe2');
+  return {
+    extra: fe ? fe.value.trim() : '',
+    price: fe ? fe.value.trim() : '',
+    margin: fe2 ? fe2.value.trim() : '',
+    geo: fe ? fe.value.trim() : '',
+    budget: fe ? fe.value.trim() : '',
+    worry: fe ? fe.value.trim() : '',
+    q: fe ? fe.value.trim() : '',
+  };
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-renderSB();
-s1();
+// ── RUNNERS ────────────────────────────────────────────────────────────────────
+function runStep1() {
+  const brand = v('f1'), stage = v('f2');
+  if (!brand) { toast('Enter brand name', 'err'); return; }
+  if (!stage) { toast('Select a stage', 'err'); return; }
+  S.brand = {
+    brand, stage,
+    product: v('f3'), location: v('f4'), revenue: v('f5'),
+    target: v('f6'), channels: v('f7'), usp: v('f8'),
+    budget: v('f9'), notes: v('f10')
+  };
+  S.stage = stage;
+  renderSidebar();
+  execute(1, prompt(1, {}));
+}
+
+function runQ() {
+  const q = v('fq');
+  if (!q) { toast('Type your question', 'err'); return; }
+  execute(12, prompt(12, {q}));
+}
+
+function runGeneric(n, d) {
+  if (!S.brand.brand && n !== 1) { toast('Complete Step 1 first', 'err'); return; }
+  execute(n, prompt(n, d));
+}
+
+function v(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+// ── EXECUTE ────────────────────────────────────────────────────────────────────
+async function execute(n, p) {
+  if (!S.key) { toast('No API key — return to welcome', 'err'); return; }
+
+  const btn = document.getElementById('runBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Analyzing...'; }
+
+  // Show loading spinner
+  const c = document.getElementById('content');
+  let loader = document.getElementById('loader');
+  if (!loader) {
+    loader = document.createElement('div');
+    loader.id = 'loader';
+    loader.className = 'loading';
+    loader.innerHTML = `<div class="spin"></div><div><div class="ltxt">BrandOS is analyzing...</div><div class="lsub">Applying Indian market intelligence</div></div>`;
+    c.appendChild(loader);
+  }
+  c.scrollTop = c.scrollHeight;
+
+  try {
+    const out = await gemini(p);
+    S.resp[n] = { inp: p, out };
+    S.done.add(n);
+    loader.remove();
+    renderSidebar();
+    goStep(n);
+    // Scroll to response
+    setTimeout(() => {
+      const rb = document.querySelector('.rbox');
+      if (rb) rb.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+    toast('Step ' + n + ' complete!', 'ok');
+  } catch(err) {
+    loader.remove();
+    if (btn) { btn.disabled = false; btn.textContent = 'Try Again →'; }
+    toast('Error: ' + err.message, 'err');
+    // Show error in content too
+    const errDiv = document.createElement('div');
+    errDiv.style.cssText = 'background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.3);border-radius:10px;padding:18px;margin-top:16px;font-size:13.5px;color:var(--red);';
+    errDiv.innerHTML = '<strong>API Error:</strong> ' + err.message + '<br><br><span style="color:var(--text2);font-size:12px;">Check your API key is valid and has Gemini API enabled at aistudio.google.com</span>';
+    c.appendChild(errDiv);
+  }
+}
+
+// ── MARKDOWN RENDERER ─────────────────────────────────────────────────────────
+function md(t) {
+  // Escape HTML first
+  t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Headers
+  t = t.replace(/^#### (.+)$/gm,'<h4>$1</h4>');
+  t = t.replace(/^### (.+)$/gm,'<h4>$1</h4>');
+  t = t.replace(/^## (.+)$/gm,'<h3>$1</h3>');
+  t = t.replace(/^# (.+)$/gm,'<h2>$1</h2>');
+  // Bold / italic
+  t = t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  t = t.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  // HR
+  t = t.replace(/^---+$/gm,'<hr>');
+  // Tables (basic)
+  t = t.replace(/^\|(.+)\|$/gm, (line) => {
+    if (line.replace(/[\s\-\|]/g,'') === '') return '<tr class="thead-sep"></tr>';
+    const cells = line.split('|').filter((_,i,a)=>i>0&&i<a.length-1);
+    return '<tr>' + cells.map(c=>`<td>${c.trim()}</td>`).join('') + '</tr>';
+  });
+  t = t.replace(/(<tr>.*<\/tr>\n?)+/gs, m => `<table>${m}</table>`);
+  // Lists
+  t = t.replace(/^- (.+)$/gm,'<li>$1</li>');
+  t = t.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
+  t = t.replace(/(<li>[\s\S]*?<\/li>)(\n(?!<li>)|$)/g,'<ul>$1</ul>$2');
+  // Paragraphs
+  t = t.replace(/\n\n/g,'</p><p>');
+  t = t.replace(/\n/g,'<br>');
+  return '<p>' + t + '</p>';
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────────────────
+function toast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>{ t.className='toast'; }, 3500);
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────────
+renderSidebar();
+showWelcome();
+setTimeout(() => goStep(1), 80);
+// Auto-advance to step 1 since key is pre-loaded
+setTimeout(() => goStep(1), 100);
 </script>
 </body>
 </html>
