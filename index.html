@@ -174,7 +174,7 @@ select option{background:var(--surface2);}
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────────
 const S = {
-  key: 'AIzaSyDokl7yirUdJ8-ddpiCinrMdUADhLa2dwA',
+  key: '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',
   step: 0,
   done: new Set(),
   brand: {},
@@ -201,50 +201,45 @@ const STEPS = [
 // ── GEMINI API ─────────────────────────────────────────────────────────────────
 async function gemini(userMsg) {
   const contents = [];
-  contents.push({ role:'user', parts:[{text: 'You are BrandOS. Instructions:\n' + SYSPROMPT + '\nAcknowledge in 5 words.'}] });
-  contents.push({ role:'model', parts:[{text: 'Ready. BrandOS India intelligence activated.'}] });
+  // Build conversation history
   for (let i = 1; i <= 13; i++) {
     if (S.resp[i]) {
-      contents.push({ role:'user',  parts:[{text: S.resp[i].inp}] });
-      contents.push({ role:'model', parts:[{text: S.resp[i].out}] });
+      contents.push({ role:'user',    content: S.resp[i].inp });
+      contents.push({ role:'assistant', content: S.resp[i].out });
     }
   }
-  contents.push({ role:'user', parts:[{text: userMsg}] });
-  const body = { contents, generationConfig: { temperature: 0.85, maxOutputTokens: 4096 } };
+  contents.push({ role:'user', content: userMsg });
 
-  const MODELS = [
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent',
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent',
-    'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent',
-    'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent',
-  ];
+  const body = {
+    model: 'google/gemini-2.0-flash-exp:free',
+    messages: [
+      { role:'system', content: SYSPROMPT },
+      ...contents
+    ],
+    max_tokens: 4096,
+    temperature: 0.85
+  };
 
-  let lastErr = '';
-  for (const modelUrl of MODELS) {
-    try {
-      const res = await fetch(`${modelUrl}?key=${S.key}`, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(body)
-      });
-      if (!res.ok) {
-        const e = await res.json().catch(()=>({}));
-        lastErr = e.error?.message || `HTTP ${res.status}`;
-        if (lastErr.includes('quota') || lastErr.includes('RESOURCE_EXHAUSTED')) throw new Error('Quota exceeded: ' + lastErr);
-        continue;
-      }
-      const data = await res.json();
-      const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (!text) { lastErr = 'Empty response'; continue; }
-      return text;
-    } catch(e) {
-      if (e.message.includes('quota') || e.message.includes('Failed to fetch')) throw e;
-      lastErr = e.message;
-    }
+  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${S.key}`,
+      'HTTP-Referer': 'https://akashtiwari5283-source.github.io/brandos',
+      'X-Title': 'BrandOS Indian Marketing Intelligence'
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!res.ok) {
+    const e = await res.json().catch(() => ({}));
+    throw new Error(e.error?.message || `HTTP ${res.status}`);
   }
-  throw new Error('All models failed. Last: ' + lastErr);
+
+  const data = await res.json();
+  const text = data.choices?.[0]?.message?.content;
+  if (!text) throw new Error('Empty response');
+  return text;
 }
 
 // ── SYSTEM PROMPT ──────────────────────────────────────────────────────────────
