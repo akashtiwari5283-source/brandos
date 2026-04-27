@@ -716,6 +716,7 @@ function connectKey() {
 
 // ── STEP RENDER ────────────────────────────────────────────────────────────────
 function goStep(n) {
+  if (!S.key) { showWelcome(); setTimeout(() => toast('Enter your OpenRouter key first'), 200); return; }
   S.step = n;
   renderSidebar();
   const c = document.getElementById('content');
@@ -906,7 +907,11 @@ function v(id) { const e = document.getElementById(id); return e ? e.value.trim(
 
 // ── EXECUTE ────────────────────────────────────────────────────────────────────
 async function execute(n, p) {
-  if (!S.key) { toast('No API key — return to welcome', 'err'); return; }
+  if (!S.key) {
+    showWelcome();
+    setTimeout(() => toast('Enter your OpenRouter key first', 'err'), 300);
+    return;
+  }
 
   const btn = document.getElementById('runBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'Analyzing...'; }
@@ -990,8 +995,6 @@ function toast(msg, type='') {
 // ── INIT ───────────────────────────────────────────────────────────────────────
 renderSidebar();
 showWelcome();
-// Auto-advance to step 1 since key is pre-loaded
-setTimeout(() => goStep(1), 100);
 </script>
 </body>
 </html>
