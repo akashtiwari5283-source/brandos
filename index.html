@@ -174,7 +174,7 @@ select option{background:var(--surface2);}
 <script>
 // ── STATE ──────────────────────────────────────────────────────────────────────
 const S = {
-  key: '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',
+  key: '',
   step: 0,
   done: new Set(),
   brand: {},
@@ -686,17 +686,19 @@ function showWelcome() {
         <span class="tag">SEC Income Tiers</span>
         <span class="tag">Kirana → Quick Commerce</span>
         <span class="tag">13-Step Framework</span>
-        <span class="tag">Free via Gemini</span>
+        <span class="tag">Free via OpenRouter</span>
       </div>
       <div class="api-box">
-        <h3>🔑 Enter Gemini API Key</h3>
-        <p>Get your free key from <a href="https://aistudio.google.com/app/apikey" target="_blank">Google AI Studio</a> — no credit card needed.</p>
+        <h3>🔑 Enter Your OpenRouter API Key</h3>
+        <p>Get your free key (no credit card) from <a href="https://openrouter.ai/keys" target="_blank" style="color:var(--acc);">openrouter.ai/keys</a> — takes 60 seconds.</p>
+        <p style="font-size:11.5px;color:var(--tx3);margin-bottom:14px;margin-top:-6px;">Your key is never stored or sent anywhere except OpenRouter. It stays in your browser memory only.</p>
         <div class="frow">
-          <input type="text" id="keyInp" placeholder="AIzaSy..." style="font-family:'DM Mono',monospace;" value="${S.key}">
+          <input type="password" id="keyInp" placeholder="sk-or-v1-..." style="font-family:'DM Mono',monospace;letter-spacing:0.04em;" value="${S.key}">
         </div>
-        <button class="btn btn-p" onclick="connectKey()" style="width:100%;justify-content:center;">Connect & Start →</button>
+        <button class="btn bp" onclick="connectKey()" style="width:100%;justify-content:center;margin-top:4px;">Connect & Start →</button>
+        <p style="font-size:11px;color:var(--tx3);margin-top:10px;text-align:center;">Free tier · No quota limits · Works with any free OpenRouter model</p>
       </div>
-      ${S.key ? `<button class="btn btn-p" onclick="goStep(1)" style="margin-top:-8px;">Continue to Step 1 →</button>` : ''}
+      ${S.key ? `<button class="btn bp" onclick="goStep(1)" style="margin-top:-4px;width:100%;max-width:360px;justify-content:center;">Continue to Step 1 →</button>` : ''}
     </div>`;
 }
 
@@ -704,10 +706,10 @@ function connectKey() {
   const inp = document.getElementById('keyInp');
   if (!inp) return;
   const k = inp.value.trim();
-  if (!k || k.length < 15) { toast('Paste your API key first', 'err'); return; }
+  if (!k || k.length < 20) { toast('Paste your OpenRouter key first', 'err'); return; }
   S.key = k;
   inp.disabled = true;
-  const btn = inp.nextElementSibling;
+  const btn = document.querySelector('.api-box .bp');
   if (btn) { btn.textContent = '✓ Connected — opening Step 1...'; btn.disabled = true; }
   setTimeout(() => goStep(1), 500);
 }
@@ -988,7 +990,6 @@ function toast(msg, type='') {
 // ── INIT ───────────────────────────────────────────────────────────────────────
 renderSidebar();
 showWelcome();
-setTimeout(() => goStep(1), 80);
 // Auto-advance to step 1 since key is pre-loaded
 setTimeout(() => goStep(1), 100);
 </script>
