@@ -201,45 +201,80 @@ const STEPS = [
 // ── GEMINI API ─────────────────────────────────────────────────────────────────
 async function gemini(userMsg) {
   const contents = [];
-  // Build conversation history
   for (let i = 1; i <= 13; i++) {
     if (S.resp[i]) {
-      contents.push({ role:'user',    content: S.resp[i].inp });
+      contents.push({ role:'user',      content: S.resp[i].inp });
       contents.push({ role:'assistant', content: S.resp[i].out });
     }
   }
   contents.push({ role:'user', content: userMsg });
 
-  const body = {
-    model: 'google/gemini-2.0-flash-exp:free',
-    messages: [
-      { role:'system', content: SYSPROMPT },
-      ...contents
-    ],
-    max_tokens: 4096,
-    temperature: 0.85
-  };
-
-  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${S.key}`,
-      'HTTP-Referer': 'https://akashtiwari5283-source.github.io/brandos',
-      'X-Title': 'BrandOS Indian Marketing Intelligence'
-    },
-    body: JSON.stringify(body)
-  });
-
-  if (!res.ok) {
-    const e = await res.json().catch(() => ({}));
-    throw new Error(e.error?.message || `HTTP ${res.status}`);
+  // Fetch available free models from OpenRouter, then use first working one
+  async function tryModel(model) {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${S.key}`,
+        'HTTP-Referer': window.location.href,
+        'X-Title': 'BrandOS'
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role:'system', content: SYSPROMPT },
+          ...contents
+        ],
+        max_tokens: 4096,
+        temperature: 0.85
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(()=>({}));
+      throw new Error(e.error?.message || `HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content;
+    if (!text) throw new Error('Empty response');
+    return text;
   }
 
-  const data = await res.json();
-  const text = data.choices?.[0]?.message?.content;
-  if (!text) throw new Error('Empty response');
-  return text;
+  // Auto-discover free models then try them
+  try {
+    const modelsRes = await fetch('https://openrouter.ai/api/v1/models', {
+      headers: { 'Authorization': `Bearer ${S.key}` }
+    });
+    if (modelsRes.ok) {
+      const modelsData = await modelsRes.json();
+      const freeModels = modelsData.data
+        .filter(m => m.id.includes(':free'))
+        .map(m => m.id);
+      
+      for (const model of freeModels) {
+        try { return await tryModel(model); } catch(e) { continue; }
+      }
+    }
+  } catch(e) { /* fall through to hardcoded list */ }
+
+  // Hardcoded fallback list
+  const FALLBACK = [
+    'meta-llama/llama-3.3-70b-instruct:free',
+    'meta-llama/llama-3.1-8b-instruct:free',
+    'mistralai/mistral-7b-instruct:free',
+    'qwen/qwen-2.5-72b-instruct:free',
+    'qwen/qwen3-8b:free',
+    'deepseek/deepseek-r1-0528:free',
+    'deepseek/deepseek-chat-v3-0324:free',
+    'google/gemma-3-27b-it:free',
+    'microsoft/phi-4:free',
+  ];
+  
+  let lastErr = '';
+  for (const model of FALLBACK) {
+    try { return await tryModel(model); }
+    catch(e) { lastErr = e.message; continue; }
+  }
+  throw new Error('All models failed. Last error: ' + lastErr);
 }
 
 // ── SYSTEM PROMPT ──────────────────────────────────────────────────────────────
