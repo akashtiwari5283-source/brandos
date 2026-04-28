@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrandOS — Indian Marketing Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0a0b; --surface:#111114; --surface2:#1a1a1f; --surface3:#22222a;
+  --border:#2a2a35; --border2:#353545;
+  --accent:#ff6b2b; --accent2:#ff9f5a; --glow:rgba(255,107,43,0.15);
+  --gold:#f5c842; --text:#f0eff5; --text2:#9998aa; --text3:#605f70;
+  --green:#3dd68c; --red:#ff4d6a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
+.app{display:flex;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sidebar{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.logo-wrap{padding:22px 20px 18px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;}
+.logo span{color:var(--accent);}
+.logo-sub{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:3px;text-transform:uppercase;letter-spacing:.06em;}
+.steps{flex:1;overflow-y:auto;padding:10px 0;}
+.steps::-webkit-scrollbar{width:3px;}
+.steps::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.si{display:flex;align-items:center;gap:11px;padding:9px 18px;cursor:pointer;border-left:3px solid transparent;transition:all .15s;}
+.si:hover{background:var(--surface2);}
+.si.active{background:var(--glow);border-left-color:var(--accent);}
+.snum{width:24px;height:24px;border-radius:50%;background:var(--surface3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);flex-shrink:0;transition:all .2s;}
+.si.active .snum{background:var(--accent);color:#fff;border-color:var(--accent);}
+.si.done .snum{background:var(--green);color:#000;border-color:var(--green);}
+.slabel{font-size:12.5px;color:var(--text2);line-height:1.3;}
+.si.active .slabel{color:var(--text);font-weight:500;}
+.sidebar-foot{padding:14px 18px;border-top:1px solid var(--border);flex-shrink:0;}
+.api-dot-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+.topbar{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);flex-shrink:0;}
+.topbar-left{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text2);}
+.topbar-left b{color:var(--accent);}
+.sbadge{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;background:var(--surface3);border:1px solid var(--border2);color:var(--text3);}
+.sbadge.on{color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.08);}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:28px 32px;display:flex;flex-direction:column;gap:22px;min-height:0;}
+.content::-webkit-scrollbar{width:5px;}
+.content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* BOTTOM NAV */
+.botnav{padding:14px 28px;border-top:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.navinfo{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:9px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .15s;}
+.btn-p{background:var(--accent);color:#fff;}
+.btn-p:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 18px rgba(255,107,43,.3);}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-g{background:var(--surface2);border:1px solid var(--border2);color:var(--text2);}
+.btn-g:hover{border-color:var(--border);color:var(--text);}
+
+/* WELCOME */
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:65vh;text-align:center;gap:18px;padding:20px;}
+.wicon{width:68px;height:68px;background:var(--glow);border:1px solid rgba(255,107,43,.3);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:4px;}
+.welcome h1{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;line-height:1.2;}
+.welcome h1 em{color:var(--accent);font-style:normal;}
+.welcome p{font-size:14.5px;color:var(--text2);max-width:460px;line-height:1.75;}
+.wtags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 11px;border-radius:20px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);}
+.api-box{width:100%;max-width:440px;background:var(--surface2);border:1px solid rgba(245,200,66,.25);border-radius:13px;padding:22px;margin-top:4px;}
+.api-box h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:7px;}
+.api-box p{font-size:13px;color:var(--text2);margin-bottom:15px;line-height:1.6;}
+.api-box a{color:var(--accent);text-decoration:none;}
+.api-box a:hover{text-decoration:underline;}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;}
+.card-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px;}
+.card-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:var(--glow);border:1px solid rgba(255,107,43,.25);padding:4px 9px;border-radius:7px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.card-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;}
+.card-desc{font-size:13px;color:var(--text2);margin-top:3px;line-height:1.55;}
+.card-body{padding:22px;}
+
+/* FORM */
+label{display:block;font-size:13px;color:var(--text2);margin-bottom:7px;font-weight:500;}
+label span{color:var(--accent);}
+input[type=text],textarea,select{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .2s,box-shadow .2s;resize:vertical;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow);}
+select option{background:var(--surface2);}
+.frow{margin-bottom:18px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+
+/* CONTEXT BAR */
+.ctx{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:16px 20px;}
+.ctx h4{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text3);margin-bottom:11px;text-transform:uppercase;letter-spacing:.06em;}
+.ctx-row{display:flex;gap:10px;margin-bottom:8px;font-size:13px;}
+.ctx-k{color:var(--text3);font-family:'DM Mono',monospace;min-width:110px;}
+.ctx-v{color:var(--text);}
+
+/* RESPONSE */
+.rbox{background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:22px;margin-top:18px;}
+.rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.rlabel{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.07em;}
+.rlabel::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;}
+.rcontent{font-size:13.5px;line-height:1.9;color:var(--text);word-break:break-word;overflow-wrap:break-word;}
+.rcontent h2{font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:var(--accent);margin:0 0 14px;}
+.rcontent h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin:22px 0 9px;padding-top:14px;border-top:1px solid var(--border);}
+.rcontent h4{font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;color:var(--accent2);margin:16px 0 7px;}
+.rcontent strong{color:var(--accent2);font-weight:600;}
+.rcontent em{color:var(--gold);font-style:normal;}
+.rcontent ul{padding-left:18px;margin:8px 0;}
+.rcontent li{margin:5px 0;}
+.rcontent p{margin:9px 0;}
+.rcontent table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px;}
+.rcontent th{background:var(--surface3);padding:8px 12px;text-align:left;font-weight:600;border:1px solid var(--border2);}
+.rcontent td{padding:7px 12px;border:1px solid var(--border2);color:var(--text2);}
+.rcontent hr{border:none;border-top:1px solid var(--border);margin:18px 0;}
+
+/* LOADING */
+.loading{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--surface2);border:1px solid var(--border);border-radius:11px;margin-top:18px;}
+.spin{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ltxt{font-size:13.5px;color:var(--text2);}
+.lsub{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:3px;}
+
+/* CHIPS */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;}
+.chip{font-size:11px;font-family:'DM Mono',monospace;padding:4px 10px;border-radius:6px;background:var(--surface3);border:1px solid var(--border2);color:var(--text3);}
+.chip.g{color:var(--green);border-color:rgba(61,214,140,.2);background:rgba(61,214,140,.07);}
+.chip.o{color:var(--accent);border-color:rgba(255,107,43,.25);background:var(--glow);}
+.chip.gld{color:var(--gold);border-color:rgba(245,200,66,.2);background:rgba(245,200,66,.07);}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;background:var(--surface);border:1px solid var(--border2);border-radius:9px;padding:12px 18px;font-size:13px;color:var(--text);box-shadow:0 8px 28px rgba(0,0,0,.4);z-index:999;transform:translateY(16px);opacity:0;transition:all .25s;max-width:300px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.ok{border-color:rgba(61,214,140,.35);}
+.toast.err{border-color:rgba(255,77,106,.35);color:var(--red);}
+
+@media print{.sidebar,.topbar,.botnav,.btn,.api-box{display:none!important;}.main{width:100%;}.content{padding:16px;}body{background:#fff;color:#000;}}
+
+/* MODE SWITCHER */
+.mode-tabs{display:flex;gap:0;padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.mtab{flex:1;padding:7px 6px;text-align:center;font-family:'DM Mono',monospace;font-size:10px;border-radius:7px;cursor:pointer;color:var(--text3);transition:all .15s;border:1px solid transparent;line-height:1.3;}
+.mtab:hover{color:var(--text2);}
+.mtab.active{background:var(--surface3);border-color:var(--border2);color:var(--text);}
+.mtab.layer2.active{color:var(--green);border-color:rgba(61,214,140,.25);background:rgba(61,214,140,.07);}
+.mtab.layer3.active{color:var(--gold);border-color:rgba(245,200,66,.25);background:rgba(245,200,66,.07);}
+.mtab-icon{font-size:14px;display:block;margin-bottom:3px;}
+
+/* EXEC ENGINE TOOL GRID */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px;}
+.tool-card{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:13px 14px;cursor:pointer;transition:all .15s;}
+.tool-card:hover{border-color:var(--green);background:rgba(61,214,140,.05);}
+.tool-card.active{border-color:var(--green);background:rgba(61,214,140,.07);}
+.tc-icon{font-size:18px;margin-bottom:5px;}
+.tc-name{font-family:'Syne',sans-serif;font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.tc-desc{font-size:11px;color:var(--text3);line-height:1.4;}
+
+/* PROBLEM SOLVER */
+.ps-chat{display:flex;flex-direction:column;gap:14px;padding-bottom:16px;}
+.ps-msg{padding:14px 17px;border-radius:11px;font-size:13.5px;line-height:1.75;}
+.ps-msg.user{background:var(--glow);border:1px solid rgba(255,107,43,.2);color:var(--text);align-self:flex-end;max-width:85%;}
+.ps-msg.ai{background:var(--surface2);border:1px solid var(--border);color:var(--text);}
+.ps-msg.ai .rlabel{margin-bottom:10px;}
+.ps-input-wrap{display:flex;gap:10px;align-items:flex-end;}
+.ps-input-wrap textarea{flex:1;min-height:60px;max-height:140px;}
+
+/* LAYER SECTION HEADERS IN SIDEBAR */
+.s-section{padding:10px 18px 4px;font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;}
+
+/* EXEC OUTPUT CHIPS */
+.exec-chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="logo-wrap">
+      <div class="logo">Brand<span>OS</span></div>
+      <div class="logo-sub">Indian Marketing Intelligence</div>
+    </div>
+    <div class="mode-tabs">
+      <div class="mtab active" id="tab1" onclick="switchMode('strategy')">
+        <span class="mtab-icon">📊</span>Strategy
+      </div>
+      <div class="mtab layer2" id="tab2" onclick="switchMode('execution')">
+        <span class="mtab-icon">⚡</span>Execution
+      </div>
+      <div class="mtab layer3" id="tab3" onclick="switchMode('solver')">
+        <span class="mtab-icon">🔥</span>Solver
+      </div>
+    </div>
+    <div class="steps" id="sidebarSteps"></div>
+    <div class="sidebar-foot">
+      <div class="api-dot-row"><div class="dot"></div><span id="modelLabel">OpenRouter Free</span></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="topbar">
+      <div class="topbar-left" id="topbarLeft">Step <b id="tStep">—</b> · <span id="tName">Welcome</span></div>
+      <div class="sbadge" id="tBadge">Stage not set</div>
+    </div>
+    <div class="content" id="content"></div>
+    <div class="botnav" id="botnav">
+      <button class="btn btn-g" id="btnPrev" onclick="nav(-1)">← Prev</button>
+      <div class="navinfo" id="navInfo">— of 13</div>
+      <button class="btn btn-g" id="btnNext" onclick="nav(1)">Next →</button>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────────
+const S = {
+  key: '',
+  step: 0,
+  done: new Set(),
+  brand: {},
+  resp: {},    // step responses {n: {out, inp}}
+  stage: '',
+  mode: 'strategy',      // 'strategy' | 'execution' | 'solver'
+  execTool: null,        // currently selected execution tool id
+  solverHistory: [],     // [{role, content}] for problem solver chat
+  solverRunning: false,
+};
+
+const STEPS = [
+  {id:1,  label:'Brand Brief Intake'},
+  {id:2,  label:'Consumer Persona Builder'},
+  {id:3,  label:'MarketFit Score'},
+  {id:4,  label:'Market Sizing TAM/SAM/SOM'},
+  {id:5,  label:'Competitor Intelligence'},
+  {id:6,  label:'Framework Battery'},
+  {id:7,  label:'Challenger Positioning'},
+  {id:8,  label:'PriceSense — Pricing'},
+  {id:9,  label:'GTM Sequencer 90 Days'},
+  {id:10, label:'Budget Allocator'},
+  {id:11, label:'Risk Flags'},
+  {id:12, label:'Open Q&A'},
+  {id:13, label:'Final Consultancy Report'},
+];
+
+// ── API LAYER ──────────────────────────────────────────────────────────────────
+// Shared AI call — used by all 3 layers
+const OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1';
+const OPENROUTER_SITE_URL = window.location.origin && window.location.origin !== 'null'
+  ? window.location.origin
+  : 'https://brandos.app';
+const OPENROUTER_APP_TITLE = 'BrandOS';
+
+function getApiKey() {
+  const activeInput = document.getElementById('keyInp');
+  const key = (activeInput?.value || S.key || '').trim();
+  if (key && key !== S.key) S.key = key;
+  return key;
+}
+
+function requireApiKey() {
+  const key = getApiKey();
+  if (!key) throw new Error('Enter your OpenRouter API key first.');
+  if (!key.startsWith('sk-or-')) throw new Error('OpenRouter keys usually start with sk-or-. Check that you pasted the right key.');
+  return key;
+}
+
+async function openRouterFetch(path, options = {}) {
+  const headers = {
+    'Authorization': `Bearer ${requireApiKey()}`,
+    'HTTP-Referer': OPENROUTER_SITE_URL,
+    'X-Title': OPENROUTER_APP_TITLE,
+    ...(options.headers || {})
+  };
+  return fetch(`${OPENROUTER_API_BASE}${path}`, { ...options, headers });
+}
+
+async function readOpenRouterError(res) {
+  const fallback = `OpenRouter request failed with HTTP ${res.status}`;
+  try {
+    const data = await res.json();
+    return data.error?.message || data.message || fallback;
+  } catch(e) {
+    return fallback;
+  }
+}
+
+async function callAI(userMsg, systemPrompt, extraHistory) {
+  requireApiKey();
+  const contents = extraHistory ? [...extraHistory] : [];
+  contents.push({ role:'user', content: userMsg });
+
+  async function tryModel(model) {
+    const res = await openRouterFetch('/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role:'system', content: systemPrompt || SYSPROMPT },
+          ...contents
+        ],
+        max_tokens: 4096,
+        temperature: 0.85
+      })
+    });
+    if (!res.ok) {
+      throw new Error(await readOpenRouterError(res));
+    }
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content;
+    if (!text) throw new Error('Empty response');
+    // Track which model succeeded
+    const modelName = model.split('/').pop().replace(':free','');
+    document.getElementById('modelLabel').textContent = modelName;
+    return text;
+  }
+
+  let discoveredFreeModels = [];
+  // Auto-discover free models
+  try {
+    const modelsRes = await openRouterFetch('/models', {
+      headers: { 'Content-Type':'application/json' }
+    });
+    if (modelsRes.ok) {
+      const modelsData = await modelsRes.json();
+      discoveredFreeModels = modelsData.data
+        .filter(m => m.id.includes(':free'))
+        .map(m => m.id);
+    }
+  } catch(e) { /* fall through */ }
+
+  const FALLBACK = [
+    'openai/gpt-oss-20b:free',
+    'openai/gpt-oss-120b:free',
+    'qwen/qwen3-next-80b-a3b-instruct:free',
+    'qwen/qwen3-coder:free',
+    'z-ai/glm-4.5-air:free',
+    'minimax/minimax-m2.5:free',
+    'nvidia/nemotron-nano-9b-v2:free',
+    'google/gemma-4-31b-it:free',
+    'google/gemma-4-26b-a4b-it:free',
+    'google/gemma-3-12b-it:free',
+    'google/gemma-3-4b-it:free',
+    'meta-llama/llama-3.3-70b-instruct:free',
+    'meta-llama/llama-3.2-3b-instruct:free',
+    'google/gemma-3-27b-it:free',
+    'google/gemma-3n-e4b-it:free',
+    'google/gemma-3n-e2b-it:free',
+  ];
+  let lastErr = '';
+  const candidateModels = [...new Set([...discoveredFreeModels, ...FALLBACK])];
+  for (const model of candidateModels) {
+    try { return await tryModel(model); }
+    catch(e) { lastErr = e.message; continue; }
+  }
+  throw new Error('All models failed. Last error: ' + lastErr);
+}
+
+// Strategy layer wrapper — injects previous step context
+async function gemini(userMsg) {
+  const history = [];
+  for (let i = 1; i <= 13; i++) {
+    if (S.resp[i]) {
+      history.push({ role:'user',      content: S.resp[i].inp });
+      history.push({ role:'assistant', content: S.resp[i].out });
+    }
+  }
+  return callAI(userMsg, SYSPROMPT, history);
+}
+
+// ── SYSTEM PROMPT ──────────────────────────────────────────────────────────────
+const SYSPROMPT = `You are BrandOS — a world-class strategy intelligence system with the combined reasoning capability of a McKinsey EM, a Bain commercial diligence partner, and a BCG growth strategist, filtered through deep knowledge of India as a market. You have advised businesses across every sector — consumer goods, SaaS, fintech, healthtech, edtech, B2B services, manufacturing, retail, logistics, media, real estate, and more. You operate at the level of a Rs. 2 crore engagement, delivered instantly.
+
+You do not give marketing advice. You give strategy. The difference: marketing advice tells you what to do. Strategy tells you why it will work, what the risks are, what assumptions it rests on, and what would have to be true for it to succeed.
+
+═══════════════════════════════════════════
+CONSULTING INTELLIGENCE — HOW YOU THINK
+═══════════════════════════════════════════
+
+FIRST PRINCIPLES BEFORE FRAMEWORKS:
+Frameworks are tools, not answers. Before applying any framework, you do what every great consultant does first — you understand the specific business deeply enough to have a hypothesis. Then you use frameworks to stress-test the hypothesis, not to generate it. You never fill a framework mechanically. You fill it with insight.
+
+THE MECE PRINCIPLE:
+Every analysis you produce is Mutually Exclusive and Collectively Exhaustive. You do not repeat points. You do not leave critical dimensions uncovered. Every list, every matrix, every recommendation set is structured so that the pieces do not overlap and together they cover the complete picture.
+
+HYPOTHESIS-DRIVEN THINKING:
+Like McKinsey, you form a hypothesis early and work to prove or disprove it. You state your hypothesis clearly. You identify the 3-5 key questions whose answers determine whether the hypothesis holds. You give your current view on each. This is faster and sharper than open-ended exploration.
+
+ISSUE TREE DECOMPOSITION:
+For every complex problem, you decompose it into a logical tree. Revenue problem? Break into volume and price. Volume problem? Break into acquisition and retention. Acquisition problem? Break into awareness, consideration, and conversion. You go 3 levels deep before recommending solutions.
+
+SO WHAT TEST:
+Every insight you generate must pass the So What test. A fact without implication is not an insight. "The Indian premium food market is growing at 18% CAGR" is a fact. "This means a challenger brand has a 24-36 month window before incumbents respond with premium sub-brands, making speed of distribution the single most important variable right now" is an insight. You always state the implication, not just the observation.
+
+THE PYRAMID PRINCIPLE:
+Structure every response with the conclusion first, then the supporting arguments, then the evidence. Indian founders are busy. They need the answer in the first paragraph, not at the end. Lead with the recommendation. Then justify it.
+
+═══════════════════════════════════════════
+STRATEGIC LENSES — APPLIED TO EVERY BUSINESS
+═══════════════════════════════════════════
+
+MARKET LENS — Is this a good market to be in?
+Analyze market size, growth rate, fragmentation, and the distribution of value across the value chain. Identify where the profit pools are. Determine whether the market structure favors incumbents or challengers. Assess whether the market is growing because of genuine demand creation or just category switching.
+
+COMPETITIVE LENS — Can this business win?
+Identify the basis of competition in this market. Is it price? Quality? Distribution? Network effects? Switching costs? Brand? Assess the business's current and potential competitive advantage against each dimension. Identify the one thing that, if true, would make this business unbeatable. Identify the one thing that, if it fails, makes the business irrelevant.
+
+CUSTOMER LENS — Will the target customer actually buy?
+Go beyond demographics. Understand the decision-making process: who triggers the purchase, who influences it, who has veto power, who pays, and who uses it. Understand what job the customer is actually hiring this product to do — and whether the product does that job better than the current alternative. In India specifically, understand how trust is established in this category, because Indian consumers require trust before money changes hands.
+
+BUSINESS MODEL LENS — Will the economics work?
+Assess unit economics: what does it cost to acquire a customer, what is the gross margin per unit, what is the lifetime value, what is the payback period. Identify the operating leverage inflection point — the scale at which the business model becomes self-sustaining. Identify the working capital dynamics, which in India are often the constraint that kills otherwise good businesses.
+
+EXECUTION LENS — Can this team, in this market, actually do it?
+Strategy without execution is fantasy. Assess what the hardest thing to execute is — usually distribution, talent, or capital. Identify the critical path: what has to happen in what sequence for this strategy to work. Identify the biggest assumption that, if wrong, collapses the plan.
+
+═══════════════════════════════════════════
+INDIA AS A STRATEGIC VARIABLE
+═══════════════════════════════════════════
+
+India is not a single market and not simply a "developing market version" of Western markets. India has specific structural characteristics that change strategy fundamentally:
+
+STRUCTURAL CHARACTERISTICS TO ALWAYS CONSIDER:
+- Price-value architecture: India has the world's most sophisticated price-sensitive consumers. They are not poor — they are value-maximizing. The question is never "will they pay?" but "what proof of value justifies this price to this specific segment?"
+- Trust infrastructure deficit: In the absence of strong institutions, Indian consumers and businesses rely on personal relationships, known brands, and social proof. New entrants must architect trust deliberately — it does not come from product quality alone.
+- Distribution complexity: India's physical geography and fragmented retail mean distribution is always a strategic variable, not an operational one. How you reach your customer in India requires as much strategic thinking as what you sell them.
+- Regulatory heterogeneity: India has 28 states with different tax structures, licensing requirements, and regulatory environments. Strategy must account for this — what works in Maharashtra may be illegal or uneconomical in another state.
+- Digital-physical integration: India leapfrogged many digital stages but did not abandon physical. The most effective go-to-market strategies in India integrate digital discovery with physical availability, or digital commerce with physical trust signals.
+- Talent and execution constraints: India has abundant talent but acute execution capacity constraints at the mid-management level. Strategy must be designed for the available execution capacity, not the theoretical ideal.
+
+INDIA-SPECIFIC INSIGHT GENERATION:
+For every business analyzed, you generate at least one insight that is true for India that would NOT be true in the US, Europe, or China. This is the India-specific strategic advantage or risk that only someone with deep India knowledge would identify.
+
+═══════════════════════════════════════════
+OUTPUT STANDARDS — WORLD CLASS MEANS THIS
+═══════════════════════════════════════════
+
+WHAT WORLD CLASS LOOKS LIKE:
+A McKinsey slide has one key message per page, supported by 3 pieces of evidence, with a clear "so what" for the client. Your responses follow this logic — each section has one key message, supported by specific evidence, with a clear implication for THIS founder's specific decision.
+
+SPECIFICITY IS NON-NEGOTIABLE:
+Vague answers are not acceptable. "Consider digital marketing" is not an answer. "Your highest-ROI acquisition channel in the first 6 months is X because your target customer does Y and the average CAC on this channel for this category is Z" is an answer. Always be specific. Always give a number. Always name the thing.
+
+INTELLECTUAL HONESTY:
+If the data does not support a conclusion, say so. If the founder's plan has a fundamental flaw, name it directly. If a strategy has a 30% chance of working and a 70% chance of failing, say that — and explain both scenarios. World-class consultants do not tell clients what they want to hear. They tell clients what they need to know.
+
+BRUTAL TRUTHS — MANDATORY IN EVERY RESPONSE:
+End every response with 2-3 Brutal Truths — things the founder probably does not want to hear but absolutely must know. The best consulting relationships are built on this honesty. Founders pay for truth, not validation.
+
+FORMAT:
+## for major sections. **Bold** for key insights and conclusions. Tables for comparisons and matrices. Bullet points for supporting evidence. Always lead with the most important point.
+`;
+
+// ── STEP PROMPTS ───────────────────────────────────────────────────────────────
+function prompt(n, d) {
+  const b = S.brand;
+  const ps = {
+    1: `STEP 1 — BRAND BRIEF INTAKE
+
+Analyze this brand and provide:
+## 1. Brand Snapshot
+What this brand actually is — 2-3 sentences of clarity.
+
+## 2. The Real Opportunity  
+What specific Indian consumer need does this fill? Why now?
+
+## 3. Initial Positioning Hypothesis
+Your first instinct on where this brand should sit in the consumer's mind.
+
+## 4. Three Critical Questions
+Things you need answered before full strategy can begin.
+
+## 5. Stage Assessment
+Confirm the brand stage and what strategic approach that unlocks.
+
+## 6. Brutal Truths
+2-3 hard realities about this category the founder must accept.
+
+---
+Brand: ${b.brand}
+Product: ${b.product}
+Stage: ${b.stage}
+Location: ${b.location}
+Revenue: ${b.revenue || 'Not disclosed'}
+Target Customer: ${b.target}
+Current Channels: ${b.channels}
+USP: ${b.usp}
+Budget: ${b.budget || 'Not disclosed'}
+Founder Notes: ${b.notes || 'None'}`,
+
+    2: `STEP 2 — INDIAN CONSUMER / BUYER PERSONA BUILDER
+
+For brand: ${b.brand} (${b.product}) — Business model: ${b.bizModel || 'Not specified'}
+
+Build 3 distinct ${b.isB2B ? 'B2B buyer personas (decision-makers at target companies)' : 'Indian consumer personas'}. For each:
+- **Name, Age, ${b.isB2B ? 'Role, Company size, Industry' : 'City, SEC Tier'}**
+- **Daily Life / Work Context** — how does this product fit into their actual ${b.isB2B ? 'work week and company context' : 'day'}?
+- **Purchase / Buying Triggers** — what makes them buy? What blocks them?
+- **Channel Preference** — ${b.isB2B ? 'LinkedIn / Google search / peer referral / event / cold email / WhatsApp?' : 'kirana / DMart / Instagram / Zepto / WhatsApp / D2C website?'}
+- **Price Sensitivity** — exact price points / ${b.isB2B ? 'contract sizes' : 'spend thresholds'} that unlock vs block purchase
+- **${b.isB2B ? 'Organizational Context' : 'Cultural Context'}** — ${b.isB2B ? 'procurement process, who else is involved, approval hierarchy' : 'festivals, family influence, reference groups'}
+- **Media / Discovery Touchpoints** — ${b.isB2B ? 'LinkedIn, industry events, newsletters, peer communities?' : 'YouTube, Instagram, TV, regional language content?'}
+- **The Non-Obvious Insight** — one thing about this person competitors miss
+
+Make them real ${b.isB2B ? 'Indian professionals in real companies with real business pressures' : 'Indians from real cities with real aspirations'}. Not demographic boxes.
+${d.extra || ''}`,
+
+    3: `STEP 3 — MARKETFIT SCORE
+
+Score ${b.brand}'s product-market fit on 100 points across 5 dimensions (business model: ${b.bizModel || 'not specified'}):
+
+**1. Problem Severity (20 pts)** — How acutely painful is the problem in India?
+**2. India Market Readiness (20 pts)** — Is Indian ${b.isB2B ? 'business buyer' : 'consumer'} behavior ready for this?
+**3. Competitive White Space (20 pts)** — How uncrowded is the position?
+**4. Unit Economics Viability (20 pts)** — Can this work at Indian ${b.isB2B ? 'contract sizes and CAC levels' : 'price points'}?
+**5. ${b.isB2B ? 'Sales Motion Feasibility (20 pts) — Can you realistically close Indian B2B buyers at this price?' : b.isD2C ? 'Customer Acquisition Feasibility (20 pts) — Can you reach and convert target buyers at sustainable CAC?' : 'Distribution Feasibility (20 pts) — Can you realistically reach buyers through Indian retail channels?'}**
+
+For each: score X/20, reasoning, and what would change the score.
+
+Then give: **Total MarketFit Score: XX/100** — Red (<50) / Yellow (50-70) / Green (70+) verdict with specific action items.
+${d.extra || ''}`,
+
+    4: `STEP 4 — MARKET SIZING (TAM/SAM/SOM)
+
+For ${b.brand} in India:
+
+## TAM — Total Addressable Market
+- Define the total Indian market for this category
+- Calculate using BOTH bottom-up and top-down methods
+- Show your math in rupees (crore/billion)
+- CAGR and growth trajectory
+
+## SAM — Serviceable Addressable Market  
+- Which segments can ${b.brand} realistically serve given price, geography, channels?
+- 3-year SAM projection
+
+## SOM — Serviceable Obtainable Market
+- Year 1, Year 3, Year 5 realistic targets
+- What % market share = profitability?
+- What does it take to become the #1 brand in this segment?
+
+## Market Dynamics
+- Top 3 growth drivers
+- Top 3 headwinds  
+- Regulatory landscape
+- Where is the real money in this market?
+${d.extra || ''}`,
+
+    5: `STEP 5 — COMPETITOR INTELLIGENCE MAP
+
+For ${b.brand}:
+
+## Tier 1: Direct Competitors (same product, same customer)
+For each: positioning, price points, distribution strength, digital presence, weaknesses, estimated revenue
+
+## Tier 2: Indirect Competitors (different solution, same need)
+Same analysis
+
+## Tier 3: Future Threats (who will enter this space)
+
+## Competitive Matrix
+Create a comparison table: Brand | Price | Quality | Distribution | Brand Equity | Digital | Overall Score
+
+## The White Space
+Where is the unclaimed position? What does no brand own?
+
+## Their Biggest Mistakes
+What are competitors doing wrong that ${b.brand} can exploit RIGHT NOW?
+${d.extra || ''}`,
+
+    6: `STEP 6 — FRAMEWORK BATTERY (10 Frameworks)
+
+Apply all 10 to ${b.brand}. Fill each completely — no vague placeholders:
+
+## 1. SWOT Analysis
+4-5 India-specific points per quadrant
+
+## 2. PESTLE Analysis  
+Political/Regulatory, Economic (India macro), Social (demographics), Technology (Digital India), Legal (GST/FSSAI/BIS), Environmental
+
+## 3. STP Analysis
+Segmentation → Targeting → Positioning statement
+
+## 4. 7Ps Marketing Mix
+Product, Price, Place, Promotion, People, Process, Physical Evidence — all India-specific
+
+## 5. AIDA Model
+How to move Indian consumers: Awareness → Interest → Desire → Action (with specific tactics)
+
+## 6. Porter's Five Forces
+Rate each High/Medium/Low with India context and implication
+
+## 7. Blue Ocean Strategy
+Eliminate / Reduce / Raise / Create grid vs competition
+
+## 8. Ansoff Matrix
+Which quadrant is the priority and exact rationale
+
+## 9. BCG Matrix
+Where does this product sit and what it implies for investment
+
+## 10. Jobs To Be Done
+The real functional + emotional + social job Indian consumers hire this for
+${d.extra || ''}`,
+
+    7: `STEP 7 — CHALLENGER POSITIONING ADVISOR
+
+For ${b.brand} challenging incumbents in its category:
+
+## The Incumbent's Problem
+What does the market leader get wrong? What narrative do they own? What's unclaimed?
+
+## Three Challenger Positions
+Each with a name, tagline, and rationale:
+1. **[Position Name]** — targeting customer who is frustrated by [specific thing]
+2. **[Position Name]** — the values/mission-based play
+3. **[Position Name]** — the performance/results play
+
+## Recommended Position
+Which one to own, why, and the final positioning statement.
+
+## Proof Points
+What evidence makes this position credible to a skeptical Indian consumer?
+
+## The Villain
+What concept/habit/status quo is ${b.brand} fighting against? (not a competitor by name)
+
+## Communication Rules
+5 rules for how this brand must always communicate
+
+## Never Say / Never Be
+3 associations this brand must never have
+${d.extra || ''}`,
+
+    8: (() => {
+      const base = `STEP 8 — PRICESENSE (PRICING STRATEGY)\n\nFor ${b.brand} (${b.bizModel || 'Business'}):\n\nCurrent price/plan: ${d.price || 'To be determined'}\nTarget margin: ${d.margin || 'To be determined'}\n\n## Price Point Analysis\nWhere this price sits in the Indian buyer's mental map and psychological anchor analysis.\n\n## Pricing Strategy\nChoose and justify one: Penetration / Skimming / Value-Based / Competitive / Premium\n\n## Price-Value Perception\nHow to make the price FEEL right to the target customer.\n\n## Price Escalation Path\nHow to increase price over 2 years without losing customers.\n\n`;
+      if (b.isSaaS) return base + `
+## SaaS Pricing Architecture
+Design 3-4 pricing tiers (e.g., Starter / Growth / Scale / Enterprise) with:
+- Monthly & annual prices in ₹ (and USD if relevant)
+- Features unlocked at each tier
+- Which tier is the "golden handcuff" that drives expansion revenue
+- Free trial / freemium strategy for India (is it necessary here?)
+
+## Indian B2B Buying Psychology
+- How procurement decisions are made in Indian companies (committee, champion, finance gate)
+- What makes a price seem "safe" to an Indian procurement head
+- Annual vs monthly billing — which converts better and why
+
+## Expansion Revenue Model
+- Seat-based, usage-based, or module-based upsell path
+- Which feature creates the strongest lock-in
+- NDR (Net Dollar Retention) target and how to hit it
+
+## Discounting Rules
+- Maximum allowable discount for direct sales / channel / enterprise
+- How to handle "we'll pay if you reduce by 40%" (very common in India)
+- Pilot pricing: what to charge for a 3-month proof of concept`;
+
+      if (b.isD2C) return base + `
+## SKU Architecture
+Design 3-4 SKUs/variants with prices that maximize reach AND margin:
+- Core SKU (volume driver)
+- Hero SKU (margin driver)  
+- Entry SKU (trial/acquisition)
+- Bundle/gifting SKU (AOV driver)
+
+## Channel-Wise Pricing
+- D2C website MRP + offers
+- Amazon / Flipkart marketplace (account for fees + returns)
+- Quick Commerce: Blinkit / Zepto (higher margin required)
+- Offline modern trade if applicable
+- Why each price differs and how to avoid channel conflict
+
+## D2C Conversion Mechanics
+- Discount psychology: % off vs ₹ off vs "buy 2 get 1" — which works for this product
+- Subscription model viability (LTV impact if adopted)
+- COD vs prepaid split and its margin implication
+- Return rate assumption built into pricing
+
+## Promotions That Work
+- Sale event strategy (Big Billion, Great Indian Festival, D2C brand days)
+- Influencer code discount strategy without destroying brand value
+- Bundle mechanics to increase AOV`;
+
+      // FMCG or default
+      return base + `
+## Pack Architecture
+Design 3-4 pack sizes/variants with prices that maximize reach AND margin:
+- Trial/entry pack (kirana impulse)
+- Core pack (weekly household unit)
+- Value/bulk pack (monthly purchase)
+- Premium variant if applicable
+
+## Channel-Wise Pricing
+- MRP on pack
+- Kirana trade margin (typically 8-12%)
+- Modern Trade: DMart / Reliance Smart (5-8% + listing fees)
+- Quick Commerce: Blinkit / Zepto (20-25% commission)
+- D2C website if applicable
+- Why each differs and how to avoid channel conflict
+
+## Promotions That Work
+- Festival pricing windows (Diwali / Navratri / Eid / harvest seasons)
+- Sachet/trial strategy for new markets
+- Cashback vs discount psychology for Indian grocery buyer
+- Trade scheme mechanics (retailers push what earns them more)`;
+    })(),
+
+    9: (() => {
+      const geo = d.geo || b.location || 'As per brief';
+      const budget = d.budget || b.budget || 'As per brief';
+      const base = `STEP 9 — GO-TO-MARKET SEQUENCER (90-DAY PLAN)\n\nFor ${b.brand} (${b.bizModel || 'Business'}):\nGeography: ${geo}\nBudget: ${budget}\n\n`;
+      
+      const sharedFooter = `\n## The One Big Bet\nSingle highest-leverage activity in 90 days\n\n## Early Warning System\n3 metrics that confirm GTM is working | 3 metrics that mean pivot immediately`;
+
+      if (b.isSaaS) return base + `
+## Month 1 (Days 1-30): ICP Lock & First Customers
+- Week 1: Define Ideal Customer Profile (company size, industry, role, pain point trigger). Identify 100 target accounts.
+- Week 2: Set up CRM, outbound sequences, LinkedIn Sales Navigator. Write 3 cold email + 1 cold LinkedIn message variants.
+- Week 3: 50 cold outreach, 10 discovery calls targeted. Identify 2-3 design partner candidates.
+- Week 4: Close 2-3 pilot customers (even at reduced price). Document every objection.
+- KPIs by end of Month 1: 10+ discovery calls, 2-3 pilots live, ICP validated or falsified
+- Budget: Mostly founder time + CRM tool costs
+
+## Month 2 (Days 31-60): Product-Channel Fit
+- Weeks 5-6: Pilot feedback loops. Identify the "aha moment" in the product. Build 2 case studies from pilots.
+- Weeks 7-8: Test 2 acquisition channels: LinkedIn outbound + one inbound (content / SEO / community). Measure CAC on each.
+- KPIs by end of Month 2: Pilot → paid conversion rate ≥40%, CAC benchmarked, 1 reference customer
+- Budget: Content production + LinkedIn premium
+
+## Month 3 (Days 61-90): Scale the Winning Channel
+- Weeks 9-10: Double down on the channel with lowest CAC. Add 1 SDR or freelance BD if economics justify.
+- Weeks 11-12: Build partner / channel referral program. Target associations, accelerators, CA networks, or integration partners.
+- KPIs by end of Month 3: ₹X ARR milestone, pipeline = 3x monthly target, NPS ≥50 from pilot cohort
+- Budget: ${budget}
+
+## GTM Sequencing Logic (B2B SaaS)
+Sequence by ICP fit, NOT geography. Unlock in this order:
+1. Founder-led direct sales → prove the pitch works
+2. Inbound content (case studies, LinkedIn thought leadership) → reduce CAC
+3. Channel/referral partners → scale without adding headcount
+4. Enterprise sales motion (if applicable) → only after SMB playbook proven
+
+## Activation Architecture
+- Free trial vs freemium vs demo-gated — which fits this product and why
+- Onboarding sequence: what must a new user do in first 7 days to convert to paid?
+- The single metric that best predicts retention (identify and optimize for it)
+${sharedFooter}`;
+
+      if (b.isD2C) return base + `
+## Month 1 (Days 1-30): Brand Foundation & First Sales
+- Week 1: D2C website live (Shopify/WooCommerce), Meta/Google pixels installed, first 3 product pages optimized. Set up email/WhatsApp capture.
+- Week 2: Seed influencer outreach — target 10 micro-influencers (10k-100k followers) in the category. Brief them. 5 should agree.
+- Week 3: First paid Meta campaign — Rs.500/day, test 3 creative concepts, 2 audiences. Goal: find winning creative, not ROAS yet.
+- Week 4: First influencer content drops. Capture UGC. Kill underperforming ad sets. Scale winner to Rs.1500/day.
+- KPIs by Month 1: 100+ orders, ROAS ≥1.8x, CAC benchmarked, email list ≥500
+- Budget: ~40% on paid, 30% on influencer, 30% on product/UGC shoots
+
+## Month 2 (Days 31-60): Retention Engine + Channel Expansion
+- Weeks 5-6: Launch email/WhatsApp flow (welcome series, abandoned cart, post-purchase). Set up Blinkit/Zepto listing if margin allows.
+- Weeks 7-8: Scale winning Meta creative. Test Google Shopping. Launch first referral/loyalty mechanic.
+- KPIs by Month 2: Repeat purchase rate ≥20%, email open rate ≥35%, ROAS ≥2.5x, Amazon/Flipkart listing live
+- Budget: Shift toward retention, maintain acquisition
+
+## Month 3 (Days 61-90): Scale & Category Visibility
+- Weeks 9-10: PR push — target 5 digital publications. Submit to 2 D2C award/community platforms.
+- Weeks 11-12: Expand influencer roster to 25. Test YouTube Shorts. First sale event (Independence Day / own brand day).
+- KPIs by Month 3: Rs.X GMV milestone, ≥30% revenue from repeat customers, CAC < LTV/3
+- Budget: ${budget}
+
+## Channel Rollout Sequence
+D2C website → Meta ads → Micro-influencer → Quick Commerce → Amazon/Flipkart → Modern Trade (only if proven offline demand)
+${sharedFooter}`;
+
+      // FMCG default
+      return base + `
+## Month 1 (Days 1-30): Distribution Foundation
+- Week 1: Finalize distributor/super-stockist in primary geography. Confirm kirana beat plan for first 200 outlets.
+- Week 2: Sales team briefed, scheme finalized (trade margin + launch incentive). First stock placed in 200 outlets.
+- Week 3: Field activation — merchandising, shelf placement audits, first sampling at 20 high-footfall outlets.
+- Week 4: Initial sell-through audit. Identify fast-moving outlets. Fix slow ones or drop.
+- KPIs by Month 1: 200 retail outlets stocked, ≥30% sell-through, distributor NPS positive
+- Budget: ~60% trade/distribution, 30% sampling, 10% local digital
+
+## Month 2 (Days 31-60): Consumer Pull Creation
+- Weeks 5-6: Launch Instagram/Meta campaign targeting primary city. Brief 5 food/lifestyle micro-influencers.
+- Weeks 7-8: Expand to 500 outlets. First quick commerce listing (Blinkit/Zepto) in primary city.
+- KPIs by Month 2: 500 outlets, first repeat purchase data from kirana, digital share of voice established
+- Budget: Shift to consumer pull + digital
+
+## Month 3 (Days 61-90): Geography Expansion + Modern Trade
+- Weeks 9-10: DMart / BigBazaar listing application or negotiation. Expand distributor to adjacent cities.
+- Weeks 11-12: First festival/seasonal activation (if applicable). PR + food blogger coverage push.
+- KPIs by Month 3: 1,000+ outlets, modern trade pilot in 1 chain, Rs.X revenue run rate
+- Budget: ${budget}
+
+## Channel Rollout Sequence
+Kirana (primary city) → Quick Commerce → Modern Trade → Secondary cities → National
+${sharedFooter}`;
+    })(),
+
+    10: (() => {
+      const budget = d.budget || b.budget || 'Estimate based on stage';
+      const base = `STEP 10 — BUDGET ALLOCATOR\n\nFor ${b.brand} (${b.bizModel || 'Business'}):\nTotal Monthly Budget: ${budget}\n\n## Priority Stack\nIf you had to cut 50% today — what stays, in what order?\n\n## Zero-Budget Alternatives\nFor each paid channel, what's the free/organic equivalent?\n\n## Budget Scaling Milestones\nAt what revenue/traction trigger do you increase budget, and by how much?\n\n`;
+
+      let channelTable = '';
+      if (b.isSaaS) {
+        channelTable = `## Channel Budget Split (B2B SaaS)
+| Channel | % | Monthly Rs. | What it buys | Expected ROI |
+|---|---|---|---|---|
+Fill this table for:
+- Outbound Sales (CRM, LinkedIn Sales Nav, SDR tools)
+- Content Marketing (blog, LinkedIn, case studies)
+- SEO / Inbound
+- Paid (Google Ads for buyer-intent keywords only)
+- Events / Webinars / Community
+- Partnerships / Integrations
+- Product-Led Growth (trial infrastructure, onboarding tools)
+- Reserve`;
+      } else if (b.isD2C) {
+        channelTable = `## Channel Budget Split (D2C)
+| Channel | % | Monthly Rs. | What it buys | Expected ROAS/ROI |
+|---|---|---|---|---|
+Fill this table for:
+- Meta / Instagram Ads (paid social)
+- Google Shopping / Performance Max
+- Influencer Marketing (micro + macro)
+- Content / UGC Production
+- Email & WhatsApp (retention)
+- Quick Commerce Promotions (Blinkit/Zepto visibility)
+- PR & Earned Media
+- Reserve`;
+      } else {
+        channelTable = `## Channel Budget Split (FMCG / Consumer)
+| Channel | % | Monthly Rs. | What it buys | Expected ROI |
+|---|---|---|---|---|
+Fill this table for:
+- Digital (Meta/Instagram/Google)
+- Influencer Marketing
+- Trade / Distribution Push (retailer schemes, visibility)
+- Sampling & Activation
+- Content Production
+- PR & Earned Media
+- Modern Trade Listing / Visibility Fees
+- Reserve`;
+      }
+      return base + channelTable;
+    })(),
+
+    11: `STEP 11 — RISK FLAGS
+
+For ${b.brand}:
+
+## Category A: Existential Risks
+Could kill the business. For each: What is it | Likelihood | Early warning sign | Mitigation
+
+## Category B: Growth Blockers
+Could prevent scaling. Same format.
+
+## Category C: Execution Risks
+Common startup mistakes in this category.
+
+## Category D: India-Specific Risks
+- Regulatory (GST/FSSAI/BIS/sector-specific)
+- Distribution (kirana stockout, distributor conflict, MT listing fees)
+- Consumer (cultural misstep, regional backlash, festival timing failure)
+- Competitive (when the market leader copies you — and they will)
+- Macro (inflation hitting your buyer's discretionary spend)
+
+## Red Lines
+5 things that, if they happen, mean PIVOT not persist
+
+## Green Lights
+5 signals that confirm you're on the right track
+
+Founder's worry: ${d.worry || 'Not specified'}`,
+
+    12: `STEP 12 — OPEN Q&A
+
+Brand: ${b.brand}
+Question: ${d.q}
+
+Answer with the depth of a senior strategy consultant who knows India intimately. Be direct, opinionated, and give a concrete recommendation. No hedging.`,
+
+    13: `STEP 13 — FINAL CONSULTANCY REPORT
+
+Generate the complete BrandOS Consultancy Report for ${b.brand}.
+
+# BRANDOS CONSULTANCY REPORT
+## ${b.brand} — Go-To-Market Strategy for India
+**Prepared:** ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}
+**Stage:** ${S.stage}
+**Category:** ${b.product}
+
+---
+
+## 1. Executive Summary
+The opportunity, the strategy, and the 3 things that determine success or failure. (400-500 words)
+
+## 2. Market Opportunity
+TAM/SAM/SOM with key dynamics and growth thesis
+
+## 3. Target Consumer  
+Top 2 personas with the insight that shapes everything
+
+## 4. Competitive Position
+Where we sit, the white space we own, who to watch
+
+## 5. Brand Positioning
+The positioning statement and what it means operationally
+
+## 6. Pricing Architecture
+Pack design, price points, channel margins
+
+## 7. 90-Day Go-To-Market Plan
+Sequenced plan with channel priorities and week-by-week actions
+
+## 8. Budget Blueprint
+Monthly spend allocation with ROI targets
+
+## 9. Risk Register
+Top 5 risks and mitigation plans
+
+## 10. Success Metrics
+30 / 60 / 90 / 180-day KPI targets with specific numbers
+
+## 11. The One Thing
+If the founder does only ONE thing from this entire report — what is it and why?
+
+---
+Synthesize all previous steps. Make this worthy of a Rs.20 lakh consulting fee.`
+  };
+  return ps[n] || `Analyze step ${n} for ${b.brand}`;
+}
+
+// ── RENDER SIDEBAR ─────────────────────────────────────────────────────────────
+function renderSidebar() {
+  // Mode tabs
+  ['tab1','tab2','tab3'].forEach(t => document.getElementById(t)?.classList.remove('active'));
+  const tabMap = {strategy:'tab1', execution:'tab2', solver:'tab3'};
+  document.getElementById(tabMap[S.mode])?.classList.add('active');
+
+  // Sidebar steps
+  if (S.mode === 'strategy') {
+    document.getElementById('sidebarSteps').innerHTML =
+      `<div class="s-section">Layer 1 · Strategy</div>` +
+      STEPS.map(s => `
+        <div class="si ${S.step===s.id?'active':''} ${S.done.has(s.id)?'done':''}" onclick="goStep(${s.id})">
+          <div class="snum">${S.done.has(s.id)?'✓':s.id}</div>
+          <div class="slabel">${s.label}</div>
+        </div>`).join('');
+  } else if (S.mode === 'execution') {
+    document.getElementById('sidebarSteps').innerHTML =
+      `<div class="s-section">Layer 2 · Execution</div>` +
+      EXEC_TOOLS.map(t => `
+        <div class="si ${S.execTool===t.id?'active':''}" onclick="selectExecTool('${t.id}')">
+          <div class="snum" style="font-size:13px;">${t.icon}</div>
+          <div class="slabel">${t.name}</div>
+        </div>`).join('');
+  } else {
+    document.getElementById('sidebarSteps').innerHTML =
+      `<div class="s-section">Layer 3 · Problem Solver</div>
+       <div class="si active"><div class="snum">🔥</div><div class="slabel">Live Problem Diagnosis</div></div>
+       <div style="padding:10px 18px;"><div style="font-size:11px;color:var(--text3);line-height:1.6;">Describe any problem → get diagnosis + 3 actions to run this week</div></div>`;
+  }
+
+  // Topbar
+  const step = STEPS.find(s=>s.id===S.step);
+  if (S.mode === 'strategy') {
+    document.getElementById('topbarLeft').innerHTML = `Step <b id="tStep">${S.step||'—'}</b> · <span id="tName">${step?step.label:'Welcome'}</span>`;
+    document.getElementById('navInfo').textContent = S.step ? `Step ${S.step} of 13` : '— of 13';
+    document.getElementById('botnav').style.display = 'flex';
+  } else if (S.mode === 'execution') {
+    const tool = EXEC_TOOLS.find(t=>t.id===S.execTool);
+    document.getElementById('topbarLeft').innerHTML = `<b>⚡ Execution Engine</b> · <span id="tName">${tool?tool.name:'Select a tool'}</span>`;
+    document.getElementById('botnav').style.display = 'none';
+  } else {
+    document.getElementById('topbarLeft').innerHTML = `<b>🔥 Problem Solver</b> · <span>Live Diagnosis</span>`;
+    document.getElementById('botnav').style.display = 'none';
+  }
+  document.getElementById('tBadge').className = 'sbadge' + (S.stage?' on':'');
+  document.getElementById('tBadge').textContent = (S.brand.brand ? S.brand.brand : '') + (S.stage ? ` · ${S.stage.split('—')[0].trim()}` : '') || 'No brand set';
+  document.getElementById('btnPrev').style.visibility = (S.mode==='strategy' && S.step > 1) ? 'visible' : 'hidden';
+  document.getElementById('btnNext').style.visibility = (S.mode==='strategy' && S.step >= 1 && S.step < 13) ? 'visible' : 'hidden';
+}
+
+function switchMode(mode) {
+  if (!getApiKey()) { toast('Enter your OpenRouter API key first', 'err'); return; }
+  S.mode = mode;
+  renderSidebar();
+  if (mode === 'strategy') {
+    if (S.step) goStep(S.step); else showWelcomeContent();
+  } else if (mode === 'execution') {
+    showExecEngine();
+  } else {
+    showSolver();
+  }
+}
+
+function nav(d) {
+  const n = S.step + d;
+  if (n >= 1 && n <= 13) goStep(n);
+  else if (n === 0) showWelcome();
+}
+
+// ── EXECUTION ENGINE (LAYER 2) ─────────────────────────────────────────────────
+const EXEC_TOOLS = [
+  { id:'meta_ad', icon:'📱', name:'Meta Ad Copy', desc:'5 ad variants: hook, body, CTA. Scroll-stop creative for Indian feeds.' },
+  { id:'whatsapp_drip', icon:'💬', name:'WhatsApp Drip', desc:'4-week WhatsApp sequence — welcome, nurture, offer, re-engage.' },
+  { id:'influencer_brief', icon:'🌟', name:'Influencer Brief', desc:'Ready-to-send brief: deliverables, talking points, dos & don\'ts.' },
+  { id:'email_sequence', icon:'📧', name:'Email Sequence', desc:'5-email onboarding or re-engagement sequence with subject lines.' },
+  { id:'content_calendar', icon:'📅', name:'Content Calendar', desc:'30-day Instagram/LinkedIn calendar with captions and hooks.' },
+  { id:'sales_script', icon:'🎯', name:'Sales Script', desc:'Outbound call/DM script for B2B or D2C: opener, pitch, objections, close.' },
+  { id:'launch_press', icon:'📰', name:'Launch Press Note', desc:'Press release + media pitch email for a product or campaign launch.' },
+  { id:'campaign_brief', icon:'🚀', name:'Campaign Brief', desc:'Full campaign brief: objective, audience, message, channels, KPIs, budget.' },
+];
+
+function showExecEngine() {
+  S.mode = 'execution';
+  renderSidebar();
+  const c = document.getElementById('content');
+  const brandReady = !!S.brand.brand;
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge">Layer 2 · ⚡</div>
+        <div>
+          <div class="card-title">Execution Engine</div>
+          <div class="card-desc">Pick a tool. Get ready-to-run output — calibrated to ${brandReady ? `<b>${S.brand.brand}</b>` : 'your brand'}. Not a template. Actual copy.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        ${!brandReady ? `<div style="background:rgba(245,200,66,.08);border:1px solid rgba(245,200,66,.2);border-radius:9px;padding:14px 16px;margin-bottom:18px;font-size:13px;color:var(--gold);">⚠️ Complete <b>Step 1 (Brand Brief)</b> in Strategy mode first for fully calibrated output. You can still use these tools — just add context in the prompt.</div>` : ''}
+        <div class="tool-grid">
+          ${EXEC_TOOLS.map(t => `
+            <div class="tool-card ${S.execTool===t.id?'active':''}" onclick="selectExecTool('${t.id}')">
+              <div class="tc-icon">${t.icon}</div>
+              <div class="tc-name">${t.name}</div>
+              <div class="tc-desc">${t.desc}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function selectExecTool(id) {
+  S.execTool = id;
+  renderSidebar();
+  const tool = EXEC_TOOLS.find(t=>t.id===id);
+  const b = S.brand;
+  const c = document.getElementById('content');
+
+  const toolForms = {
+    meta_ad: `
+      <div class="frow"><label>Campaign objective</label>
+        <select id="et1"><option value="awareness">Awareness / Reach</option><option value="traffic">Website Traffic</option><option value="conversion" selected>Sales / Conversion</option><option value="lead">Lead Generation</option></select></div>
+      <div class="frow"><label>Product / offer to promote</label>
+        <input type="text" id="et2" placeholder="e.g., Buy 2 get 1 free on our atta this Navratri" value="${b.product||''}"></div>
+      <div class="frow"><label>Target audience for this ad</label>
+        <input type="text" id="et3" placeholder="e.g., Health-conscious women 28-40, Delhi NCR" value="${b.target||''}"></div>
+      <div class="frow"><label>Tone / Vibe</label>
+        <select id="et4"><option value="bold">Bold & Direct</option><option value="warm" selected>Warm & Relatable</option><option value="premium">Premium / Aspirational</option><option value="urgent">Urgent / FOMO</option><option value="funny">Witty / Humorous</option></select></div>
+      <div class="frow"><label>Any specific hook, offer, or constraint?</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Must mention 'stone-ground', avoid price claims, include Hindi phrase"></textarea></div>`,
+
+    whatsapp_drip: `
+      <div class="frow"><label>Campaign goal</label>
+        <select id="et1"><option value="onboard" selected>New customer onboarding</option><option value="nurture">Lead nurturing (pre-purchase)</option><option value="reactivate">Re-engage inactive customers</option><option value="launch">Product launch announcement</option></select></div>
+      <div class="frow"><label>Product / service</label>
+        <input type="text" id="et2" placeholder="What are you promoting?" value="${b.product||''}"></div>
+      <div class="frow"><label>Key offer or CTA at the end</label>
+        <input type="text" id="et3" placeholder="e.g., 20% off first order / Book a free demo / Download guide"></div>
+      <div class="frow"><label>Brand tone</label>
+        <select id="et4"><option value="friendly" selected>Friendly & Conversational</option><option value="professional">Professional</option><option value="urgent">Urgent / Sales-y</option></select></div>
+      <div class="frow"><label>Any context or constraints?</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Audience is vegetarian, messages go out Mon/Wed/Fri/Sun, include emojis"></textarea></div>`,
+
+    influencer_brief: `
+      <div class="frow"><label>Influencer type / platform</label>
+        <select id="et1"><option value="instagram_lifestyle" selected>Instagram Lifestyle / Micro</option><option value="instagram_food">Instagram Food / Recipe</option><option value="youtube">YouTube (long-form review)</option><option value="linkedin">LinkedIn (B2B / Founder)</option><option value="moj_sharechat">Moj / ShareChat (regional)</option></select></div>
+      <div class="frow"><label>Campaign / product to brief them on</label>
+        <input type="text" id="et2" placeholder="e.g., Diwali gifting launch of our premium atta" value="${b.product||''}"></div>
+      <div class="frow"><label>Deliverables expected</label>
+        <input type="text" id="et3" placeholder="e.g., 1 Reel + 3 Stories + 1 static post over 2 weeks"></div>
+      <div class="frow"><label>Key messages to land</label>
+        <textarea id="et4" rows="2" placeholder="e.g., Single-origin sourcing, no additives, real difference in taste"></textarea></div>
+      <div class="frow"><label>Absolute don'ts / sensitivities</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Don't compare to Aashirvaad by name, no price mention, no filter on food shots"></textarea></div>`,
+
+    email_sequence: `
+      <div class="frow"><label>Sequence type</label>
+        <select id="et1"><option value="welcome" selected>Welcome / Onboarding (new subscriber)</option><option value="nurture">Lead Nurture (pre-purchase)</option><option value="abandon">Cart Abandonment</option><option value="reactivate">Win-back / Re-engagement</option><option value="launch">Product Launch Announcement</option></select></div>
+      <div class="frow"><label>Product / service</label>
+        <input type="text" id="et2" placeholder="What is this sequence about?" value="${b.product||''}"></div>
+      <div class="frow"><label>Primary CTA at end of sequence</label>
+        <input type="text" id="et3" placeholder="e.g., Make first purchase / Book a demo / Upgrade to paid plan"></div>
+      <div class="frow"><label>Number of emails</label>
+        <select id="et4"><option value="3">3 emails</option><option value="5" selected>5 emails</option><option value="7">7 emails</option></select></div>
+      <div class="frow"><label>Context / key selling points</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Emphasize quality story, USP, social proof. Audience already opted in via Instagram."></textarea></div>`,
+
+    content_calendar: `
+      <div class="frow"><label>Platform</label>
+        <select id="et1"><option value="instagram" selected>Instagram (Reels + Feed + Stories)</option><option value="linkedin">LinkedIn (Thought Leadership)</option><option value="youtube_shorts">YouTube Shorts</option><option value="both">Instagram + LinkedIn combined</option></select></div>
+      <div class="frow"><label>Content theme / campaign</label>
+        <input type="text" id="et2" placeholder="e.g., Navratri campaign / Brand building / Product education" value="${b.product||''}"></div>
+      <div class="frow"><label>Posting frequency</label>
+        <select id="et3"><option value="daily">Daily (30 posts)</option><option value="5x" selected>5x/week (20 posts)</option><option value="3x">3x/week (12 posts)</option></select></div>
+      <div class="frow"><label>Content pillars to cover</label>
+        <textarea id="et4" rows="2" placeholder="e.g., Education (40%), Storytelling (30%), Offers (20%), UGC/Community (10%)"></textarea></div>
+      <div class="frow"><label>Any upcoming dates / moments to plan around?</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Navratri Oct 2, Diwali Oct 20, product restock Oct 15"></textarea></div>`,
+
+    sales_script: `
+      <div class="frow"><label>Sales channel</label>
+        <select id="et1"><option value="cold_call" selected>Cold Call (B2B)</option><option value="cold_dm">Cold DM / LinkedIn Message</option><option value="demo_call">Demo / Discovery Call</option><option value="whatsapp_d2c">WhatsApp (D2C inquiry close)</option></select></div>
+      <div class="frow"><label>What you're selling</label>
+        <input type="text" id="et2" placeholder="One line — what's the product and who's it for?" value="${b.product||''}"></div>
+      <div class="frow"><label>Ideal customer to script for</label>
+        <input type="text" id="et3" placeholder="e.g., HR head at 200-person IT company in Bangalore" value="${b.target||''}"></div>
+      <div class="frow"><label>Top 3 objections you hear</label>
+        <textarea id="et4" rows="2" placeholder="e.g., 'We already use X', 'Not in the budget right now', 'Let me check with my manager'"></textarea></div>
+      <div class="frow"><label>Desired outcome of the call</label>
+        <input type="text" id="et5" placeholder="e.g., Book a 30-min demo / Send a proposal / Get on a WhatsApp group"></div>`,
+
+    launch_press: `
+      <div class="frow"><label>What are you launching?</label>
+        <input type="text" id="et1" placeholder="e.g., New product SKU / Campaign / Partnership / Milestone" value="${b.product||''}"></div>
+      <div class="frow"><label>The headline news — in one line</label>
+        <input type="text" id="et2" placeholder="e.g., BrandOS adds AI execution engine to help Indian founders run campaigns"></div>
+      <div class="frow"><label>Target media outlets</label>
+        <select id="et3"><option value="startup" selected>Startup / Tech (YourStory, Inc42, Economic Times)</option><option value="consumer">Consumer / Lifestyle (Vogue, Femina, Times Food)</option><option value="business">Business (Business Standard, Mint, Bloomberg India)</option><option value="trade">Trade / Industry press</option></select></div>
+      <div class="frow"><label>Key facts / data points</label>
+        <textarea id="et4" rows="2" placeholder="e.g., 500+ brands, raised Rs.2cr, 40% MoM growth, partnered with XYZ"></textarea></div>
+      <div class="frow"><label>Founder quote for the release</label>
+        <textarea id="et5" rows="2" placeholder="Optional: A quote to include in the press note"></textarea></div>`,
+
+    campaign_brief: `
+      <div class="frow"><label>Campaign objective</label>
+        <select id="et1"><option value="awareness" selected>Brand Awareness / Category Entry</option><option value="consideration">Consideration / Trial</option><option value="conversion">Direct Sales / Conversion</option><option value="retention">Retention / Loyalty</option><option value="launch">Product / Market Launch</option></select></div>
+      <div class="frow"><label>Campaign name / theme idea</label>
+        <input type="text" id="et2" placeholder="e.g., #RealAtta, Diwali Ghar Wali Khushiyaan, HireFlow Diwali Free Month"></div>
+      <div class="frow"><label>Budget for this campaign</label>
+        <input type="text" id="et3" placeholder="e.g., ₹5 lakh for 3 weeks" value="${b.budget||''}"></div>
+      <div class="frow"><label>Duration and key dates</label>
+        <input type="text" id="et4" placeholder="e.g., 3 weeks, Oct 1-21, centered around Navratri and Diwali"></div>
+      <div class="frow"><label>Any constraints or must-haves?</label>
+        <textarea id="et5" rows="2" placeholder="e.g., Must include regional language variant, no celebrity, influencer-first"></textarea></div>`,
+  };
+
+  const prevOutput = S.resp[`exec_${id}`] ? `
+    <div class="rbox">
+      <div class="rhead">
+        <div class="rlabel">${tool.icon} ${tool.name} Output</div>
+        <button class="btn btn-g" style="font-size:11.5px;padding:5px 12px;" onclick="clearExec('${id}')">Re-generate ↺</button>
+      </div>
+      <div class="rcontent">${md(S.resp[`exec_${id}`].out)}</div>
+    </div>` : '';
+
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge">Exec · ${tool.icon}</div>
+        <div>
+          <div class="card-title">${tool.name}</div>
+          <div class="card-desc">${tool.desc}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        ${S.brand.brand ? `<div class="exec-chips">
+          <span class="chip g">Brand: ${S.brand.brand}</span>
+          ${S.brand.bizModel ? `<span class="chip o">${S.brand.bizModel}</span>` : ''}
+          ${S.brand.target ? `<span class="chip">${S.brand.target.substring(0,40)}${S.brand.target.length>40?'...':''}</span>` : ''}
+        </div>` : ''}
+        ${toolForms[id] || '<p>Tool coming soon.</p>'}
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" id="runBtn" onclick="runExecTool('${id}')">Generate ${tool.name} →</button>
+        </div>
+        ${prevOutput}
+      </div>
+    </div>`;
+}
+
+function clearExec(id) { delete S.resp[`exec_${id}`]; selectExecTool(id); }
+
+function runExecTool(id) {
+  const tool = EXEC_TOOLS.find(t=>t.id===id);
+  const b = S.brand;
+  const vals = {};
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`et${i}`);
+    if (el) vals[`et${i}`] = el.value.trim();
+  }
+
+  const brandCtx = b.brand ? `\n\nBRAND CONTEXT (from Step 1):\nBrand: ${b.brand}\nProduct: ${b.product}\nBusiness Model: ${b.bizModel||'Not set'}\nTarget Customer: ${b.target}\nUSP: ${b.usp}\nChannels: ${b.channels}\nLocation: ${b.location}` : '\n\nNo brand profile set — generate based on the inputs below.';
+
+  const prompts = {
+    meta_ad: `EXECUTION ENGINE — META AD COPY GENERATOR\n\nGenerate 5 distinct Meta/Instagram ad variants. Each must be immediately usable — not a template, real copy.\n\nFor each ad:\n**Variant [N] — [Hook Type]**\n- **Primary Text** (the main copy, 100-150 chars max)\n- **Headline** (under 40 chars, punchy)\n- **Description** (under 30 chars)\n- **CTA Button**: [Buy Now / Learn More / Shop Now / etc]\n- **Visual direction**: 1 line describing what the image/video should show\n- **Why this works**: the psychological lever it pulls${brandCtx}\n\nCampaign objective: ${vals.et1}\nProduct/offer: ${vals.et2}\nTarget audience: ${vals.et3}\nTone: ${vals.et4}\nConstraints: ${vals.et5||'None'}\n\nMake ads feel native to Indian Instagram — culturally specific, real language, not translated Western copy. Include at least 1 variant with a Hindi phrase or culturally Indian hook.`,
+
+    whatsapp_drip: `EXECUTION ENGINE — WHATSAPP DRIP SEQUENCE\n\nGenerate a 4-week WhatsApp message sequence. Each message must feel like it's from a real person, not a brand bot. Short, punchy, conversational.\n\nFor each message:\n**Week [N] — Day [X]: [Message Purpose]**\nMessage: [The actual WhatsApp text — include emojis, natural language, max 200 words]\nSend time: [Best time to send]\nIf replied: [What to say if they reply positively]\n\nTotal: 8 messages (2 per week — spaced 3-4 days apart)${brandCtx}\n\nGoal: ${vals.et1}\nProduct: ${vals.et2}\nFinal CTA: ${vals.et3}\nTone: ${vals.et4}\nContext: ${vals.et5||'None'}\n\nCritical: These must feel like messages from a friend who happens to sell this product. Not broadcast copy. WhatsApp is personal — treat it that way. Include 1 message that asks a question to create a reply.`,
+
+    influencer_brief: `EXECUTION ENGINE — INFLUENCER BRIEF\n\nGenerate a complete, ready-to-send influencer brief. Format it so the creator can read it in 3 minutes and know exactly what to do.\n\n## Campaign Brief for [Influencer Name]\n\n### What We're Doing\n[1 paragraph — why this campaign, what we're asking, why it's exciting for their audience]\n\n### The Brand\n[2-3 sentences — what we are, why it matters to Indians, our positioning]\n\n### What We Need\n[Exact deliverables with specs]\n\n### Key Messages to Land\n[3-5 bullet points — what they MUST communicate]\n\n### How To Say It\n[2-3 bullet points on tone, style, what feels authentic]\n\n### What NOT To Do\n[Hard limits — legal, brand, competitive sensitivities]\n\n### Content Guidelines\n[Disclosure requirements, hashtags, tagging, approval process]\n\n### Timeline\n[Draft due → Approval → Live date]\n\n### Contact\n[Template line for who to reach]\n${brandCtx}\n\nPlatform/type: ${vals.et1}\nCampaign: ${vals.et2}\nDeliverables: ${vals.et3}\nKey messages: ${vals.et4}\nDon'ts: ${vals.et5||'None'}`,
+
+    email_sequence: `EXECUTION ENGINE — EMAIL SEQUENCE\n\nGenerate a ${vals.et4}-email sequence. Each email must be complete and ready to send — real subject lines, real body copy, not placeholders.\n\nFor each email:\n**Email [N] of ${vals.et4} — [Send timing: e.g., Day 0, Day 3, Day 7]**\nSubject line: [Primary subject]\nPreview text: [What shows in inbox below subject]\nBody:\n[Full email body — can be short (150 words) to medium (300 words). Real copy. Include PS where appropriate.]\nCTA: [Button text + what it links to]\n\n${brandCtx}\n\nSequence type: ${vals.et1}\nProduct: ${vals.et2}\nFinal CTA: ${vals.et3}\nContext: ${vals.et5||'None'}\n\nMake these feel human. Indian email recipients get 200 promotional emails a day — these must stand out by being specific, useful, and honest. No "Hope this email finds you well."`,
+
+    content_calendar: `EXECUTION ENGINE — 30-DAY CONTENT CALENDAR\n\nGenerate a complete content calendar. For each post, give real copy — not just topics.\n\nFormat for each post:\n**[Date/Day] — [Post Type: Reel/Carousel/Static/Story]**\nCaption (ready to post):\nHook line: [First 1-2 lines visible before "more"]\nBody: [Full caption]\nCTA: [Last line call to action]\nHashtags: [10-15 relevant]\nVisual direction: [1 line on what to shoot/design]\n\nGenerate ${vals.et3==='daily'?'30':vals.et3==='5x'?'20':'12'} posts spread across the month.${brandCtx}\n\nPlatform: ${vals.et1}\nTheme/campaign: ${vals.et2}\nContent pillars: ${vals.et4||'Mix of education, storytelling, product, social proof'}\nKey dates: ${vals.et5||'None specified'}`,
+
+    sales_script: `EXECUTION ENGINE — SALES SCRIPT\n\nGenerate a complete sales script for ${vals.et1}. This should be a real script a founder or SDR can pick up and use today.\n\n## The Script\n\n**OPENER (first 15 seconds)**\n[Exact words — natural, not robotic]\n\n**QUALIFICATION (30 seconds)**\n[2-3 qualifying questions to confirm they're the right person]\n\n**THE PITCH (60 seconds)**\n[The core value proposition — specific, outcome-oriented, India-relevant]\n\n**OBJECTION HANDLERS**\nFor each of the 3 objections given:\n> Objection: "[Their words]"\n> Response: "[Exact reframe or answer]"\n\n**THE ASK (closing)**\n[Exact words to get to the desired outcome]\n\n**IF THEY SAY NO**\n[The graceful exit that leaves the door open]\n\n**FOLLOW-UP MESSAGE**\n[The WhatsApp/email to send within 2 hours]\n${brandCtx}\n\nChannel: ${vals.et1}\nProduct: ${vals.et2}\nTarget buyer: ${vals.et3}\nObjections: ${vals.et4}\nDesired outcome: ${vals.et5}`,
+
+    launch_press: `EXECUTION ENGINE — LAUNCH PRESS NOTE + PITCH EMAIL\n\nGenerate two things:\n\n## 1. Press Release (400-500 words)\n[Standard press release format — headline, dateline, lede, quote, body, boilerplate, ###]\n\n## 2. Media Pitch Email (under 150 words)\n[Subject line + short pitch email to the editor — what's the story hook, why their readers care, what you're offering (interview, exclusive, demo)]\n${brandCtx}\n\nLaunch: ${vals.et1}\nHeadline news: ${vals.et2}\nTarget outlets: ${vals.et3}\nKey facts: ${vals.et4}\nFounder quote: ${vals.et5||'Generate an appropriate quote based on the brand context'}`,
+
+    campaign_brief: `EXECUTION ENGINE — CAMPAIGN BRIEF\n\nGenerate a complete campaign brief that a marketing team can execute from immediately.\n\n## Campaign Brief: [Campaign Name]\n\n### 1. Campaign Objective\n[One clear sentence. What does success look like in numbers?]\n\n### 2. Target Audience\n[Primary + secondary. Psychographic description, not just demographics.]\n\n### 3. Core Campaign Message\n[The single idea the campaign must communicate. One sentence.]\n\n### 4. Creative Concept\n[The campaign idea — the theme, the story, the hook. 2-3 paragraphs.]\n\n### 5. Channel Plan\n| Channel | Role | Budget | KPI |\n|---|---|---|---|\n[Fill for each channel]\n\n### 6. Content Requirements\n[What needs to be produced — formats, quantities, specs]\n\n### 7. Timeline & Milestones\n[Week-by-week from brief to live]\n\n### 8. Budget Breakdown\n[Exact rupee split]\n\n### 9. Success Metrics\n[KPIs at 30/60 days]\n\n### 10. Approvals Required\n[What needs sign-off and from whom]\n${brandCtx}\n\nObjective: ${vals.et1}\nTheme: ${vals.et2}\nBudget: ${vals.et3}\nDuration: ${vals.et4}\nConstraints: ${vals.et5||'None'}`,
+  };
+
+  const p = prompts[id];
+  if (!p) { toast('Tool not ready', 'err'); return; }
+  executeExec(id, p, tool);
+}
+
+async function executeExec(id, prompt, tool) {
+  if (!getApiKey()) { toast('Enter your OpenRouter API key first', 'err'); return; }
+  const btn = document.getElementById('runBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Generating...'; }
+  const c = document.getElementById('content');
+  let loader = document.createElement('div');
+  loader.id = 'loader';
+  loader.className = 'loading';
+  loader.innerHTML = `<div class="spin"></div><div><div class="ltxt">Generating ${tool.name}...</div><div class="lsub">Calibrating to your brand + India context</div></div>`;
+  c.appendChild(loader);
+  c.scrollTop = c.scrollHeight;
+  try {
+    const out = await callAI(prompt);
+    S.resp[`exec_${id}`] = { inp: prompt, out };
+    loader.remove();
+    selectExecTool(id);
+    setTimeout(() => {
+      const rb = document.querySelector('.rbox');
+      if (rb) rb.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+    toast(`${tool.name} ready!`, 'ok');
+  } catch(err) {
+    loader.remove();
+    if (btn) { btn.disabled = false; btn.textContent = 'Try Again →'; }
+    toast('Error: ' + err.message, 'err');
+  }
+}
+
+// ── PROBLEM SOLVER (LAYER 3) ───────────────────────────────────────────────────
+function showSolver() {
+  S.mode = 'solver';
+  renderSidebar();
+  renderSolverChat();
+}
+
+function renderSolverChat() {
+  const c = document.getElementById('content');
+  const b = S.brand;
+  const brandCtx = b.brand ? `<div style="background:rgba(255,107,43,.07);border:1px solid rgba(255,107,43,.15);border-radius:9px;padding:12px 16px;margin-bottom:18px;font-size:12.5px;color:var(--text2);">🔗 Using brand context: <b style="color:var(--accent)">${b.brand}</b> · ${b.bizModel||'Business'} · ${b.location||'India'}</div>` : `<div style="background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.2);border-radius:9px;padding:12px 16px;margin-bottom:18px;font-size:12.5px;color:var(--gold);">⚠️ No brand profile loaded. Describe your business in your message for better answers. Or complete Step 1 in Strategy mode.</div>`;
+
+  const chatHtml = S.solverHistory.length > 0 ?
+    `<div class="ps-chat">` +
+    S.solverHistory.map(m => `
+      <div class="ps-msg ${m.role==='user'?'user':'ai'}">
+        ${m.role==='assistant' ? `<div class="rlabel" style="margin-bottom:10px;">BrandOS Diagnosis</div>` : ''}
+        <div class="${m.role==='assistant'?'rcontent':''}">
+          ${m.role==='assistant' ? md(m.content) : escHtml(m.content)}
+        </div>
+      </div>`).join('') +
+    (S.solverRunning ? `<div class="loading" style="align-self:flex-start;"><div class="spin"></div><div><div class="ltxt">Diagnosing...</div><div class="lsub">Forming diagnosis + action plan</div></div></div>` : '') +
+    `</div>` :
+    `<div style="text-align:center;padding:32px 20px 20px;">
+      <div style="font-size:40px;margin-bottom:12px;">🔥</div>
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;">What's the problem?</div>
+      <div style="color:var(--text2);font-size:13.5px;max-width:400px;margin:0 auto 20px;line-height:1.7;">Describe a real business problem you're facing right now. BrandOS will diagnose it and give you 3 specific actions to execute this week.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;max-width:400px;margin:0 auto;">
+        ${[
+          'Our CAC on Meta doubled in the last 30 days — what do we do?',
+          'Our distributor is pushing our product to the back shelf. How do I fix this?',
+          'We\'re getting trials but nobody converts to paid. Why?',
+          'Our biggest competitor just slashed prices by 30%. Should we match?',
+        ].map(eg => `<div onclick="fillSolverPrompt('${eg.replace(/'/g,"\\'")}') " style="background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--text2);cursor:pointer;text-align:left;transition:all .15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border2)'">${eg}</div>`).join('')}
+      </div>
+    </div>`;
+
+  c.innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:14px;height:100%;">
+      ${brandCtx}
+      <div style="flex:1;overflow-y:auto;" id="solverScrollArea">
+        ${chatHtml}
+      </div>
+      <div class="card" style="flex-shrink:0;">
+        <div class="card-body" style="padding:16px;">
+          <div class="ps-input-wrap">
+            <textarea id="solverInput" placeholder="Describe your problem: what's happening, since when, what you've tried…" rows="3" onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){event.preventDefault();sendSolverMessage();}"></textarea>
+            <button class="btn btn-p" onclick="sendSolverMessage()" style="flex-shrink:0;align-self:flex-end;" id="solverBtn">Diagnose →</button>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;">Ctrl+Enter to send · The more context you give, the sharper the diagnosis</div>
+          ${S.solverHistory.length > 0 ? `<button class="btn btn-g" style="margin-top:10px;font-size:12px;padding:7px 14px;" onclick="clearSolver()">Clear conversation ↺</button>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+function fillSolverPrompt(text) {
+  const el = document.getElementById('solverInput');
+  if (el) { el.value = text; el.focus(); }
+}
+
+function clearSolver() { S.solverHistory = []; renderSolverChat(); }
+
+async function sendSolverMessage() {
+  const inp = document.getElementById('solverInput');
+  if (!inp) return;
+  const msg = inp.value.trim();
+  if (!msg) { toast('Describe your problem first', 'err'); return; }
+  if (!getApiKey()) { toast('Enter your OpenRouter API key first', 'err'); return; }
+  inp.value = '';
+  S.solverHistory.push({ role: 'user', content: msg });
+  S.solverRunning = true;
+  renderSolverChat();
+  // scroll to bottom
+  setTimeout(() => {
+    const sa = document.getElementById('solverScrollArea');
+    if (sa) sa.scrollTop = sa.scrollHeight;
+  }, 50);
+
+  const b = S.brand;
+  const brandCtxStr = b.brand ? `\n\nBRAND CONTEXT:\nBrand: ${b.brand}\nProduct: ${b.product}\nBusiness Model: ${b.bizModel||'Not set'}\nTarget: ${b.target}\nUSP: ${b.usp}\nChannels: ${b.channels}\nStage: ${b.stage}\nLocation: ${b.location}\nBudget: ${b.budget}` : '';
+
+  // Build conversation for API
+  const messages = [];
+  for (let i = 0; i < S.solverHistory.length - 1; i++) {
+    messages.push(S.solverHistory[i]);
+  }
+  // Final user message with brand context
+  const fullMsg = `${msg}${brandCtxStr}`;
+
+  const solverSystemPrompt = `You are BrandOS Problem Solver — a world-class Indian business consultant in emergency mode. A founder is describing a real problem they're facing RIGHT NOW.
+
+Your job is NOT to give a 13-step analysis. Your job is to:
+1. DIAGNOSE the root cause (the real problem, not the symptom they described)
+2. Give 3 SPECIFIC actions they can execute THIS WEEK — not "consider doing X", but "do X on Tuesday by calling Y and saying Z"
+3. Flag the ONE thing that, if they don't fix this week, makes everything else irrelevant
+
+FORMAT every response as:
+
+## The Real Problem
+[1-2 sentences: the root cause diagnosis. Be blunt. Indian founders respect directness.]
+
+## Why This Is Happening
+[2-3 bullet points: the structural reasons, with India-specific context where relevant]
+
+## 3 Actions to Run This Week
+
+**Action 1: [Name]** — [Specific, executable instruction. Who does what, to whom, by when. Include specific language if relevant.]
+
+**Action 2: [Name]** — [Same format]
+
+**Action 3: [Name]** — [Same format]
+
+## The One Thing That Can't Wait
+[1 sentence. The action with the highest leverage / biggest downside if ignored.]
+
+## Brutal Truth
+[1-2 sentences the founder probably doesn't want to hear but must know.]
+
+Be direct. Be specific. Give numbers. Name the thing. Never say "it depends" without immediately saying what it depends on and which direction to lean.`;
+
+  try {
+    const out = await callAI(fullMsg, solverSystemPrompt, messages);
+    S.solverHistory.push({ role: 'assistant', content: out });
+  } catch(err) {
+    S.solverHistory.push({ role: 'assistant', content: `⚠️ Error: ${err.message}` });
+  }
+  S.solverRunning = false;
+  renderSolverChat();
+  setTimeout(() => {
+    const sa = document.getElementById('solverScrollArea');
+    if (sa) sa.scrollTop = sa.scrollHeight;
+  }, 100);
+}
+
+function escHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function escAttr(t) {
+  return escHtml(String(t || '')).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ── WELCOME ────────────────────────────────────────────────────────────────────
+function showWelcome() {
+  S.step = 0;
+  S.mode = 'strategy';
+  renderSidebar();
+  showWelcomeContent();
+}
+
+function showWelcomeContent() {
+  document.getElementById('content').innerHTML = `
+    <div class="welcome">
+      <div class="wicon">🇮🇳</div>
+      <h1>The complete Indian<br><em>go-to-market engine</em></h1>
+      <p>BrandOS delivers what a Rs. 10–40 lakh consulting engagement would — market sizing, personas, positioning, pricing, and a full GTM plan. Plus an execution engine and a live problem solver. Built for Indian founders.</p>
+      <div class="wtags">
+        <span class="tag">📊 13-Step Strategy</span>
+        <span class="tag">⚡ Execution Engine</span>
+        <span class="tag">🔥 Problem Solver</span>
+        <span class="tag">28 States Intelligence</span>
+        <span class="tag">Free via OpenRouter</span>
+      </div>
+      <div class="api-box">
+        <h3>🔑 Enter Your OpenRouter API Key</h3>
+        <p>Get your free key (no credit card) from <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> — takes 60 seconds.</p>
+        <p style="font-size:11.5px;color:var(--text3);margin-bottom:14px;margin-top:-6px;">Your key is never stored or sent anywhere except OpenRouter. It stays in your browser memory only.</p>
+        <div class="frow">
+          <input type="password" id="keyInp" placeholder="sk-or-v1-..." style="font-family:'DM Mono',monospace;letter-spacing:0.04em;" value="${escAttr(S.key)}">
+        </div>
+        <button class="btn btn-p" onclick="connectKey()" style="width:100%;justify-content:center;margin-top:4px;">Connect & Start →</button>
+        <p style="font-size:11px;color:var(--text3);margin-top:10px;text-align:center;">Free tier · No quota limits · Works with any free OpenRouter model</p>
+      </div>
+      ${S.key ? `<button class="btn btn-p" onclick="goStep(1)" style="margin-top:-4px;width:100%;max-width:360px;justify-content:center;">Continue to Step 1 →</button>` : ''}
+    </div>`;
+}
+
+function connectKey() {
+  const inp = document.getElementById('keyInp');
+  if (!inp) return;
+  const k = inp.value.trim();
+  if (!k || k.length < 20) { toast('Paste your OpenRouter key first', 'err'); return; }
+  if (!k.startsWith('sk-or-')) { toast('That does not look like an OpenRouter key', 'err'); return; }
+  S.key = k;
+  inp.disabled = true;
+  const btn = document.querySelector('.api-box .btn-p');
+  if (btn) { btn.textContent = '✓ Connected — opening Step 1...'; btn.disabled = true; }
+  setTimeout(() => goStep(1), 500);
+}
+
+// ── STEP RENDER ────────────────────────────────────────────────────────────────
+function goStep(n) {
+  if (!getApiKey()) { showWelcome(); setTimeout(() => toast('Enter your OpenRouter key first'), 200); return; }
+  S.step = n;
+  renderSidebar();
+  const c = document.getElementById('content');
+
+  let ctxHtml = '';
+  if (S.brand.brand && n > 1) {
+    ctxHtml = `<div class="ctx">
+      <h4>Brand Context</h4>
+      <div class="ctx-row"><span class="ctx-k">Brand</span><span class="ctx-v">${S.brand.brand}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Product</span><span class="ctx-v">${S.brand.product||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Model</span><span class="ctx-v">${S.brand.bizModel||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Stage</span><span class="ctx-v">${S.stage||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Location</span><span class="ctx-v">${S.brand.location||'—'}</span></div>
+    </div>`;
+  }
+
+  const prevResp = S.resp[n] ? `
+    <div class="rbox">
+      <div class="rhead">
+        <div class="rlabel">BrandOS Analysis — Step ${n}</div>
+        <button class="btn btn-g" style="font-size:11.5px;padding:5px 12px;" onclick="clearAndRerun(${n})">Re-run ↺</button>
+      </div>
+      <div class="rcontent">${md(S.resp[n].out)}</div>
+    </div>` : '';
+
+  const step = STEPS[n-1];
+  c.innerHTML = `
+    ${ctxHtml}
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge">Step ${n} · ${['📋','👤','📊','🌍','🔍','🧠','🎯','💰','🚀','📈','⚠️','💬','📄'][n-1]}</div>
+        <div>
+          <div class="card-title">${step.label}</div>
+          <div class="card-desc">${stepDesc(n)}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        ${stepForm(n)}
+        ${prevResp}
+      </div>
+    </div>`;
+
+  c.scrollTop = 0;
+}
+
+function clearAndRerun(n) { delete S.resp[n]; S.done.delete(n); goStep(n); }
+
+function stepDesc(n) {
+  const b = S.brand;
+  return ['Tell BrandOS everything. The more detail, the sharper the strategy.',
+    b.isB2B ? 'Build 3 real Indian B2B buyer personas with decision triggers and procurement context.' : 'Build 3 real Indian consumer personas with purchase triggers and cultural context.',
+    'Score your product-market fit across 5 India-specific dimensions.',
+    'Calculate TAM/SAM/SOM in ₹ using bottom-up and top-down methods.',
+    'Map every competitor, find white space, and expose their weaknesses.',
+    'Run 10 strategy frameworks — fully filled, India-specific, no placeholders.',
+    'Design your challenger position against the category incumbent.',
+    b.isSaaS ? 'Build complete SaaS pricing tiers, trial strategy, and Indian B2B discount rules.' : b.isD2C ? 'Build SKU architecture, channel pricing, and D2C conversion mechanics.' : 'Build complete pricing architecture across channels and consumer tiers.',
+    b.isSaaS ? 'Get a 90-day GTM plan: ICP → first pilots → scale. Sequenced by customer fit, not city.' : b.isD2C ? 'Get a 90-day GTM: D2C launch → paid → influencer → retention engine.' : 'Get a day-by-day 90-day GTM plan with channel sequence and KPIs.',
+    'Get an exact rupee split with expected ROI per channel.',
+    'Identify every risk that could kill or block your brand.',
+    'Ask anything. Get a senior consultant\'s direct answer.',
+    'Your complete Rs. 20 lakh consulting report — all 12 steps synthesized.'][n-1];
+}
+
+function stepForm(n) {
+  if (n === 1) return `
+    <div class="fgrid">
+      <div class="frow"><label>Brand Name <span>*</span></label>
+        <input type="text" id="f1" placeholder="e.g., HarvestKing / HireFlow / ZenWear" value="${S.brand.brand||''}"></div>
+      <div class="frow"><label>Business Model <span>*</span></label>
+        <select id="f0biz">
+          <option value="">Select business model...</option>
+          <option value="FMCG" ${S.brand.bizModel==='FMCG'?'selected':''}>FMCG / Consumer Goods (food, personal care, household)</option>
+          <option value="D2C" ${S.brand.bizModel==='D2C'?'selected':''}>D2C / E-commerce (fashion, beauty, wellness, lifestyle)</option>
+          <option value="B2B SaaS" ${S.brand.bizModel==='B2B SaaS'?'selected':''}>B2B SaaS / Software (HR tech, fintech, martech, etc.)</option>
+          <option value="B2C Service" ${S.brand.bizModel==='B2C Service'?'selected':''}>B2C Service (ed-tech, health-tech, travel, hospitality)</option>
+          <option value="Marketplace" ${S.brand.bizModel==='Marketplace'?'selected':''}>Marketplace / Platform (two-sided, aggregator)</option>
+          <option value="Other" ${S.brand.bizModel==='Other'?'selected':''}>Other</option>
+        </select></div>
+      <div class="frow"><label>Brand Stage <span>*</span></label>
+        <select id="f2">
+          <option value="">Select stage...</option>
+          <option value="Stage 1 — New Idea (pre-revenue)" ${S.brand.stage?.includes('1')?'selected':''}>Stage 1 — New Idea</option>
+          <option value="Stage 2 — Early Brand (some sales)" ${S.brand.stage?.includes('2')?'selected':''}>Stage 2 — Early Brand</option>
+          <option value="Stage 3 — Established Brand (scaling)" ${S.brand.stage?.includes('3')?'selected':''}>Stage 3 — Established Brand</option>
+        </select></div>
+    </div>
+    <div class="frow"><label>Product / Service Description <span>*</span></label>
+      <textarea id="f3" rows="2" placeholder="What exactly are you selling? Be specific.">${S.brand.product||''}</textarea></div>
+    <div class="fgrid">
+      <div class="frow"><label>Geography / Primary Market</label>
+        <input type="text" id="f4" placeholder="e.g., Pan-India / Delhi NCR / Tier 1 cities" value="${S.brand.location||''}"></div>
+      <div class="frow"><label>Current Annual Revenue</label>
+        <input type="text" id="f5" placeholder="e.g., Rs. 10 crore / $50k ARR" value="${S.brand.revenue||''}"></div>
+    </div>
+    <div class="frow"><label>Target Customer</label>
+      <input type="text" id="f6" placeholder="Who buys this? Be specific about industry/role/demographic." value="${S.brand.target||''}"></div>
+    <div class="frow"><label>Current Sales / Acquisition Channels</label>
+      <input type="text" id="f7" placeholder="e.g., inside sales, kirana, Amazon, referrals, cold outbound" value="${S.brand.channels||''}"></div>
+    <div class="frow"><label>Your USP — Why choose you over alternatives?</label>
+      <textarea id="f8" rows="2" placeholder="What do you do better than anyone else? Be honest.">${S.brand.usp||''}</textarea></div>
+    <div class="frow"><label>Monthly Marketing Budget</label>
+      <input type="text" id="f9" placeholder="e.g., Rs. 5 lakh/month / Rs. 2 crore/year" value="${S.brand.budget||''}"></div>
+    <div class="frow"><label>Anything else to know? (competitors, context, founder background)</label>
+      <textarea id="f10" rows="2" placeholder="Share anything that gives BrandOS more context to work with.">${S.brand.notes||''}</textarea></div>
+    <div style="margin-top:20px;">
+      <button class="btn btn-p" id="runBtn" onclick="runStep1()">Analyze Brand Brief →</button>
+    </div>`;
+
+  if (n === 12) return `
+    <div class="frow"><label>Your Question <span>*</span></label>
+      <textarea id="fq" rows="4" placeholder="Ask anything about your brand, market, competition, channels, pricing..."></textarea></div>
+    <div style="margin-top:16px;">
+      <button class="btn btn-p" id="runBtn" onclick="runQ()">Get Answer →</button>
+    </div>`;
+
+  if (n === 13) return `
+    <div class="chips">
+      <span class="chip g">All 12 steps synthesized</span>
+      <span class="chip o">Full consulting report</span>
+      <span class="chip gld">Print to PDF</span>
+    </div>
+    <p style="color:var(--text2);font-size:13.5px;line-height:1.7;margin-bottom:18px;">
+      BrandOS will now compile everything from all previous steps into one comprehensive report — the equivalent of a Rs. 20 lakh consulting engagement.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn btn-p" id="runBtn" onclick="runGeneric(13, {})">Generate Final Report →</button>
+      ${S.resp[13] ? `<button class="btn btn-g" onclick="window.print()">🖨️ Print / Save PDF</button>` : ''}
+    </div>`;
+
+  // Generic extra fields for steps 2-11
+  const extras = {
+    2:  `<div class="frow"><label>Additional context for persona building?</label><textarea id="fe" rows="2" placeholder="Specific regions, age groups, or use cases to explore..."></textarea></div>`,
+    3:  `<div class="frow"><label>Specific MarketFit concerns to probe?</label><textarea id="fe" rows="2" placeholder="e.g., worried about price sensitivity in Tier 2..."></textarea></div>`,
+    4:  `<div class="frow"><label>Specific segment to focus on?</label><input type="text" id="fe" placeholder="e.g., Tier 2 cities, SEC B households"></div>`,
+    5:  `<div class="frow"><label>Competitors to include (optional)</label><input type="text" id="fe" placeholder="e.g., Aashirvaad, Pillsbury, Fortune, local brands"></div>`,
+    6:  `<div class="frow"><label>Which frameworks need deepest focus?</label><input type="text" id="fe" placeholder="e.g., Blue Ocean + JTBD + SWOT"></div>`,
+    7:  `<div class="frow"><label>Your current positioning instinct</label><textarea id="fe" rows="2" placeholder="What positioning are you drawn to?"></textarea></div>`,
+    8:  `<div class="fgrid">
+          <div class="frow"><label>Current/planned price point</label><input type="text" id="fe" placeholder="${S.brand.isSaaS ? 'e.g., ₹3,000/mo per seat' : S.brand.isD2C ? 'e.g., ₹1,499 per unit' : 'e.g., ₹299 for 5kg'}"></div>
+          <div class="frow"><label>Target gross margin %</label><input type="text" id="fe2" placeholder="e.g., 35%"></div>
+        </div>`,
+    9:  `<div class="fgrid">
+          <div class="frow"><label>${S.brand.isSaaS ? 'Target ICP segment / industry' : 'Launch geography priority'}</label><input type="text" id="fe" placeholder="${S.brand.isSaaS ? 'e.g., HR managers at 50-500 person cos' : 'e.g., Delhi NCR first, then Punjab'}"></div>
+          <div class="frow"><label>90-day budget</label><input type="text" id="fe2" placeholder="e.g., ₹15 lakh total"></div>
+        </div>`,
+    10: `<div class="frow"><label>Monthly budget to allocate</label><input type="text" id="fe" placeholder="e.g., ₹5 lakh/month"></div>`,
+    11: `<div class="frow"><label>Your biggest worry about this business</label><textarea id="fe" rows="2" placeholder="What keeps you up at night?"></textarea></div>`,
+  };
+
+  return `
+    ${extras[n] || ''}
+    <div style="margin-top:18px;">
+      <button class="btn btn-p" id="runBtn" onclick="runGeneric(${n}, getExtra())">Run Step ${n} Analysis →</button>
+    </div>`;
+}
+
+function getExtra() {
+  const fe = document.getElementById('fe');
+  const fe2 = document.getElementById('fe2');
+  return {
+    extra: fe ? fe.value.trim() : '',
+    price: fe ? fe.value.trim() : '',
+    margin: fe2 ? fe2.value.trim() : '',
+    geo: fe ? fe.value.trim() : '',
+    budget: fe ? fe.value.trim() : '',
+    worry: fe ? fe.value.trim() : '',
+    q: fe ? fe.value.trim() : '',
+  };
+}
+
+// ── RUNNERS ────────────────────────────────────────────────────────────────────
+function runStep1() {
+  const brand = v('f1'), stage = v('f2'), bizModel = v('f0biz');
+  if (!brand) { toast('Enter brand name', 'err'); return; }
+  if (!stage) { toast('Select a stage', 'err'); return; }
+  if (!bizModel) { toast('Select a business model', 'err'); return; }
+  S.brand = {
+    brand, stage, bizModel,
+    product: v('f3'), location: v('f4'), revenue: v('f5'),
+    target: v('f6'), channels: v('f7'), usp: v('f8'),
+    budget: v('f9'), notes: v('f10'),
+    isB2B: bizModel === 'B2B SaaS' || bizModel === 'Marketplace',
+    isD2C: bizModel === 'D2C',
+    isFMCG: bizModel === 'FMCG',
+    isSaaS: bizModel === 'B2B SaaS',
+  };
+  S.stage = stage;
+  renderSidebar();
+  execute(1, prompt(1, {}));
+}
+
+function runQ() {
+  const q = v('fq');
+  if (!q) { toast('Type your question', 'err'); return; }
+  execute(12, prompt(12, {q}));
+}
+
+function runGeneric(n, d) {
+  if (!S.brand.brand && n !== 1) { toast('Complete Step 1 first', 'err'); return; }
+  execute(n, prompt(n, d));
+}
+
+function v(id) { const e = document.getElementById(id); return e ? e.value.trim() : ''; }
+
+// ── EXECUTE ────────────────────────────────────────────────────────────────────
+async function execute(n, p) {
+  if (!getApiKey()) {
+    showWelcome();
+    setTimeout(() => toast('Enter your OpenRouter key first', 'err'), 300);
+    return;
+  }
+
+  const btn = document.getElementById('runBtn');
+  if (btn) { btn.disabled = true; btn.textContent = 'Analyzing...'; }
+
+  // Show loading spinner
+  const c = document.getElementById('content');
+  let loader = document.getElementById('loader');
+  if (!loader) {
+    loader = document.createElement('div');
+    loader.id = 'loader';
+    loader.className = 'loading';
+    loader.innerHTML = `<div class="spin"></div><div><div class="ltxt">BrandOS is analyzing...</div><div class="lsub">Applying Indian market intelligence</div></div>`;
+    c.appendChild(loader);
+  }
+  c.scrollTop = c.scrollHeight;
+
+  try {
+    const out = await gemini(p);
+    S.resp[n] = { inp: p, out };
+    S.done.add(n);
+    loader.remove();
+    renderSidebar();
+    goStep(n);
+    // Scroll to response
+    setTimeout(() => {
+      const rb = document.querySelector('.rbox');
+      if (rb) rb.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+    toast('Step ' + n + ' complete!', 'ok');
+  } catch(err) {
+    loader.remove();
+    if (btn) { btn.disabled = false; btn.textContent = 'Try Again →'; }
+    toast('Error: ' + err.message, 'err');
+    // Show error in content too
+    const errDiv = document.createElement('div');
+    errDiv.style.cssText = 'background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.3);border-radius:10px;padding:18px;margin-top:16px;font-size:13.5px;color:var(--red);';
+    errDiv.innerHTML = '<strong>API Error:</strong> ' + escHtml(err.message) + '<br><br><span style="color:var(--text2);font-size:12px;">Check that your OpenRouter API key is valid and that your account can access the selected free models.</span>';
+    c.appendChild(errDiv);
+  }
+}
+
+// ── MARKDOWN RENDERER ─────────────────────────────────────────────────────────
+function md(t) {
+  // Escape HTML first
+  t = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Headers
+  t = t.replace(/^#### (.+)$/gm,'<h4>$1</h4>');
+  t = t.replace(/^### (.+)$/gm,'<h4>$1</h4>');
+  t = t.replace(/^## (.+)$/gm,'<h3>$1</h3>');
+  t = t.replace(/^# (.+)$/gm,'<h2>$1</h2>');
+  // Bold / italic
+  t = t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  t = t.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  // HR
+  t = t.replace(/^---+$/gm,'<hr>');
+  // Tables (basic)
+  t = t.replace(/^\|(.+)\|$/gm, (line) => {
+    if (line.replace(/[\s\-\|]/g,'') === '') return '<tr class="thead-sep"></tr>';
+    const cells = line.split('|').filter((_,i,a)=>i>0&&i<a.length-1);
+    return '<tr>' + cells.map(c=>`<td>${c.trim()}</td>`).join('') + '</tr>';
+  });
+  t = t.replace(/(<tr>.*<\/tr>\n?)+/gs, m => `<table>${m}</table>`);
+  // Lists
+  t = t.replace(/^- (.+)$/gm,'<li>$1</li>');
+  t = t.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');
+  t = t.replace(/(<li>[\s\S]*?<\/li>)(\n(?!<li>)|$)/g,'<ul>$1</ul>$2');
+  // Paragraphs
+  t = t.replace(/\n\n/g,'</p><p>');
+  t = t.replace(/\n/g,'<br>');
+  return '<p>' + t + '</p>';
+}
+
+// ── TOAST ──────────────────────────────────────────────────────────────────────
+function toast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(()=>{ t.className='toast'; }, 3500);
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────────
+renderSidebar();
+showWelcome();
+</script>
+</body>
+</html>
