@@ -1239,6 +1239,7 @@ async function executeExec(id, prompt, tool) {
   try {
     const out = await callAI(prompt);
     S.resp[`exec_${id}`] = { inp: prompt, out };
+    saveState();
     loader.remove();
     selectExecTool(id);
     setTimeout(() => {
@@ -1381,6 +1382,7 @@ Be direct. Be specific. Give numbers. Name the thing. Never say "it depends" wit
     S.solverHistory.push({ role: 'assistant', content: `⚠️ Error: ${err.message}` });
   }
   S.solverRunning = false;
+  saveState();
   renderSolverChat();
   setTimeout(() => {
     const sa = document.getElementById('solverScrollArea');
@@ -1417,6 +1419,7 @@ function showWelcomeContent() {
         <span class="tag">28 States Intelligence</span>
         <span class="tag">Free via OpenRouter</span>
       </div>
+      ${localStorage.getItem('brandos_v1') ? `<div style="background:rgba(61,214,140,.08);border:1px solid rgba(61,214,140,.25);border-radius:10px;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:440px;width:100%;"><span style="font-size:13px;color:var(--green);">💾 Saved session found — your brand data is restored</span><button onclick="clearMemory()" style="background:none;border:1px solid rgba(255,77,106,.3);color:var(--red);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;">Clear</button></div>` : ''}
       <div class="api-box">
         <h3>🔑 Enter Your OpenRouter API Key</h3>
         <p>Get your free key (no credit card) from <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> — takes 60 seconds.</p>
@@ -1492,7 +1495,7 @@ function goStep(n) {
   c.scrollTop = 0;
 }
 
-function clearAndRerun(n) { delete S.resp[n]; S.done.delete(n); goStep(n); }
+function clearAndRerun(n) { delete S.resp[n]; S.done.delete(n); saveState(); goStep(n); }
 
 function stepDesc(n) {
   const b = S.brand;
@@ -1635,6 +1638,7 @@ function runStep1() {
     isSaaS: bizModel === 'B2B SaaS',
   };
   S.stage = stage;
+  saveState();
   renderSidebar();
   execute(1, prompt(1, {}));
 }
@@ -1679,6 +1683,7 @@ async function execute(n, p) {
     const out = await gemini(p);
     S.resp[n] = { inp: p, out };
     S.done.add(n);
+    saveState();
     loader.remove();
     renderSidebar();
     goStep(n);
@@ -1739,9 +1744,68 @@ function toast(msg, type='') {
   setTimeout(()=>{ t.className='toast'; }, 3500);
 }
 
+// ── BRAND MEMORY (localStorage) ───────────────────────────────────────────────
+const STORAGE_KEY = 'brandos_v1';
+
+function saveState() {
+  try {
+    const toSave = {
+      key:           S.key,
+      step:          S.step,
+      done:          [...S.done],
+      brand:         S.brand,
+      resp:          S.resp,
+      stage:         S.stage,
+      mode:          S.mode,
+      execTool:      S.execTool,
+      solverHistory: S.solverHistory,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  } catch(e) { /* storage full or unavailable */ }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return false;
+    const saved = JSON.parse(raw);
+    S.key           = saved.key           || '';
+    S.step          = saved.step          || 0;
+    S.done          = new Set(saved.done  || []);
+    S.brand         = saved.brand         || {};
+    S.resp          = saved.resp          || {};
+    S.stage         = saved.stage         || '';
+    S.mode          = saved.mode          || 'strategy';
+    S.execTool      = saved.execTool      || null;
+    S.solverHistory = saved.solverHistory || [];
+    return true;
+  } catch(e) { return false; }
+}
+
+function clearMemory() {
+  if (!confirm('Clear all saved brand data and step outputs? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  S.key = ''; S.step = 0; S.done = new Set(); S.brand = {};
+  S.resp = {}; S.stage = ''; S.mode = 'strategy';
+  S.execTool = null; S.solverHistory = [];
+  renderSidebar();
+  showWelcome();
+  toast('Memory cleared', 'ok');
+}
+
 // ── INIT ───────────────────────────────────────────────────────────────────────
+const didRestore = loadState();
 renderSidebar();
-showWelcome();
+if (didRestore && S.brand.brand) {
+  // Restore to where they left off
+  if (S.mode === 'execution') showExecEngine();
+  else if (S.mode === 'solver') showSolver();
+  else if (S.step > 0) goStep(S.step);
+  else showWelcome();
+  setTimeout(() => toast('Welcome back, ' + S.brand.brand + ' ✓', 'ok'), 400);
+} else {
+  showWelcome();
+}
 </script>
 </body>
 </html>
