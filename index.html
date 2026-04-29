@@ -12,6 +12,8 @@
   --accent:#ff6b2b; --accent2:#ff9f5a; --glow:rgba(255,107,43,0.15);
   --gold:#f5c842; --text:#f0eff5; --text2:#9998aa; --text3:#605f70;
   --green:#3dd68c; --red:#ff4d6a;
+  --violet:#a78bfa; --violet-glow:rgba(167,139,250,0.12);
+  --cyan:#22d3ee;   --cyan-glow:rgba(34,211,238,0.10);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow:hidden;}
@@ -141,6 +143,85 @@ select option{background:var(--surface2);}
 .toast.ok{border-color:rgba(61,214,140,.35);}
 .toast.err{border-color:rgba(255,77,106,.35);color:var(--red);}
 
+/* FINANCIAL MODEL */
+.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
+.fin-card{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:14px 16px;}
+.fin-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.fin-card-icon{font-size:16px;}
+.fin-card-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--violet);text-transform:uppercase;letter-spacing:.05em;}
+.fin-metric{display:flex;flex-direction:column;margin-bottom:8px;}
+.fin-label{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:3px;}
+.fin-val{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--text);}
+.fin-val.green{color:var(--green);}
+.fin-val.red{color:var(--red);}
+.fin-val.gold{color:var(--gold);}
+.fin-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+.fin-row:last-child{border-bottom:none;}
+.fin-row-k{color:var(--text2);}
+.fin-row-v{font-family:'DM Mono',monospace;color:var(--text);}
+.fin-row-v.pos{color:var(--green);}
+.fin-row-v.neg{color:var(--red);}
+.fin-section-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--violet);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(167,139,250,.2);}
+.fin-slider-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.fin-slider-label{font-size:12px;color:var(--text2);min-width:160px;}
+.fin-slider-val{font-family:'DM Mono',monospace;font-size:12px;color:var(--violet);min-width:60px;text-align:right;}
+input[type=range]{flex:1;accent-color:var(--violet);cursor:pointer;height:4px;}
+.fin-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.fin-tab{font-family:'DM Mono',monospace;font-size:11px;padding:5px 12px;border-radius:7px;border:1px solid var(--border2);color:var(--text3);cursor:pointer;transition:all .15s;}
+.fin-tab.active{color:var(--violet);border-color:rgba(167,139,250,.35);background:var(--violet-glow);}
+.fin-tab:hover{color:var(--text2);}
+.waterfall-bar{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.wb-label{font-size:11.5px;color:var(--text2);min-width:130px;text-align:right;}
+.wb-bar-wrap{flex:1;height:22px;background:var(--surface3);border-radius:4px;overflow:hidden;position:relative;}
+.wb-bar-fill{height:100%;border-radius:4px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+.wb-val{font-family:'DM Mono',monospace;font-size:11px;min-width:70px;color:var(--text);}
+.scenario-btns{display:flex;gap:8px;margin-bottom:18px;}
+.scen-btn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-align:center;transition:all .15s;}
+.scen-btn.active.bear{color:var(--red);border-color:rgba(255,77,106,.3);background:rgba(255,77,106,.07);}
+.scen-btn.active.base{color:var(--green);border-color:rgba(61,214,140,.3);background:rgba(61,214,140,.07);}
+.scen-btn.active.bull{color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.07);}
+
+/* PRODUCT RESEARCH */
+.res-tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.res-tool-card{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:14px;cursor:pointer;transition:all .18s;}
+.res-tool-card:hover{border-color:var(--cyan);background:var(--cyan-glow);}
+.res-tool-card.active{border-color:var(--cyan);background:var(--cyan-glow);}
+.res-tc-icon{font-size:22px;margin-bottom:8px;}
+.res-tc-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--cyan);margin-bottom:4px;}
+.res-tc-desc{font-size:11px;color:var(--text3);line-height:1.5;}
+.insight-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:12px;margin:3px 3px 3px 0;}
+.insight-tag.pain{background:rgba(255,77,106,.1);border:1px solid rgba(255,77,106,.2);color:var(--red);}
+.insight-tag.desire{background:rgba(61,214,140,.1);border:1px solid rgba(61,214,140,.2);color:var(--green);}
+.insight-tag.gap{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);color:var(--cyan);}
+.insight-tag.lang{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);color:var(--gold);}
+.res-paste-area{width:100%;min-height:120px;background:var(--surface3);border:1px solid var(--border2);border-radius:8px;padding:12px;font-family:'DM Mono',monospace;font-size:12px;color:var(--text);resize:vertical;outline:none;transition:border-color .15s;}
+.res-paste-area:focus{border-color:var(--cyan);}
+.signal-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.signal-row:last-child{border-bottom:none;}
+.signal-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.signal-body{flex:1;}
+.signal-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.signal-sub{font-size:11.5px;color:var(--text3);line-height:1.5;}
+.signal-strength{font-family:'DM Mono',monospace;font-size:10px;padding:2px 7px;border-radius:8px;flex-shrink:0;margin-top:2px;}
+.signal-strength.high{background:rgba(61,214,140,.12);color:var(--green);}
+.signal-strength.med{background:rgba(245,200,66,.12);color:var(--gold);}
+.signal-strength.low{background:rgba(255,77,106,.12);color:var(--red);}
+.kano-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.kano-feat{flex:1;font-size:13px;color:var(--text);}
+.kano-cat{font-family:'DM Mono',monospace;font-size:11px;padding:3px 9px;border-radius:8px;}
+.kano-cat.must{background:rgba(255,77,106,.12);color:var(--red);}
+.kano-cat.perf{background:rgba(61,214,140,.12);color:var(--green);}
+.kano-cat.del{background:rgba(34,211,238,.12);color:var(--cyan);}
+.kano-cat.ind{background:rgba(96,95,112,.15);color:var(--text3);}
+.res-section{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--cyan);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(34,211,238,.18);}
+.gap-card{background:var(--surface3);border-left:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:10px;}
+.gap-card-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.gap-card-body{font-size:12.5px;color:var(--text2);line-height:1.6;}
+.pmf-meter{height:10px;background:var(--surface3);border-radius:5px;overflow:hidden;margin:6px 0;}
+.pmf-fill{height:100%;border-radius:5px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+@media(max-width:900px){.res-tool-grid{grid-template-columns:1fr 1fr;}}
+
 @media print{.sidebar,.topbar,.botnav,.btn,.api-box{display:none!important;}.main{width:100%;}.content{padding:16px;}body{background:#fff;color:#000;}}
 
 /* MODE SWITCHER */
@@ -150,6 +231,8 @@ select option{background:var(--surface2);}
 .mtab.active{background:var(--surface3);border-color:var(--border2);color:var(--text);}
 .mtab.layer2.active{color:var(--green);border-color:rgba(61,214,140,.25);background:rgba(61,214,140,.07);}
 .mtab.layer3.active{color:var(--gold);border-color:rgba(245,200,66,.25);background:rgba(245,200,66,.07);}
+.mtab.layer4.active{color:#a78bfa;border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.07);}
+.mtab.layer5.active{color:#22d3ee;border-color:rgba(34,211,238,.25);background:rgba(34,211,238,.07);}
 .mtab-icon{font-size:14px;display:block;margin-bottom:3px;}
 
 /* EXEC ENGINE TOOL GRID */
@@ -195,6 +278,12 @@ select option{background:var(--surface2);}
       <div class="mtab layer3" id="tab3" onclick="switchMode('solver')">
         <span class="mtab-icon">🔥</span>Solver
       </div>
+      <div class="mtab layer4" id="tab4" onclick="switchMode('finance')">
+        <span class="mtab-icon">📐</span>Finance
+      </div>
+      <div class="mtab layer5" id="tab5" onclick="switchMode('research')">
+        <span class="mtab-icon">🔬</span>Research
+      </div>
     </div>
     <div class="steps" id="sidebarSteps"></div>
     <div class="sidebar-foot">
@@ -225,8 +314,10 @@ const S = {
   brand: {},
   resp: {},    // step responses {n: {out, inp}}
   stage: '',
-  mode: 'strategy',      // 'strategy' | 'execution' | 'solver'
+  mode: 'strategy',      // 'strategy' | 'execution' | 'solver' | 'finance'
   execTool: null,        // currently selected execution tool id
+  finTool: 'unit_econ',  // currently selected finance tool id
+  resTool: 'demand',     // currently selected research tool id
   solverHistory: [],     // [{role, content}] for problem solver chat
   solverRunning: false,
 };
@@ -485,15 +576,37 @@ Confirm the brand stage and what strategic approach that unlocks.
 
 ---
 Brand: ${b.brand}
+Business Model: ${b.bizModel}
 Product: ${b.product}
 Stage: ${b.stage}
-Location: ${b.location}
+Location: ${b.location || 'Not specified'}
 Revenue: ${b.revenue || 'Not disclosed'}
-Target Customer: ${b.target}
-Current Channels: ${b.channels}
-USP: ${b.usp}
+Target Customer: ${b.target || 'Not specified'}
+Current Channels: ${b.channels || 'Not specified'}
+USP: ${b.usp || 'Not specified'}
 Budget: ${b.budget || 'Not disclosed'}
-Founder Notes: ${b.notes || 'None'}`,
+Biggest Challenge: ${b.challenge || 'Not specified'}
+${b.fmcgPrice ? `Pack Sizes & MRP: ${b.fmcgPrice}` : ''}
+${b.fmcgCogs  ? `COGS / Manufacturing Cost: ${b.fmcgCogs}` : ''}
+${b.fmcgDist  ? `Current Distribution: ${b.fmcgDist}` : ''}
+${b.fmcgComp  ? `Key Competitors (with price): ${b.fmcgComp}` : ''}
+${b.fmcgDiff  ? `Physical Product Differentiation: ${b.fmcgDiff}` : ''}
+${b.d2cPrice  ? `SKUs & Selling Price: ${b.d2cPrice}` : ''}
+${b.d2cCogs   ? `COGS per Unit: ${b.d2cCogs}` : ''}
+${b.d2cOrders ? `Platform & Monthly Orders: ${b.d2cOrders}` : ''}
+${b.d2cCac    ? `Current CAC: ${b.d2cCac}` : ''}
+${b.d2cComp   ? `Key Competitors: ${b.d2cComp}` : ''}
+${b.saasPrice ? `Pricing Plans: ${b.saasPrice}` : ''}
+${b.saasArr   ? `ARR & Customer Count: ${b.saasArr}` : ''}
+${b.saasIcp   ? `ICP: ${b.saasIcp}` : ''}
+${b.saasCycle ? `Sales Cycle: ${b.saasCycle}` : ''}
+${b.saasComp  ? `Competitors: ${b.saasComp}` : ''}
+${b.b2cPrice  ? `Service Pricing: ${b.b2cPrice}` : ''}
+${b.b2cUsers  ? `Active Users: ${b.b2cUsers}` : ''}
+${b.b2cComp   ? `Competitors: ${b.b2cComp}` : ''}
+Founder Notes: ${b.notes || 'None'}
+
+IMPORTANT: Use the exact prices, pack sizes, competitor names and distribution details provided above. Do NOT substitute generic averages or hypothetical numbers. If a specific price is given (e.g., ₹149 for 1kg), all pricing analysis must reference that exact price point.`,
 
     2: `STEP 2 — INDIAN CONSUMER / BUYER PERSONA BUILDER
 
@@ -941,11 +1054,40 @@ Synthesize all previous steps. Make this worthy of a Rs.20 lakh consulting fee.`
   return ps[n] || `Analyze step ${n} for ${b.brand}`;
 }
 
+// Append always-present brand details to any prompt so downstream steps get real numbers
+function brandDetailFooter() {
+  const b = S.brand;
+  if (!b.brand) return '';
+  const lines = [
+    '\n\n---\nBRAND DATA REFERENCE (use these exact numbers — do not substitute averages):',
+    b.fmcgPrice  ? `Pack Sizes & MRP: ${b.fmcgPrice}` : '',
+    b.fmcgCogs   ? `Manufacturing/COGS: ${b.fmcgCogs}` : '',
+    b.fmcgDist   ? `Distribution footprint: ${b.fmcgDist}` : '',
+    b.fmcgComp   ? `Competitors with prices: ${b.fmcgComp}` : '',
+    b.fmcgDiff   ? `Product differentiation: ${b.fmcgDiff}` : '',
+    b.d2cPrice   ? `SKUs & Prices: ${b.d2cPrice}` : '',
+    b.d2cCogs    ? `COGS per unit: ${b.d2cCogs}` : '',
+    b.d2cOrders  ? `Platform & orders: ${b.d2cOrders}` : '',
+    b.d2cCac     ? `Current CAC: ${b.d2cCac}` : '',
+    b.d2cComp    ? `Competitors: ${b.d2cComp}` : '',
+    b.saasPrice  ? `Pricing tiers: ${b.saasPrice}` : '',
+    b.saasArr    ? `ARR & customers: ${b.saasArr}` : '',
+    b.saasIcp    ? `ICP: ${b.saasIcp}` : '',
+    b.saasCycle  ? `Sales cycle: ${b.saasCycle}` : '',
+    b.saasComp   ? `Competitors: ${b.saasComp}` : '',
+    b.b2cPrice   ? `Service pricing: ${b.b2cPrice}` : '',
+    b.b2cUsers   ? `User base: ${b.b2cUsers}` : '',
+    b.b2cComp    ? `Competitors: ${b.b2cComp}` : '',
+    b.challenge  ? `Primary challenge: ${b.challenge}` : '',
+  ].filter(Boolean);
+  return lines.length > 1 ? lines.join('\n') : '';
+}
+
 // ── RENDER SIDEBAR ─────────────────────────────────────────────────────────────
 function renderSidebar() {
   // Mode tabs
-  ['tab1','tab2','tab3'].forEach(t => document.getElementById(t)?.classList.remove('active'));
-  const tabMap = {strategy:'tab1', execution:'tab2', solver:'tab3'};
+  ['tab1','tab2','tab3','tab4','tab5'].forEach(t => document.getElementById(t)?.classList.remove('active'));
+  const tabMap = {strategy:'tab1', execution:'tab2', solver:'tab3', finance:'tab4', research:'tab5'};
   document.getElementById(tabMap[S.mode])?.classList.add('active');
 
   // Sidebar steps
@@ -965,14 +1107,44 @@ function renderSidebar() {
           <div class="snum" style="font-size:13px;">${t.icon}</div>
           <div class="slabel">${t.name}</div>
         </div>`).join('');
-  } else {
+  } else if (S.mode === 'solver') {
     document.getElementById('sidebarSteps').innerHTML =
       `<div class="s-section">Layer 3 · Problem Solver</div>
        <div class="si active"><div class="snum">🔥</div><div class="slabel">Live Problem Diagnosis</div></div>
        <div style="padding:10px 18px;"><div style="font-size:11px;color:var(--text3);line-height:1.6;">Describe any problem → get diagnosis + 3 actions to run this week</div></div>`;
+  } else if (S.mode === 'finance') {
+    const FIN_TOOLS = [
+      {id:'unit_econ', label:'Unit Economics'},
+      {id:'p_and_l', label:'P&L Projection'},
+      {id:'cac_ltv', label:'CAC / LTV Model'},
+      {id:'breakeven', label:'Breakeven Analysis'},
+      {id:'scenario', label:'Scenario Planner'},
+      {id:'runway', label:'Burn & Runway'},
+    ];
+    document.getElementById('sidebarSteps').innerHTML =
+      `<div class="s-section">Layer 4 · Financial Model</div>` +
+      FIN_TOOLS.map(t => `
+        <div class="si ${S.finTool===t.id?'active':''}" onclick="selectFinTool('${t.id}')">
+          <div class="snum" style="font-size:13px;">📐</div>
+          <div class="slabel">${t.label}</div>
+        </div>`).join('');
+  } else {
+    const RES_TOOLS = [
+      {id:'demand',    label:'Demand Validator'},
+      {id:'review',    label:'Review Miner'},
+      {id:'whitespace',label:'Whitespace Finder'},
+      {id:'pmf',       label:'PMF Scorer'},
+      {id:'kano',      label:'Feature Prioritizer'},
+      {id:'format',    label:'Pack & Format Research'},
+    ];
+    document.getElementById('sidebarSteps').innerHTML =
+      `<div class="s-section">Layer 5 · Product Research</div>` +
+      RES_TOOLS.map(t => `
+        <div class="si ${S.resTool===t.id?'active':''}" onclick="selectResTool('${t.id}')">
+          <div class="snum" style="font-size:13px;">🔬</div>
+          <div class="slabel">${t.label}</div>
+        </div>`).join('');
   }
-
-  // Topbar
   const step = STEPS.find(s=>s.id===S.step);
   if (S.mode === 'strategy') {
     document.getElementById('topbarLeft').innerHTML = `Step <b id="tStep">${S.step||'—'}</b> · <span id="tName">${step?step.label:'Welcome'}</span>`;
@@ -981,6 +1153,12 @@ function renderSidebar() {
   } else if (S.mode === 'execution') {
     const tool = EXEC_TOOLS.find(t=>t.id===S.execTool);
     document.getElementById('topbarLeft').innerHTML = `<b>⚡ Execution Engine</b> · <span id="tName">${tool?tool.name:'Select a tool'}</span>`;
+    document.getElementById('botnav').style.display = 'none';
+  } else if (S.mode === 'finance') {
+    document.getElementById('topbarLeft').innerHTML = `<b>📐 Financial Model</b> · <span>Unit Economics & Projections</span>`;
+    document.getElementById('botnav').style.display = 'none';
+  } else if (S.mode === 'research') {
+    document.getElementById('topbarLeft').innerHTML = `<b>🔬 Product Research</b> · <span>Demand · Insights · Gaps</span>`;
     document.getElementById('botnav').style.display = 'none';
   } else {
     document.getElementById('topbarLeft').innerHTML = `<b>🔥 Problem Solver</b> · <span>Live Diagnosis</span>`;
@@ -1000,6 +1178,10 @@ function switchMode(mode) {
     if (S.step) goStep(S.step); else showWelcomeContent();
   } else if (mode === 'execution') {
     showExecEngine();
+  } else if (mode === 'finance') {
+    showFinanceEngine();
+  } else if (mode === 'research') {
+    showResearchEngine();
   } else {
     showSolver();
   }
@@ -1416,6 +1598,8 @@ function showWelcomeContent() {
         <span class="tag">📊 13-Step Strategy</span>
         <span class="tag">⚡ Execution Engine</span>
         <span class="tag">🔥 Problem Solver</span>
+        <span class="tag">📐 Financial Model</span>
+        <span class="tag">🔬 Product Research</span>
         <span class="tag">28 States Intelligence</span>
         <span class="tag">Free via OpenRouter</span>
       </div>
@@ -1456,13 +1640,19 @@ function goStep(n) {
 
   let ctxHtml = '';
   if (S.brand.brand && n > 1) {
+    const b = S.brand;
+    const priceDetail = b.fmcgPrice||b.d2cPrice||b.saasPrice||b.b2cPrice||'';
+    const compDetail  = b.fmcgComp||b.d2cComp||b.saasComp||b.b2cComp||'';
     ctxHtml = `<div class="ctx">
       <h4>Brand Context</h4>
-      <div class="ctx-row"><span class="ctx-k">Brand</span><span class="ctx-v">${S.brand.brand}</span></div>
-      <div class="ctx-row"><span class="ctx-k">Product</span><span class="ctx-v">${S.brand.product||'—'}</span></div>
-      <div class="ctx-row"><span class="ctx-k">Model</span><span class="ctx-v">${S.brand.bizModel||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Brand</span><span class="ctx-v">${b.brand}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Product</span><span class="ctx-v">${b.product||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Model</span><span class="ctx-v">${b.bizModel||'—'}</span></div>
       <div class="ctx-row"><span class="ctx-k">Stage</span><span class="ctx-v">${S.stage||'—'}</span></div>
-      <div class="ctx-row"><span class="ctx-k">Location</span><span class="ctx-v">${S.brand.location||'—'}</span></div>
+      <div class="ctx-row"><span class="ctx-k">Location</span><span class="ctx-v">${b.location||'—'}</span></div>
+      ${priceDetail ? `<div class="ctx-row"><span class="ctx-k">Pricing</span><span class="ctx-v" style="color:var(--green);">${priceDetail}</span></div>` : ''}
+      ${compDetail  ? `<div class="ctx-row"><span class="ctx-k">Competitors</span><span class="ctx-v" style="color:var(--accent2);">${compDetail}</span></div>` : ''}
+      ${b.challenge ? `<div class="ctx-row"><span class="ctx-k">Challenge</span><span class="ctx-v" style="color:var(--gold);">${b.challenge}</span></div>` : ''}
     </div>`;
   }
 
@@ -1516,11 +1706,15 @@ function stepDesc(n) {
 
 function stepForm(n) {
   if (n === 1) return `
+    <div style="background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12.5px;color:var(--text2);line-height:1.6;">
+      💡 <strong style="color:var(--text);">More detail = sharper strategy.</strong> Fill every field you can. BrandOS will ask follow-up questions if it needs more before analyzing — so you'll never get generic answers.
+    </div>
+
     <div class="fgrid">
       <div class="frow"><label>Brand Name <span>*</span></label>
         <input type="text" id="f1" placeholder="e.g., HarvestKing / HireFlow / ZenWear" value="${S.brand.brand||''}"></div>
       <div class="frow"><label>Business Model <span>*</span></label>
-        <select id="f0biz">
+        <select id="f0biz" onchange="toggleModelFields()">
           <option value="">Select business model...</option>
           <option value="FMCG" ${S.brand.bizModel==='FMCG'?'selected':''}>FMCG / Consumer Goods (food, personal care, household)</option>
           <option value="D2C" ${S.brand.bizModel==='D2C'?'selected':''}>D2C / E-commerce (fashion, beauty, wellness, lifestyle)</option>
@@ -1537,27 +1731,117 @@ function stepForm(n) {
           <option value="Stage 3 — Established Brand (scaling)" ${S.brand.stage?.includes('3')?'selected':''}>Stage 3 — Established Brand</option>
         </select></div>
     </div>
+
     <div class="frow"><label>Product / Service Description <span>*</span></label>
-      <textarea id="f3" rows="2" placeholder="What exactly are you selling? Be specific.">${S.brand.product||''}</textarea></div>
+      <textarea id="f3" rows="2" placeholder="What exactly are you selling? Be specific — variety, size, ingredients, use case.">${S.brand.product||''}</textarea></div>
+
     <div class="fgrid">
-      <div class="frow"><label>Geography / Primary Market</label>
-        <input type="text" id="f4" placeholder="e.g., Pan-India / Delhi NCR / Tier 1 cities" value="${S.brand.location||''}"></div>
+      <div class="frow"><label>Geography / Primary Launch Market</label>
+        <input type="text" id="f4" placeholder="e.g., Delhi NCR first, then Punjab & UP" value="${S.brand.location||''}"></div>
       <div class="frow"><label>Current Annual Revenue</label>
-        <input type="text" id="f5" placeholder="e.g., Rs. 10 crore / $50k ARR" value="${S.brand.revenue||''}"></div>
+        <input type="text" id="f5" placeholder="e.g., ₹80 lakh / ₹2.4 crore ARR / pre-revenue" value="${S.brand.revenue||''}"></div>
     </div>
-    <div class="frow"><label>Target Customer</label>
-      <input type="text" id="f6" placeholder="Who buys this? Be specific about industry/role/demographic." value="${S.brand.target||''}"></div>
+
+    <div class="frow"><label>Target Customer — be specific</label>
+      <input type="text" id="f6" placeholder="e.g., Health-conscious urban women 28-42, SEC A/B, cooking at home" value="${S.brand.target||''}"></div>
+
     <div class="frow"><label>Current Sales / Acquisition Channels</label>
-      <input type="text" id="f7" placeholder="e.g., inside sales, kirana, Amazon, referrals, cold outbound" value="${S.brand.channels||''}"></div>
-    <div class="frow"><label>Your USP — Why choose you over alternatives?</label>
-      <textarea id="f8" rows="2" placeholder="What do you do better than anyone else? Be honest.">${S.brand.usp||''}</textarea></div>
-    <div class="frow"><label>Monthly Marketing Budget</label>
-      <input type="text" id="f9" placeholder="e.g., Rs. 5 lakh/month / Rs. 2 crore/year" value="${S.brand.budget||''}"></div>
-    <div class="frow"><label>Anything else to know? (competitors, context, founder background)</label>
-      <textarea id="f10" rows="2" placeholder="Share anything that gives BrandOS more context to work with.">${S.brand.notes||''}</textarea></div>
-    <div style="margin-top:20px;">
-      <button class="btn btn-p" id="runBtn" onclick="runStep1()">Analyze Brand Brief →</button>
+      <input type="text" id="f7" placeholder="e.g., Instagram D2C, 3 kirana stores in Lajpat Nagar, Amazon" value="${S.brand.channels||''}"></div>
+
+    <div class="frow"><label>Your USP — why choose you over alternatives?</label>
+      <textarea id="f8" rows="2" placeholder="What do you do better than anyone? Be honest and specific — not 'best quality'.">${S.brand.usp||''}</textarea></div>
+
+    <!-- ── MODEL-SPECIFIC FIELDS (shown/hidden via JS) ─────────────────── -->
+    <div id="fields_fmcg" style="display:none;">
+      <div style="background:var(--surface3);border-radius:8px;padding:12px 14px;margin-bottom:16px;">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">🛒 FMCG / Consumer Goods — Critical Details</div>
+        <div class="fgrid">
+          <div class="frow"><label>Pack sizes & MRP for each <span>*</span></label>
+            <input type="text" id="fmcg_price" placeholder="e.g., 1kg @ ₹149, 5kg @ ₹649, 10kg @ ₹1,199" value="${S.brand.fmcgPrice||''}"></div>
+          <div class="frow"><label>Approx. COGS / manufacturing cost per unit</label>
+            <input type="text" id="fmcg_cogs" placeholder="e.g., ₹80 per kg all-in (incl. packaging)" value="${S.brand.fmcgCogs||''}"></div>
+        </div>
+        <div class="fgrid">
+          <div class="frow"><label>Distribution reach right now</label>
+            <input type="text" id="fmcg_dist" placeholder="e.g., 12 kiranas in South Delhi, 2 modern trade outlets" value="${S.brand.fmcgDist||''}"></div>
+          <div class="frow"><label>Key direct competitors (with price)</label>
+            <input type="text" id="fmcg_comp" placeholder="e.g., Aashirvaad ₹65/kg, local mill ₹55/kg" value="${S.brand.fmcgComp||''}"></div>
+        </div>
+        <div class="frow"><label>What makes your product physically different?</label>
+          <input type="text" id="fmcg_diff" placeholder="e.g., stone-ground, single-origin MP wheat, no additives, chakki-fresh texture" value="${S.brand.fmcgDiff||''}"></div>
+      </div>
+    </div>
+
+    <div id="fields_d2c" style="display:none;">
+      <div style="background:var(--surface3);border-radius:8px;padding:12px 14px;margin-bottom:16px;">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">📦 D2C — Critical Details</div>
+        <div class="fgrid">
+          <div class="frow"><label>SKUs & selling price for each <span>*</span></label>
+            <input type="text" id="d2c_price" placeholder="e.g., 500g @ ₹699, bundle of 3 @ ₹1,799" value="${S.brand.d2cPrice||''}"></div>
+          <div class="frow"><label>COGS per unit (incl. packaging & shipping)</label>
+            <input type="text" id="d2c_cogs" placeholder="e.g., ₹280 landed cost per 500g unit" value="${S.brand.d2cCogs||''}"></div>
+        </div>
+        <div class="fgrid">
+          <div class="frow"><label>Website platform & monthly orders</label>
+            <input type="text" id="d2c_orders" placeholder="e.g., Shopify, ~150 orders/month" value="${S.brand.d2cOrders||''}"></div>
+          <div class="frow"><label>Current CAC (if running paid ads)</label>
+            <input type="text" id="d2c_cac" placeholder="e.g., ₹420 Meta, ₹680 Google" value="${S.brand.d2cCac||''}"></div>
+        </div>
+        <div class="frow"><label>Key competitors (with price & where they sell)</label>
+          <input type="text" id="d2c_comp" placeholder="e.g., Brand X ₹799 on Amazon, Brand Y ₹650 D2C website" value="${S.brand.d2cComp||''}"></div>
+      </div>
+    </div>
+
+    <div id="fields_saas" style="display:none;">
+      <div style="background:var(--surface3);border-radius:8px;padding:12px 14px;margin-bottom:16px;">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">💻 B2B SaaS — Critical Details</div>
+        <div class="fgrid">
+          <div class="frow"><label>Pricing plans & price per plan <span>*</span></label>
+            <input type="text" id="saas_price" placeholder="e.g., Starter ₹2,999/mo, Growth ₹7,999/mo (per company)" value="${S.brand.saasPrice||''}"></div>
+          <div class="frow"><label>Current ARR & number of customers</label>
+            <input type="text" id="saas_arr" placeholder="e.g., ₹18L ARR, 22 paying customers" value="${S.brand.saasArr||''}"></div>
+        </div>
+        <div class="fgrid">
+          <div class="frow"><label>Ideal Customer Profile (ICP)</label>
+            <input type="text" id="saas_icp" placeholder="e.g., Series A fintech startups, 50-200 employees, Mumbai/Bengaluru" value="${S.brand.saasIcp||''}"></div>
+          <div class="frow"><label>Avg sales cycle length</label>
+            <input type="text" id="saas_cycle" placeholder="e.g., 3-6 weeks for SMB, 3-4 months for enterprise" value="${S.brand.saasCycle||''}"></div>
+        </div>
+        <div class="frow"><label>Key competitors (with positioning & price)</label>
+          <input type="text" id="saas_comp" placeholder="e.g., Tool X (₹4,999/mo, enterprise-heavy), Tool Y (free tier, US-focused)" value="${S.brand.saasComp||''}"></div>
+      </div>
+    </div>
+
+    <div id="fields_b2c" style="display:none;">
+      <div style="background:var(--surface3);border-radius:8px;padding:12px 14px;margin-bottom:16px;">
+        <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">🎓 B2C Service — Critical Details</div>
+        <div class="fgrid">
+          <div class="frow"><label>Service pricing structure <span>*</span></label>
+            <input type="text" id="b2c_price" placeholder="e.g., ₹1,999/month subscription, ₹12,000 one-time course" value="${S.brand.b2cPrice||''}"></div>
+          <div class="frow"><label>Monthly active users / subscribers</label>
+            <input type="text" id="b2c_users" placeholder="e.g., 340 paid subscribers, 2,100 freemium users" value="${S.brand.b2cUsers||''}"></div>
+        </div>
+        <div class="frow"><label>Key competitors (with pricing & model)</label>
+          <input type="text" id="b2c_comp" placeholder="e.g., Competitor A (₹999/mo, 50k users), Competitor B (free + ₹5,000 premium)" value="${S.brand.b2cComp||''}"></div>
+      </div>
+    </div>
+    <!-- ── END MODEL-SPECIFIC FIELDS ──────────────────────────────────── -->
+
+    <div class="fgrid">
+      <div class="frow"><label>Monthly Marketing Budget</label>
+        <input type="text" id="f9" placeholder="e.g., ₹3 lakh/month" value="${S.brand.budget||''}"></div>
+      <div class="frow"><label>Biggest challenge right now</label>
+        <input type="text" id="f_challenge" placeholder="e.g., CAC too high, kirana push not working, retention low" value="${S.brand.challenge||''}"></div>
+    </div>
+
+    <div class="frow"><label>Anything else? (founder background, funding status, specific ask)</label>
+      <textarea id="f10" rows="2" placeholder="What should BrandOS know that no form field captured?">${S.brand.notes||''}</textarea></div>
+
+    <div style="margin-top:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-p" id="runBtn" onclick="runStep1()">Check & Analyze →</button>
+      <div style="font-size:12px;color:var(--text3);">BrandOS will ask follow-up questions if it needs more info before analyzing.</div>
     </div>`;
+
 
   if (n === 12) return `
     <div class="frow"><label>Your Question <span>*</span></label>
@@ -1622,24 +1906,243 @@ function getExtra() {
 }
 
 // ── RUNNERS ────────────────────────────────────────────────────────────────────
+// ── BUSINESS MODEL FIELD TOGGLE ────────────────────────────────────────────────
+function toggleModelFields() {
+  const biz = document.getElementById('f0biz')?.value || '';
+  ['fmcg','d2c','saas','b2c'].forEach(m => {
+    const el = document.getElementById('fields_' + m);
+    if (el) el.style.display = 'none';
+  });
+  const map = { FMCG:'fmcg', D2C:'d2c', 'B2B SaaS':'saas', 'B2C Service':'b2c' };
+  const key = map[biz];
+  if (key) {
+    const el = document.getElementById('fields_' + key);
+    if (el) { el.style.display = 'block'; el.scrollIntoView({behavior:'smooth', block:'nearest'}); }
+  }
+}
+
+// Call on step 1 load to restore selected model's fields
+setTimeout(() => { if (document.getElementById('f0biz')) toggleModelFields(); }, 50);
+
+// ── RUNNERS ────────────────────────────────────────────────────────────────────
 function runStep1() {
   const brand = v('f1'), stage = v('f2'), bizModel = v('f0biz');
   if (!brand) { toast('Enter brand name', 'err'); return; }
   if (!stage) { toast('Select a stage', 'err'); return; }
   if (!bizModel) { toast('Select a business model', 'err'); return; }
+
+  // Collect model-specific fields
+  const modelData = {};
+  if (bizModel === 'FMCG') {
+    modelData.fmcgPrice = v('fmcg_price');
+    modelData.fmcgCogs  = v('fmcg_cogs');
+    modelData.fmcgDist  = v('fmcg_dist');
+    modelData.fmcgComp  = v('fmcg_comp');
+    modelData.fmcgDiff  = v('fmcg_diff');
+  } else if (bizModel === 'D2C') {
+    modelData.d2cPrice  = v('d2c_price');
+    modelData.d2cCogs   = v('d2c_cogs');
+    modelData.d2cOrders = v('d2c_orders');
+    modelData.d2cCac    = v('d2c_cac');
+    modelData.d2cComp   = v('d2c_comp');
+  } else if (bizModel === 'B2B SaaS') {
+    modelData.saasPrice = v('saas_price');
+    modelData.saasArr   = v('saas_arr');
+    modelData.saasIcp   = v('saas_icp');
+    modelData.saasCycle = v('saas_cycle');
+    modelData.saasComp  = v('saas_comp');
+  } else if (bizModel === 'B2C Service') {
+    modelData.b2cPrice  = v('b2c_price');
+    modelData.b2cUsers  = v('b2c_users');
+    modelData.b2cComp   = v('b2c_comp');
+  }
+
   S.brand = {
     brand, stage, bizModel,
     product: v('f3'), location: v('f4'), revenue: v('f5'),
     target: v('f6'), channels: v('f7'), usp: v('f8'),
-    budget: v('f9'), notes: v('f10'),
-    isB2B: bizModel === 'B2B SaaS' || bizModel === 'Marketplace',
-    isD2C: bizModel === 'D2C',
+    budget: v('f9'), challenge: v('f_challenge'), notes: v('f10'),
+    ...modelData,
+    isB2B:  bizModel === 'B2B SaaS' || bizModel === 'Marketplace',
+    isD2C:  bizModel === 'D2C',
     isFMCG: bizModel === 'FMCG',
     isSaaS: bizModel === 'B2B SaaS',
   };
   S.stage = stage;
   saveState();
   renderSidebar();
+
+  // ── SUFFICIENCY GATE ─────────────────────────────────────────────────────────
+  // Build a summary of what we have and what's missing
+  const pricingFilled = !!(
+    modelData.fmcgPrice || modelData.d2cPrice || modelData.saasPrice || modelData.b2cPrice
+  );
+  const competitorsFilled = !!(
+    modelData.fmcgComp || modelData.d2cComp || modelData.saasComp || modelData.b2cComp
+  );
+  const productDetail = (v('f3') || '').length > 20;
+  const targetDetail  = (v('f6') || '').length > 15;
+
+  // Critical gaps — always block
+  const hardGaps = [];
+  if (!pricingFilled) hardGaps.push('pricing / price points');
+  if (!productDetail) hardGaps.push('product description (needs more detail)');
+
+  // Soft gaps — ask but don't block
+  const softGaps = [];
+  if (!competitorsFilled) softGaps.push('key competitors with their prices');
+  if (!targetDetail)      softGaps.push('target customer specifics (age, city tier, occasion)');
+  if (!v('f4'))           softGaps.push('primary launch geography');
+  if (!v('f_challenge'))  softGaps.push('biggest challenge right now');
+
+  if (hardGaps.length > 0) {
+    // Show inline error prompts — don't proceed
+    showGapWarning(hardGaps, softGaps, false);
+    return;
+  }
+
+  if (softGaps.length >= 2) {
+    // Enough gaps that analysis quality will suffer — ask for clarification
+    showClarificationPanel(softGaps);
+    return;
+  }
+
+  // All good — run analysis
+  execute(1, prompt(1, {}));
+}
+
+function showGapWarning(hardGaps, softGaps, canSkip) {
+  const c = document.getElementById('content');
+  let warn = document.getElementById('gapWarning');
+  if (!warn) {
+    warn = document.createElement('div');
+    warn.id = 'gapWarning';
+    c.querySelector('.card-body')?.appendChild(warn);
+  }
+  warn.innerHTML = `
+    <div style="background:rgba(255,77,106,.08);border:1px solid rgba(255,77,106,.3);border-radius:10px;padding:16px 18px;margin-top:16px;">
+      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--red);margin-bottom:10px;">⚠ Missing critical info — analysis will be generic without these</div>
+      <ul style="padding-left:18px;margin:0 0 12px;font-size:13px;color:var(--text2);line-height:1.9;">
+        ${hardGaps.map(g => `<li><strong style="color:var(--text);">${g}</strong> — BrandOS cannot give specific pricing or positioning advice without this</li>`).join('')}
+      </ul>
+      ${softGaps.length ? `<div style="font-size:12.5px;color:var(--text3);">Also helpful to add: ${softGaps.join(', ')}</div>` : ''}
+      <div style="margin-top:12px;">
+        <button class="btn btn-g" style="font-size:12px;padding:7px 14px;" onclick="document.getElementById('gapWarning').remove();scrollToFirstEmpty();">← Fill in the gaps</button>
+        ${canSkip ? `<button class="btn btn-g" style="font-size:12px;padding:7px 14px;margin-left:8px;color:var(--text3);" onclick="document.getElementById('gapWarning').remove();execute(1,prompt(1,{}));">Skip & analyze anyway</button>` : ''}
+      </div>
+    </div>`;
+  warn.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function scrollToFirstEmpty() {
+  const ids = ['fmcg_price','d2c_price','saas_price','b2c_price','f3','f6'];
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (el && !el.value.trim()) { el.focus(); el.scrollIntoView({behavior:'smooth',block:'center'}); return; }
+  }
+}
+
+// ── CLARIFICATION PANEL — asks follow-up Qs before running ─────────────────────
+async function showClarificationPanel(gaps) {
+  const c = document.getElementById('content');
+  const b = S.brand;
+
+  // Build what we know so far
+  const briefSoFar = `
+Brand: ${b.brand}
+Business Model: ${b.bizModel}
+Product: ${b.product}
+Stage: ${b.stage}
+Target: ${b.target || 'Not specified'}
+Location: ${b.location || 'Not specified'}
+Revenue: ${b.revenue || 'Not specified'}
+USP: ${b.usp || 'Not specified'}
+Channels: ${b.channels || 'Not specified'}
+Budget: ${b.budget || 'Not specified'}
+Challenge: ${b.challenge || 'Not specified'}
+Model-specific: ${JSON.stringify({
+    price: b.fmcgPrice||b.d2cPrice||b.saasPrice||b.b2cPrice||'',
+    cogs: b.fmcgCogs||b.d2cCogs||'',
+    competitors: b.fmcgComp||b.d2cComp||b.saasComp||b.b2cComp||'',
+  })}
+Known gaps: ${gaps.join(', ')}`;
+
+  // Show loading
+  let clarDiv = document.getElementById('clarPanel');
+  if (!clarDiv) {
+    clarDiv = document.createElement('div');
+    clarDiv.id = 'clarPanel';
+    c.querySelector('.card-body')?.appendChild(clarDiv);
+  }
+  clarDiv.innerHTML = `<div class="loading" style="margin-top:16px;"><div class="spin"></div><div><div class="ltxt">Identifying what's missing...</div><div class="lsub">BrandOS is reading your brief</div></div></div>`;
+  clarDiv.scrollIntoView({behavior:'smooth', block:'start'});
+
+  const clarPrompt = `You are BrandOS intake specialist. A founder has filled in a brand brief but there are information gaps that will make strategy advice generic. 
+
+BRIEF SO FAR:
+${briefSoFar}
+
+Your job: Generate EXACTLY 3 follow-up questions — the 3 most important missing facts that, if answered, would make the strategy advice 10x more specific and useful.
+
+RULES:
+- Questions must be about THIS specific brand and business model (${b.bizModel})
+- Do NOT ask for anything already provided above
+- For FMCG/D2C: always include a pricing/pack question if price is missing
+- Questions should be answerable in 1-2 sentences by a founder
+- Make questions feel like a smart consultant asking, not a form
+- Return ONLY a JSON array of exactly 3 objects: [{"q": "question text", "placeholder": "example answer"}]
+- No preamble, no explanation, no markdown fences. Pure JSON only.`;
+
+  try {
+    const raw = await callAI(clarPrompt, 'You are a JSON-only response bot. Return only valid JSON arrays. No preamble, no markdown, no explanation.');
+    let questions;
+    try {
+      const clean = raw.replace(/```json|```/g,'').trim();
+      questions = JSON.parse(clean);
+      if (!Array.isArray(questions)) throw new Error('not array');
+    } catch(e) {
+      // Fallback to generic questions if parse fails
+      questions = [
+        {q: `What is the exact price point for ${b.brand}'s main product/pack?`, placeholder: 'e.g., ₹149 for 1kg, ₹649 for 5kg'},
+        {q: 'Who are your 2-3 main competitors and what do they charge?', placeholder: 'e.g., Aashirvaad ₹65/kg, local mills ₹50/kg'},
+        {q: 'What is the one specific outcome your target customer wants from this product?', placeholder: 'e.g., soft rotis without maida, same taste as hometown chakki'},
+      ];
+    }
+
+    clarDiv.innerHTML = `
+      <div style="background:rgba(245,200,66,.07);border:1px solid rgba(245,200,66,.25);border-radius:12px;padding:20px;margin-top:18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px;">📋 3 quick questions before we analyze</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6;">Your brief is almost there. These answers will make the analysis specific to your situation — not a generic template.</div>
+        ${questions.slice(0,3).map((q,i) => `
+          <div class="frow">
+            <label>${q.q}</label>
+            <input type="text" id="clarQ${i}" placeholder="${q.placeholder||'Your answer...'}" style="background:var(--surface);border-color:rgba(245,200,66,.3);">
+          </div>`).join('')}
+        <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;align-items:center;">
+          <button class="btn btn-p" id="runBtn" onclick="submitClarifications(${JSON.stringify(questions).replace(/"/g,'&quot;')})">Submit & Analyze →</button>
+          <button class="btn btn-g" style="font-size:12px;" onclick="document.getElementById('clarPanel').remove();execute(1,prompt(1,{}));">Skip & analyze with current info</button>
+        </div>
+      </div>`;
+    clarDiv.scrollIntoView({behavior:'smooth', block:'start'});
+  } catch(err) {
+    // On error, just proceed with analysis
+    clarDiv.remove();
+    execute(1, prompt(1, {}));
+  }
+}
+
+function submitClarifications(questions) {
+  // Append clarification answers to brand notes
+  const answers = questions.slice(0,3).map((q,i) => {
+    const a = document.getElementById('clarQ' + i)?.value?.trim() || '';
+    return a ? `Q: ${q.q}\nA: ${a}` : '';
+  }).filter(Boolean).join('\n\n');
+
+  if (answers) {
+    S.brand.notes = (S.brand.notes ? S.brand.notes + '\n\n' : '') + 'ADDITIONAL CONTEXT (from follow-up):\n' + answers;
+    saveState();
+  }
+  document.getElementById('clarPanel')?.remove();
   execute(1, prompt(1, {}));
 }
 
@@ -1663,6 +2166,8 @@ async function execute(n, p) {
     setTimeout(() => toast('Enter your OpenRouter key first', 'err'), 300);
     return;
   }
+  // Always append real brand data so no step falls back to generic averages
+  if (n !== 1) p = p + brandDetailFooter();
 
   const btn = document.getElementById('runBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'Analyzing...'; }
@@ -1758,6 +2263,8 @@ function saveState() {
       stage:         S.stage,
       mode:          S.mode,
       execTool:      S.execTool,
+      finTool:       S.finTool,
+      resTool:       S.resTool,
       solverHistory: S.solverHistory,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
@@ -1777,6 +2284,8 @@ function loadState() {
     S.stage         = saved.stage         || '';
     S.mode          = saved.mode          || 'strategy';
     S.execTool      = saved.execTool      || null;
+    S.finTool       = saved.finTool       || 'unit_econ';
+    S.resTool       = saved.resTool       || 'demand';
     S.solverHistory = saved.solverHistory || [];
     return true;
   } catch(e) { return false; }
@@ -1787,11 +2296,1337 @@ function clearMemory() {
   localStorage.removeItem(STORAGE_KEY);
   S.key = ''; S.step = 0; S.done = new Set(); S.brand = {};
   S.resp = {}; S.stage = ''; S.mode = 'strategy';
-  S.execTool = null; S.solverHistory = [];
+  S.execTool = null; S.finTool = 'unit_econ'; S.resTool = 'demand'; S.solverHistory = [];
   renderSidebar();
   showWelcome();
   toast('Memory cleared', 'ok');
 }
+
+// ── PRODUCT RESEARCH ENGINE (LAYER 5) ─────────────────────────────────────────
+
+const RES_TOOLS_META = [
+  {id:'demand',     icon:'📡', label:'Demand Validator',      desc:'Is there real pull? Search signals, category trends, India-specific demand evidence.'},
+  {id:'review',     icon:'💬', label:'Review Miner',           desc:'Paste competitor reviews → extract pains, desires, unmet needs, exact consumer language.'},
+  {id:'whitespace', icon:'🗺', label:'Whitespace Finder',      desc:'Map competitor gaps vs consumer complaints. Find the unclaimed positioning lane.'},
+  {id:'pmf',        icon:'🎯', label:'PMF Scorer',             desc:'Score your product-market fit across 6 India-specific dimensions. Know where you\'re weak.'},
+  {id:'kano',       icon:'⚙️', label:'Feature Prioritizer',    desc:'Kano model + RICE scoring. Know which features to build, drop, or double down on.'},
+  {id:'format',     icon:'📦', label:'Pack & Format Research', desc:'What pack sizes, price points, and formats are winning in your category right now.'},
+];
+
+function showResearchEngine() {
+  S.mode = 'research';
+  renderSidebar();
+  const c = document.getElementById('content');
+  const b = S.brand;
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--cyan);background:var(--cyan-glow);border-color:rgba(34,211,238,.25);">Layer 5 · 🔬</div>
+        <div>
+          <div class="card-title">Product Research</div>
+          <div class="card-desc">Evidence-based tools to validate demand, mine consumer language, and find gaps before you build or launch. ${b.brand ? `Running on <b>${b.brand}</b> context.` : 'Set up your brand in Step 1 for calibrated analysis.'}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="res-tool-grid">
+          ${RES_TOOLS_META.map(t => `
+            <div class="res-tool-card ${S.resTool===t.id?'active':''}" onclick="selectResTool('${t.id}')">
+              <div class="res-tc-icon">${t.icon}</div>
+              <div class="res-tc-name">${t.label}</div>
+              <div class="res-tc-desc">${t.desc}</div>
+            </div>`).join('')}
+        </div>
+        <div style="background:var(--surface3);border-radius:10px;padding:16px 18px;font-size:13px;color:var(--text2);line-height:1.7;">
+          <strong style="color:var(--cyan);">How this layer works:</strong> Each tool uses AI to simulate what takes weeks of manual research — review scraping, search trend analysis, competitive gap mapping. Start with <b>Demand Validator</b> if you're pre-launch. Start with <b>Review Miner</b> if you already have competitors.
+        </div>
+      </div>
+    </div>`;
+}
+
+function selectResTool(id) {
+  S.resTool = id;
+  saveState();
+  renderSidebar();
+  const renderers = {
+    demand:     renderDemandValidator,
+    review:     renderReviewMiner,
+    whitespace: renderWhitespaceFinder,
+    pmf:        renderPMFScorer,
+    kano:       renderFeaturePrioritizer,
+    format:     renderFormatResearch,
+  };
+  (renderers[id] || showResearchEngine)();
+}
+
+// helper — cyan-themed card shell
+function resCard(title, icon, desc, body) {
+  return `<div class="card">
+    <div class="card-head">
+      <div class="card-badge" style="color:var(--cyan);background:var(--cyan-glow);border-color:rgba(34,211,238,.25);">${icon}</div>
+      <div><div class="card-title">${title}</div><div class="card-desc">${desc}</div></div>
+    </div>
+    <div class="card-body">${body}</div>
+  </div>`;
+}
+
+function resCyanBtn(label, onclick) {
+  return `<button class="btn btn-p" style="background:var(--cyan);color:#000;font-weight:700;box-shadow:0 4px 16px rgba(34,211,238,.2);" onclick="${onclick}">${label}</button>`;
+}
+
+// ── 1. DEMAND VALIDATOR ────────────────────────────────────────────────────────
+function renderDemandValidator() {
+  const b = S.brand;
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('Demand Validator', '📡 · Layer 5',
+    'Validate whether real, monetisable demand exists in India — before you spend a rupee on marketing.',
+    `<div class="res-section">What are you validating?</div>
+    <div class="frow"><label>Product / idea to validate <span>*</span></label>
+      <input type="text" id="dv_product" placeholder="e.g., premium stone-ground atta, ₹149/kg, urban health-conscious buyers" value="${b.fmcgPrice||b.d2cPrice||b.product||''}">
+    </div>
+    <div class="fgrid">
+      <div class="frow"><label>Target buyer</label>
+        <input type="text" id="dv_buyer" placeholder="e.g., women 28-42, SEC A/B, cooking at home" value="${b.target||''}">
+      </div>
+      <div class="frow"><label>Primary geography</label>
+        <input type="text" id="dv_geo" placeholder="e.g., Delhi NCR, then Punjab" value="${b.location||''}">
+      </div>
+    </div>
+    <div class="frow"><label>Who currently serves this need (if anyone)?</label>
+      <input type="text" id="dv_comp" placeholder="e.g., Aashirvaad, local chakki mills, imported organic brands" value="${b.fmcgComp||b.d2cComp||b.saasComp||''}">
+    </div>
+    <div class="frow"><label>Your hypothesis — what gap do you believe exists?</label>
+      <textarea id="dv_hypothesis" class="res-paste-area" rows="2" placeholder="e.g., urban buyers want chakki-fresh taste + modern brand trust but current options are either low-quality local or unbranded"></textarea>
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('🔍 Validate Demand →', 'runResAI("demand")')}</div>
+    <div id="resOutput_demand"></div>`
+  );
+}
+
+// ── 2. REVIEW MINER ────────────────────────────────────────────────────────────
+function renderReviewMiner() {
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('Review Miner', '💬 · Layer 5',
+    'Paste raw reviews from Amazon, Flipkart, Meesho, Google, or Zomato — get structured consumer intelligence extracted automatically.',
+    `<div class="res-section">Paste competitor reviews below</div>
+    <div style="font-size:12.5px;color:var(--text3);margin-bottom:10px;line-height:1.6;">
+      Copy 10-30 reviews from Amazon/Flipkart product pages, Google Reviews, or any platform. The more, the better. BrandOS will extract pains, desires, unmet needs, and exact language your consumers use.
+    </div>
+    <div class="frow"><label>Product / brand being reviewed</label>
+      <input type="text" id="rm_brand" placeholder="e.g., Aashirvaad Atta 5kg — Amazon reviews">
+    </div>
+    <textarea id="rm_reviews" class="res-paste-area" rows="8" placeholder="Paste reviews here...
+
+Example:
+⭐⭐⭐ — 'Taste is okay but roti gets hard after 2 hours. Tried calling customer care, no response.'
+⭐⭐⭐⭐⭐ — 'Best atta I have tried. My family loves the softness. Will definitely buy again.'
+⭐⭐ — 'Packaging is bad. The bag tore and atta spilled everywhere. Very disappointed.'
+...paste as many as you have"></textarea>
+    <div class="frow" style="margin-top:12px;"><label>What angle to focus on? (optional)</label>
+      <input type="text" id="rm_focus" placeholder="e.g., what do people hate most / what drives repeat purchase / what do 1-3 star reviewers complain about">
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('💬 Mine Insights →', 'runResAI("review")')}</div>
+    <div id="resOutput_review"></div>`
+  );
+}
+
+// ── 3. WHITESPACE FINDER ───────────────────────────────────────────────────────
+function renderWhitespaceFinder() {
+  const b = S.brand;
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('Whitespace Finder', '🗺 · Layer 5',
+    'Map what consumers want but can\'t get. Find the lane no competitor owns — then plant your flag there.',
+    `<div class="res-section">Category context</div>
+    <div class="frow"><label>Your category <span>*</span></label>
+      <input type="text" id="ws_cat" placeholder="e.g., packaged atta / women's ethnic wear D2C / B2B HR SaaS" value="${b.bizModel==='FMCG'?'FMCG — '+(b.product||''):b.product||''}">
+    </div>
+    <div class="frow"><label>Top 3-5 competitors — include their positioning and price</label>
+      <textarea id="ws_comp" class="res-paste-area" rows="3" placeholder="e.g.:
+Aashirvaad: mass-market, ₹65/kg, 'healthy atta' positioning, dominant in MT
+Fortune: value player, ₹55/kg, distribution strength
+Local chakki mills: freshness cred, no brand, ₹40-50/kg, offline only" value="${b.fmcgComp||b.d2cComp||b.saasComp||b.b2cComp||''}"></textarea>
+    </div>
+    <div class="frow"><label>Common consumer complaints you've seen or heard</label>
+      <textarea id="ws_complaints" class="res-paste-area" rows="3" placeholder="e.g.: rotis get hard after 2 hours / brands don't explain sourcing / no premium option in modern packaging / local mills unhygienic but taste better"></textarea>
+    </div>
+    <div class="frow"><label>What are consumers asking for that no brand delivers?</label>
+      <textarea id="ws_desires" class="res-paste-area" rows="2" placeholder="e.g.: stone-ground with a trustworthy brand / subscription with guaranteed freshness / single-origin wheat traceability"></textarea>
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('🗺 Find the Whitespace →', 'runResAI("whitespace")')}</div>
+    <div id="resOutput_whitespace"></div>`
+  );
+}
+
+// ── 4. PMF SCORER ─────────────────────────────────────────────────────────────
+function renderPMFScorer() {
+  const b = S.brand;
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('PMF Scorer', '🎯 · Layer 5',
+    'Honest product-market fit assessment across 6 India-specific dimensions. Know exactly where you\'re strong and where you\'ll leak.',
+    `<div class="res-section">Tell BrandOS about your current traction</div>
+    <div class="fgrid">
+      <div class="frow"><label>Monthly revenue or orders</label>
+        <input type="text" id="pmf_rev" placeholder="e.g., ₹3.2L/mo, 280 orders" value="${b.revenue||''}">
+      </div>
+      <div class="frow"><label>How long have you been selling?</label>
+        <input type="text" id="pmf_age" placeholder="e.g., 8 months">
+      </div>
+    </div>
+    <div class="fgrid">
+      <div class="frow"><label>Repeat purchase rate / retention</label>
+        <input type="text" id="pmf_repeat" placeholder="e.g., ~35% of customers reorder within 30 days">
+      </div>
+      <div class="frow"><label>How do most customers find you?</label>
+        <input type="text" id="pmf_acq" placeholder="e.g., mostly word of mouth + Instagram ads" value="${b.channels||''}">
+      </div>
+    </div>
+    <div class="frow"><label>What do your happiest customers say? (exact words if possible)</label>
+      <textarea id="pmf_love" class="res-paste-area" rows="2" placeholder="e.g.: 'Finally found something that tastes like my mother's chakki atta' / 'I don't buy from anyone else now'"></textarea>
+    </div>
+    <div class="frow"><label>What's the most common reason customers don't return or complain?</label>
+      <textarea id="pmf_pain" class="res-paste-area" rows="2" placeholder="e.g.: price too high vs local alternatives / delivery takes too long / packaging not premium enough"></textarea>
+    </div>
+    <div class="frow"><label>Have you raised prices? What happened?</label>
+      <input type="text" id="pmf_price" placeholder="e.g.: raised 10%, ~15% drop in orders / haven't tried yet">
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('🎯 Score My PMF →', 'runResAI("pmf")')}</div>
+    <div id="resOutput_pmf"></div>`
+  );
+}
+
+// ── 5. FEATURE PRIORITIZER (KANO) ─────────────────────────────────────────────
+function renderFeaturePrioritizer() {
+  const b = S.brand;
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('Feature Prioritizer', '⚙️ · Layer 5',
+    'Kano model + RICE scoring for your product features. Stop building what doesn\'t matter. Double down on what does.',
+    `<div class="res-section">Your product features / attributes</div>
+    <div style="font-size:12.5px;color:var(--text3);margin-bottom:12px;line-height:1.6;">
+      List every feature, attribute, or product improvement you're considering. One per line. Include things already live and things you're planning. Be specific — not "better packaging" but "resealable zip-lock pouch with freshness window."
+    </div>
+    <textarea id="kano_features" class="res-paste-area" rows="8" placeholder="e.g.:
+Stone-ground texture (already live)
+1kg resealable zip-lock pouch
+Freshness date on every bag
+WhatsApp subscription reminder
+Premium unboxing insert card
+Single-origin wheat traceability QR code
+Atta for diabetics (low GI variety)
+5kg family pack with free chakki
+Recipe booklet inside
+Same-day delivery in Delhi NCR
+Free trial pack (200g)
+Influencer collaboration packs"></textarea>
+    <div class="frow" style="margin-top:12px;"><label>Target buyer and context</label>
+      <input type="text" id="kano_buyer" placeholder="e.g., health-conscious urban homemakers, SEC A/B, 28-45" value="${b.target||''}">
+    </div>
+    <div class="frow"><label>Your current price point</label>
+      <input type="text" id="kano_price" placeholder="e.g., ₹149/kg" value="${b.fmcgPrice||b.d2cPrice||b.saasPrice||''}">
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('⚙️ Prioritize Features →', 'runResAI("kano")')}</div>
+    <div id="resOutput_kano"></div>`
+  );
+}
+
+// ── 6. PACK & FORMAT RESEARCH ─────────────────────────────────────────────────
+function renderFormatResearch() {
+  const b = S.brand;
+  const c = document.getElementById('content');
+  c.innerHTML = resCard('Pack & Format Research', '📦 · Layer 5',
+    'What pack sizes, price ladders, and formats are winning in your category — and what the data says about where to launch.',
+    `<div class="res-section">Category & format details</div>
+    <div class="frow"><label>Category <span>*</span></label>
+      <input type="text" id="fr_cat" placeholder="e.g., packaged whole wheat atta / premium honey / D2C protein powder" value="${b.product||''}">
+    </div>
+    <div class="frow"><label>Your current or planned pack sizes + price</label>
+      <input type="text" id="fr_current" placeholder="e.g., 1kg @ ₹149, 5kg @ ₹649 (planning)" value="${b.fmcgPrice||b.d2cPrice||''}">
+    </div>
+    <div class="frow"><label>Sales channel(s)</label>
+      <input type="text" id="fr_channel" placeholder="e.g., D2C website + Blinkit + Amazon" value="${b.channels||''}">
+    </div>
+    <div class="frow"><label>Target buyer SEC / income bracket</label>
+      <input type="text" id="fr_sec" placeholder="e.g., SEC A/B, ₹80k-2L/month household income" value="${b.target||''}">
+    </div>
+    <div class="frow"><label>What pack sizes do competitors sell? (with price)</label>
+      <textarea id="fr_comp" class="res-paste-area" rows="3" placeholder="e.g.:
+Aashirvaad: 1kg ₹65, 2kg ₹125, 5kg ₹295, 10kg ₹560
+Fortune: 5kg ₹270, 10kg ₹510
+Local mill: 5kg ₹200-240 (varies)" value="${b.fmcgComp||b.d2cComp||''}"></textarea>
+    </div>
+    <div style="margin-top:16px;">${resCyanBtn('📦 Research Formats →', 'runResAI("format")')}</div>
+    <div id="resOutput_format"></div>`
+  );
+}
+
+// ── AI RUNNER FOR RESEARCH TOOLS ───────────────────────────────────────────────
+async function runResAI(toolId) {
+  if (!getApiKey()) { toast('Enter your OpenRouter key first', 'err'); return; }
+  const b = S.brand;
+  const brandCtx = b.brand
+    ? `BRAND CONTEXT:\nBrand: ${b.brand} | Model: ${b.bizModel} | Stage: ${b.stage}\nProduct: ${b.product}\nTarget: ${b.target||'—'} | Location: ${b.location||'—'}\n${b.fmcgPrice||b.d2cPrice||b.saasPrice?'Price: '+(b.fmcgPrice||b.d2cPrice||b.saasPrice):''}\n${b.fmcgComp||b.d2cComp||b.saasComp?'Competitors: '+(b.fmcgComp||b.d2cComp||b.saasComp):''}`
+    : 'No brand profile set.';
+
+  const g = id => document.getElementById(id)?.value?.trim() || '';
+
+  const prompts = {
+    demand: () => {
+      const product = g('dv_product'), buyer = g('dv_buyer'), geo = g('dv_geo'),
+            comp = g('dv_comp'), hyp = g('dv_hypothesis');
+      if (!product) { toast('Describe the product/idea first', 'err'); return null; }
+      return `PRODUCT RESEARCH — DEMAND VALIDATION
+
+${brandCtx}
+
+Product to validate: ${product}
+Target buyer: ${buyer || 'Not specified'}
+Geography: ${geo || 'India'}
+Current alternatives: ${comp || 'Not specified'}
+Founder hypothesis: ${hyp || 'Not specified'}
+
+Provide a rigorous demand validation analysis for India:
+
+## Demand Signal Assessment
+Rate overall demand strength: Strong / Moderate / Weak / Unproven — with one-line rationale.
+
+## Pull vs Push Analysis
+Is this a pull market (consumers actively searching) or push market (needs to be created)? What's the evidence for Indian consumers specifically?
+
+## Search & Discovery Signals
+What would Google Trends, Amazon search volume, and Flipkart category data likely show for this? What keywords have real demand in India vs aspirational demand? What search terms should they monitor?
+
+## Category Size Reality Check
+Rough size of this category in India (₹ crore). Growing or declining? Who has the money in this market?
+
+## Demand Segments (rank by readiness to pay)
+3-4 buyer segments ranked by: who buys first, who pays most, who is easiest to reach in India.
+
+## India-Specific Demand Drivers
+What cultural, economic, or behavioral factors create demand for this in India specifically? (e.g., festival cycles, health awareness post-COVID, Tier 2 aspiration, joint family dynamics)
+
+## Red Flags
+What demand signals are missing or concerning? What would make this a niche vs a real business?
+
+## Validation Experiments
+3 specific, cheap experiments to validate demand in India before spending on inventory or marketing. Include WhatsApp/Instagram-native methods, kirana network testing, etc.
+
+## Verdict
+Is this real, monetisable demand? Direct answer + what to do next.`;
+    },
+
+    review: () => {
+      const reviews = g('rm_reviews'), brand = g('rm_brand'), focus = g('rm_focus');
+      if (!reviews || reviews.length < 50) { toast('Paste at least a few reviews first', 'err'); return null; }
+      return `PRODUCT RESEARCH — REVIEW MINING & CONSUMER INTELLIGENCE
+
+${brandCtx}
+
+Product being reviewed: ${brand || 'Competitor product'}
+Analysis focus: ${focus || 'All dimensions — pains, desires, unmet needs, language'}
+
+REVIEWS TO ANALYZE:
+---
+${reviews}
+---
+
+Extract structured consumer intelligence from these reviews:
+
+## 🔴 Top Pains & Complaints (ranked by frequency)
+For each pain: exact consumer language used | how many reviews mention it | severity (deal-breaker / frustration / minor)
+
+## 🟢 What Delights Them (what drives 5-star reviews)
+For each delight: exact consumer language | emotional driver behind it | how to replicate or surpass
+
+## 🔵 Unmet Needs (what they wish existed)
+Desires explicitly or implicitly stated that no product currently delivers. These are your product opportunities.
+
+## 🟡 Consumer Language Library
+Exact phrases, words, and expressions consumers use — this is your ad copy goldmine. Pull 15-20 real phrases.
+
+## 🎯 Repeat Purchase Triggers
+What specifically makes people come back? Or what's preventing repeat?
+
+## 📊 Segment Patterns
+Are there different buyer types visible in the reviews? (e.g., health-focused vs value-focused vs gift-buyers)
+
+## 💡 Product Opportunity Summary
+Top 3 product improvements or new features directly suggested by these reviews — ranked by impact.
+
+## Ad Copy Angles
+3 specific ad hooks or messaging angles derived directly from what consumers are saying.`;
+    },
+
+    whitespace: () => {
+      const cat = g('ws_cat'), comp = g('ws_comp'),
+            complaints = g('ws_complaints'), desires = g('ws_desires');
+      if (!cat) { toast('Enter the category first', 'err'); return null; }
+      return `PRODUCT RESEARCH — WHITESPACE FINDER
+
+${brandCtx}
+
+Category: ${cat}
+Competitors & positioning: ${comp || 'Not specified'}
+Consumer complaints: ${complaints || 'Not specified'}
+Unmet desires: ${desires || 'Not specified'}
+
+Map the competitive whitespace in this Indian category:
+
+## Competitive Positioning Map
+Plot each competitor on 2 axes most relevant to this category (e.g., Price vs Quality, Traditional vs Modern, Mass vs Premium). Identify the crowded zones and empty zones.
+
+## The Complaint-Gap Matrix
+Cross-reference: what consumers complain about vs what competitors actually offer. Every mismatch is a whitespace.
+
+Format as:
+| Consumer Complaint | Which brands have this problem | Opportunity if solved |
+
+## Top 3 Whitespace Opportunities (ranked)
+For each:
+- **The gap**: exactly what's unclaimed
+- **Who wants it**: which buyer segment
+- **Why no one's filled it**: barriers (cost? complexity? didn't see it?)
+- **How to own it**: product + positioning move to claim this space
+
+## The Unclaimed Positioning Statement
+Draft 1 brand positioning statement that would own the biggest whitespace. Format: "For [target buyer] who [pain/desire], [Brand] is the [category] that [key differentiator], unlike [alternatives] which [their failure]."
+
+## First-Mover Risk
+What stops a bigger player from copying this whitespace immediately? What moats exist?
+
+## Verdict
+Is this whitespace large enough to build a business on? What's the realistic TAM of the whitespace vs the full category?`;
+    },
+
+    pmf: () => {
+      const rev = g('pmf_rev'), age = g('pmf_age'), repeat = g('pmf_repeat'),
+            acq = g('pmf_acq'), love = g('pmf_love'), pain = g('pmf_pain'), price = g('pmf_price');
+      return `PRODUCT RESEARCH — PMF SCORING
+
+${brandCtx}
+
+Traction data:
+- Revenue/orders: ${rev || 'Not disclosed'}
+- Time selling: ${age || 'Not specified'}
+- Repeat rate: ${repeat || 'Not specified'}
+- Acquisition: ${acq || 'Not specified'}
+- What fans say: ${love || 'Not specified'}
+- Main complaints/churn reason: ${pain || 'Not specified'}
+- Price sensitivity test: ${price || 'Not tested'}
+
+Score product-market fit across 6 India-specific dimensions. For each dimension: score out of 20 + specific diagnosis + what to fix.
+
+## Dimension 1: Retention Signal (0-20)
+Repeat purchase rate vs category benchmark. Is the product sticky or transactional?
+
+## Dimension 2: Organic Pull (0-20)
+Word-of-mouth, referral, organic search growth. Are people telling others without being paid to?
+
+## Dimension 3: Price Inelasticity (0-20)
+Can they raise price without killing demand? What does pricing power tell us about PMF strength?
+
+## Dimension 4: Buyer Specificity (0-20)
+Is there a very clear buyer who loves this, or vague interest from many? Narrow love beats broad indifference.
+
+## Dimension 5: Distribution Pull (0-20)
+Are retailers/platforms asking to stock it, or is it being pushed? In India, retailer demand = real PMF signal.
+
+## Dimension 6: Category Timing (0-20)
+Is the market tailwind behind this product right now in India? PMF partly depends on timing.
+
+---
+## Total PMF Score: [X/120] → [XX%]
+Red (<50%) / Yellow (50-70%) / Green (70%+)
+
+## The One Biggest PMF Problem
+If they could fix one thing to improve PMF, what is it?
+
+## 90-Day PMF Improvement Plan
+3 concrete actions specifically for the Indian market context.`;
+    },
+
+    kano: () => {
+      const features = g('kano_features'), buyer = g('kano_buyer'), price = g('kano_price');
+      if (!features) { toast('List your features first', 'err'); return null; }
+      return `PRODUCT RESEARCH — FEATURE PRIORITIZATION (KANO + RICE)
+
+${brandCtx}
+
+Target buyer: ${buyer || b.target || 'Not specified'}
+Price point: ${price || 'Not specified'}
+
+Features to evaluate:
+${features}
+
+Apply Kano Model + RICE scoring to every feature listed.
+
+## Kano Classification
+For each feature, classify as:
+- **Must-Have (Basic)**: Expected by default — absence kills the product, presence doesn't delight
+- **Performance**: More = better. Directly drives satisfaction and willingness to pay.
+- **Delighter**: Unexpected. Creates wow. Drives word-of-mouth and premium pricing power.
+- **Indifferent**: Consumers don't care either way. Don't waste money here.
+
+Format as a table:
+| Feature | Kano Category | Why | India-specific insight |
+
+## RICE Priority Score (Top 10 features)
+For each: Reach × Impact × Confidence / Effort = Score
+Reach = % of target buyers affected
+Impact = satisfaction uplift (1-3)
+Confidence = how sure are we (%)
+Effort = weeks/months to build
+
+## The Must-Build-Now List
+Top 3 features that will have the biggest PMF impact in the next 90 days. Be specific about execution.
+
+## The Cut List
+Features that look good on paper but India consumers don't actually care about. Drop these.
+
+## The Sequencing Roadmap
+Quarter-by-quarter feature rollout sequence optimised for: (1) retention first, (2) new buyer acquisition, (3) premium tier creation.
+
+## The Pricing Unlock
+Which features, when added, would justify a 15-25% price increase? This is your premium tier strategy.`;
+    },
+
+    format: () => {
+      const cat = g('fr_cat'), current = g('fr_current'), channel = g('fr_channel'),
+            sec = g('fr_sec'), comp = g('fr_comp');
+      if (!cat) { toast('Enter your category first', 'err'); return null; }
+      return `PRODUCT RESEARCH — PACK & FORMAT RESEARCH
+
+${brandCtx}
+
+Category: ${cat}
+Current/planned packs: ${current || 'Not specified'}
+Channels: ${channel || 'Not specified'}
+Target SEC: ${sec || 'Not specified'}
+Competitor pack sizes & prices: ${comp || 'Not specified'}
+
+Provide India-specific pack and format intelligence:
+
+## Category Pack Architecture (India)
+What pack sizes, price ladders, and formats dominate this category in India? What's winning on Amazon, Flipkart, Blinkit, and in kirana? Use real data patterns where available.
+
+## Price Ladder Analysis
+Map the full price ladder in this category:
+| Pack Size | Price Range | Who Buys | Channel | Share of sales |
+
+## The Magic Price Points for India
+What are the psychological price thresholds in this category? (e.g., ₹99, ₹149, ₹499 — the points where conversion jumps). What price points have the most search volume on e-commerce?
+
+## Channel-Format Matrix
+Different channels need different formats. For each channel given:
+- Optimal pack size
+- Optimal price point  
+- Packaging format (pouch / box / jar / sachet)
+- Margin requirement
+
+## The Entry SKU Strategy
+If launching with ONE pack size to test demand, what should it be and why? What's the lowest-risk way to enter this category?
+
+## Premium Format Opportunity
+Is there an unserved premium format in this category? (e.g., subscription box, gift pack, trial sachet, refillable container) What would justify 30-50% premium pricing?
+
+## India-Specific Format Insights
+- Festival pack opportunity (Diwali / Dussehra / Eid / harvest season)
+- Gifting format potential
+- Institutional / bulk format (office, hostel, canteen)
+- Modern trade vs kirana format differences
+
+## Recommendation
+The exact SKU architecture to launch with — pack sizes, prices, and channel allocation — with rationale.`;
+    },
+  };
+
+  const promptFn = prompts[toolId];
+  if (!promptFn) return;
+  const p = promptFn();
+  if (!p) return;
+
+  // Show output area with loader
+  const outputId = `resOutput_${toolId}`;
+  let out = document.getElementById(outputId);
+  if (!out) {
+    const c = document.getElementById('content');
+    out = document.createElement('div');
+    out.id = outputId;
+    c.querySelector('.card-body')?.appendChild(out);
+  }
+  const toolMeta = RES_TOOLS_META.find(t => t.id === toolId);
+  out.innerHTML = `<div class="loading" style="margin-top:18px;"><div class="spin"></div><div><div class="ltxt">${toolMeta?.label || 'Research'} in progress...</div><div class="lsub">Applying India market intelligence</div></div></div>`;
+  out.scrollIntoView({behavior:'smooth', block:'start'});
+
+  try {
+    const result = await callAI(p, SYSPROMPT);
+    out.innerHTML = `
+      <div class="rbox" style="margin-top:18px;border-color:rgba(34,211,238,.2);">
+        <div class="rhead">
+          <div class="rlabel" style="color:var(--cyan);">${toolMeta?.icon} ${toolMeta?.label} — Results</div>
+          <button class="btn btn-g" style="font-size:11.5px;padding:5px 12px;" onclick="selectResTool('${toolId}')">Rerun ↺</button>
+        </div>
+        <div class="rcontent">${md(result)}</div>
+      </div>`;
+  } catch(err) {
+    out.innerHTML = `<div style="color:var(--red);padding:14px;margin-top:12px;">Error: ${escHtml(err.message)}</div>`;
+  }
+}
+
+// ── PRODUCT RESEARCH ENGINE END ────────────────────────────────────────────────
+
+// ── FINANCIAL MODEL ENGINE (LAYER 4) ───────────────────────────────────────────
+
+// Finance state (not persisted to keep it reactive)
+const FIN = {
+  // Shared inputs
+  revenue: 500000,      // monthly revenue ₹
+  cogs: 35,             // COGS %
+  opex: 30,             // OpEx %
+  cac: 2500,            // Customer Acquisition Cost ₹
+  ltv: 12000,           // Lifetime Value ₹
+  churnRate: 5,         // Monthly churn %
+  avgOrderVal: 1200,    // AOV ₹
+  repeatRate: 25,       // Repeat purchase % per month
+  teamCost: 150000,     // Monthly team cost ₹
+  infraCost: 40000,     // Monthly infra/ops cost ₹
+  mktgSpend: 80000,     // Monthly marketing spend ₹
+  currentCash: 2000000, // Cash in bank ₹
+  monthlyBurn: 300000,  // Monthly net burn ₹
+  growthRate: 15,        // Monthly growth rate %
+  scenario: 'base',
+};
+
+const FIN_TOOLS_META = [
+  {id:'unit_econ', label:'Unit Economics', icon:'⚖️', desc:'P&L per unit, contribution margin, break-even units'},
+  {id:'p_and_l',   label:'P&L Projection', icon:'📊', desc:'12-month projected P&L with waterfall chart'},
+  {id:'cac_ltv',   label:'CAC / LTV Model', icon:'🎯', desc:'Payback period, LTV:CAC ratio, cohort efficiency'},
+  {id:'breakeven', label:'Breakeven Analysis', icon:'📍', desc:'Break-even in units, revenue, and months'},
+  {id:'scenario',  label:'Scenario Planner', icon:'🔭', desc:'Bear / Base / Bull scenarios across 12 months'},
+  {id:'runway',    label:'Burn & Runway', icon:'🛫', desc:'Cash runway calculator and burn optimization'},
+];
+
+function showFinanceEngine() {
+  S.mode = 'finance';
+  renderSidebar();
+  const c = document.getElementById('content');
+  const brandReady = !!S.brand.brand;
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">Layer 4 · 📐</div>
+        <div>
+          <div class="card-title">Financial Model</div>
+          <div class="card-desc">Interactive unit economics, P&L projections, and scenario planning — built for Indian startup realities. ${brandReady ? `Calibrated to <b>${S.brand.brand}</b>.` : 'Complete Step 1 for auto-calibration.'}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="tool-grid">
+          ${FIN_TOOLS_META.map(t => `
+            <div class="tool-card ${S.finTool===t.id?'active':''}" onclick="selectFinTool('${t.id}')" style="${S.finTool===t.id?'border-color:var(--violet);background:var(--violet-glow);':''}">
+              <div class="tc-icon">${t.icon}</div>
+              <div class="tc-name" style="${S.finTool===t.id?'color:var(--violet);':''}">${t.label}</div>
+              <div class="tc-desc">${t.desc}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function selectFinTool(id) {
+  S.finTool = id;
+  renderSidebar();
+  const renderers = {
+    unit_econ: renderUnitEconomics,
+    p_and_l:   renderPandL,
+    cac_ltv:   renderCacLtv,
+    breakeven: renderBreakeven,
+    scenario:  renderScenario,
+    runway:    renderRunway,
+  };
+  (renderers[id] || showFinanceEngine)();
+}
+
+function fmt(n, prefix='₹') {
+  if (Math.abs(n) >= 10000000) return prefix + (n/10000000).toFixed(2) + ' Cr';
+  if (Math.abs(n) >= 100000) return prefix + (n/100000).toFixed(2) + ' L';
+  if (Math.abs(n) >= 1000) return prefix + (n/1000).toFixed(1) + 'K';
+  return prefix + Math.round(n).toLocaleString('en-IN');
+}
+
+function fmtPct(n) { return n.toFixed(1) + '%'; }
+
+function finInputRow(label, key, min, max, step, unit='₹', multiplier=1) {
+  const val = FIN[key];
+  const display = unit === '₹' ? fmt(val * multiplier) : fmtPct(val);
+  return `<div class="fin-slider-row">
+    <div class="fin-slider-label">${label}</div>
+    <input type="range" min="${min}" max="${max}" step="${step}" value="${val}"
+      oninput="FIN['${key}']=+this.value; document.getElementById('sv_${key}').textContent=this.value>999&&'${unit}'==='₹'?fmt(+this.value*${multiplier}):(this.value+'${unit==='₹'?'':unit}'); recalcFin();">
+    <div class="fin-slider-val" id="sv_${key}">${display}</div>
+  </div>`;
+}
+
+function recalcFin() {
+  // Re-render the current tool
+  selectFinTool(S.finTool);
+}
+
+// ─── UNIT ECONOMICS ───────────────────────────────────────────────────────────
+function renderUnitEconomics() {
+  const rev = FIN.avgOrderVal;
+  const cogsPct = FIN.cogs / 100;
+  const cogs = rev * cogsPct;
+  const grossProfit = rev - cogs;
+  const grossMargin = (grossProfit / rev) * 100;
+  const mktgCostPer = FIN.cac; // per new customer
+  const contribMargin = grossProfit - (FIN.mktgSpend / Math.max(1, FIN.revenue / FIN.avgOrderVal) / 12);
+  const opexPct = FIN.opex / 100;
+  const opexPer = rev * opexPct;
+  const netMargin = grossProfit - opexPer;
+  const netMarginPct = (netMargin / rev) * 100;
+  const unitsToBreakeven = FIN.monthlyBurn / Math.max(1, grossProfit - opexPer);
+  const isHealthy = grossMargin > 40;
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">Unit Economics · ⚖️</div>
+        <div>
+          <div class="card-title">Unit Economics Model</div>
+          <div class="card-desc">P&L per rupee of revenue. Every number flows from your inputs — drag sliders to model scenarios.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">📐 Your Inputs</div>
+        ${finInputRow('Avg Order Value / Unit Price', 'avgOrderVal', 100, 50000, 100)}
+        ${finInputRow('COGS (as % of revenue)', 'cogs', 5, 90, 1, '%')}
+        ${finInputRow('OpEx (% of revenue)', 'opex', 5, 80, 1, '%')}
+        ${finInputRow('Monthly Marketing Spend', 'mktgSpend', 10000, 2000000, 10000)}
+        ${finInputRow('Customer Acquisition Cost', 'cac', 100, 50000, 100)}
+
+        <div class="fin-section-title">📊 Per-Unit P&L Waterfall</div>
+        ${waterfallBar('Revenue (MRP)', rev, rev, '#a78bfa')}
+        ${waterfallBar('– COGS', cogs, rev, '#ff4d6a')}
+        ${waterfallBar('= Gross Profit', grossProfit, rev, grossMargin > 40 ? '#3dd68c' : '#f5c842')}
+        ${waterfallBar('– OpEx (allocated)', opexPer, rev, '#ff9f5a')}
+        ${waterfallBar('= Net Contribution', netMargin, rev, netMargin > 0 ? '#3dd68c' : '#ff4d6a')}
+
+        <div class="fin-grid" style="margin-top:18px;">
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">💚</span><span class="fin-card-title">Gross Margin</span></div>
+            <div class="fin-val ${isHealthy?'green':'red'}">${fmtPct(grossMargin)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${isHealthy?'Healthy — above 40% target':'Warning — below 40% minimum for sustainability'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📐</span><span class="fin-card-title">Net Contribution / Unit</span></div>
+            <div class="fin-val ${netMargin>0?'green':'red'}">${fmt(netMargin)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${netMargin>0?'Each unit contributes to fixed-cost recovery':'Each unit is destroying value — fix COGS or opex first'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">🎯</span><span class="fin-card-title">CAC</span></div>
+            <div class="fin-val gold">${fmt(FIN.cac)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">CAC:GMV ratio ${fmtPct((FIN.cac/rev)*100)} — ${FIN.cac < rev * 0.5 ? 'Good' : 'High — review acquisition channels'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">🔁</span><span class="fin-card-title">Break-even Units/Mo</span></div>
+            <div class="fin-val">${Math.ceil(Math.max(0, unitsToBreakeven)).toLocaleString('en-IN')}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">Units needed monthly to cover burn of ${fmt(FIN.monthlyBurn)}</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title" style="margin-top:8px;">📋 India Benchmarks (Your Category)</div>
+        <div class="fin-card">
+          ${benchmarkRow('FMCG Gross Margin', '35-50%', grossMarginBench(grossMargin, 35, 50))}
+          ${benchmarkRow('D2C Gross Margin', '45-65%', grossMarginBench(grossMargin, 45, 65))}
+          ${benchmarkRow('SaaS Gross Margin', '65-80%', grossMarginBench(grossMargin, 65, 80))}
+          ${benchmarkRow('Healthy LTV:CAC', '>3x', FIN.ltv / FIN.cac >= 3 ? 'green' : 'red')}
+          ${benchmarkRow('CAC Payback Period', '<12 months', (FIN.cac / (grossProfit * 12)) <= 1 ? 'green' : 'red')}
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('unit_econ')">🤖 Get AI Analysis of These Numbers →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function waterfallBar(label, val, total, color) {
+  const pct = Math.min(100, Math.max(0, Math.abs(val / total) * 100));
+  return `<div class="waterfall-bar">
+    <div class="wb-label">${label}</div>
+    <div class="wb-bar-wrap">
+      <div class="wb-bar-fill" style="width:${pct}%;background:${color};"></div>
+    </div>
+    <div class="wb-val">${fmt(val)}</div>
+  </div>`;
+}
+
+function benchmarkRow(label, target, status) {
+  const color = status === 'green' ? 'var(--green)' : status === 'red' ? 'var(--red)' : 'var(--text3)';
+  const icon = status === 'green' ? '✓' : status === 'red' ? '✗' : '—';
+  return `<div class="fin-row">
+    <span class="fin-row-k">${label}</span>
+    <span style="font-size:11.5px;color:var(--text3);">${target}</span>
+    <span style="color:${color};font-family:'DM Mono',monospace;font-size:12px;">${icon}</span>
+  </div>`;
+}
+
+function grossMarginBench(gm, low, high) {
+  if (gm >= low && gm <= high) return 'green';
+  if (gm > high) return 'green';
+  return 'red';
+}
+
+// ─── P&L PROJECTION ───────────────────────────────────────────────────────────
+function renderPandL() {
+  const months = ['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
+  const gr = 1 + FIN.growthRate / 100;
+  let rev = FIN.revenue;
+  const rows = months.map((m, i) => {
+    const r = Math.round(rev);
+    const cogs = Math.round(r * FIN.cogs / 100);
+    const gp = r - cogs;
+    const opex = Math.round(r * FIN.opex / 100);
+    const mktg = FIN.mktgSpend;
+    const team = FIN.teamCost;
+    const infra = FIN.infraCost;
+    const ebitda = gp - opex - mktg - team - infra;
+    rev *= gr;
+    return {m, r, cogs, gp, opex, mktg, team, infra, ebitda};
+  });
+
+  const totalRev = rows.reduce((a,r)=>a+r.r,0);
+  const totalGP = rows.reduce((a,r)=>a+r.gp,0);
+  const totalEBITDA = rows.reduce((a,r)=>a+r.ebitda,0);
+  const avgGM = (totalGP/totalRev*100);
+  const firstProfit = rows.findIndex(r=>r.ebitda>0);
+
+  // Simple sparkline using bar widths
+  const maxRev = Math.max(...rows.map(r=>r.r));
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">P&L Projection · 📊</div>
+        <div>
+          <div class="card-title">12-Month P&L Projection</div>
+          <div class="card-desc">Full-year income statement built bottom-up. Drag sliders to run scenarios.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">📐 Revenue & Growth Inputs</div>
+        ${finInputRow('Starting Monthly Revenue', 'revenue', 50000, 10000000, 50000)}
+        ${finInputRow('Monthly Growth Rate', 'growthRate', 1, 50, 1, '%')}
+        ${finInputRow('COGS %', 'cogs', 5, 90, 1, '%')}
+        ${finInputRow('OpEx %', 'opex', 5, 60, 1, '%')}
+        ${finInputRow('Monthly Marketing Spend', 'mktgSpend', 10000, 2000000, 10000)}
+        ${finInputRow('Monthly Team Cost', 'teamCost', 50000, 5000000, 25000)}
+        ${finInputRow('Monthly Infra/Ops Cost', 'infraCost', 5000, 500000, 5000)}
+
+        <div class="fin-section-title">📈 Revenue Trajectory</div>
+        ${rows.map(r => `
+          <div class="waterfall-bar">
+            <div class="wb-label">${r.m}</div>
+            <div class="wb-bar-wrap">
+              <div class="wb-bar-fill" style="width:${(r.r/maxRev*100)}%;background:var(--violet);opacity:.8;"></div>
+            </div>
+            <div class="wb-val" style="font-size:11px;">${fmt(r.r)}</div>
+          </div>`).join('')}
+
+        <div class="fin-grid" style="margin-top:18px;">
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📅</span><span class="fin-card-title">Annual Revenue</span></div>
+            <div class="fin-val">${fmt(totalRev)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">💚</span><span class="fin-card-title">Annual Gross Profit</span></div>
+            <div class="fin-val ${avgGM>40?'green':'red'}">${fmt(totalGP)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📐</span><span class="fin-card-title">EBITDA (Annual)</span></div>
+            <div class="fin-val ${totalEBITDA>0?'green':'red'}">${fmt(totalEBITDA)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">🎯</span><span class="fin-card-title">First Profit Month</span></div>
+            <div class="fin-val ${firstProfit>=0?'green':'red'}">${firstProfit>=0?months[firstProfit]:'Not in Yr 1'}</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title">📋 Monthly P&L Table</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:11.5px;">
+            <thead>
+              <tr style="background:var(--surface3);">
+                ${['Month','Revenue','COGS','Gross Profit','GM%','Mktg','Team','EBITDA'].map(h=>`<th style="padding:7px 10px;text-align:right;border:1px solid var(--border2);color:var(--text2);font-weight:600;white-space:nowrap;">${h}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.map(r => {
+                const gmpct = (r.gp/r.r*100).toFixed(0);
+                const pos = r.ebitda > 0;
+                return `<tr>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);color:var(--text3);font-family:'DM Mono',monospace;">${r.m}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:var(--text);">${fmt(r.r)}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:var(--red);">${fmt(r.cogs)}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:var(--green);">${fmt(r.gp)}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:${+gmpct>40?'var(--green)':'var(--red)'};">${gmpct}%</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:var(--accent2);">${fmt(r.mktg)}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:var(--text2);">${fmt(r.team)}</td>
+                  <td style="padding:6px 10px;border:1px solid var(--border2);text-align:right;color:${pos?'var(--green)':'var(--red)'};">${fmt(r.ebitda)}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('p_and_l')">🤖 Get AI Commentary on This P&L →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── CAC / LTV MODEL ─────────────────────────────────────────────────────────
+function renderCacLtv() {
+  const ltv = FIN.ltv;
+  const cac = FIN.cac;
+  const ratio = ltv / cac;
+  const paybackMonths = cac / (FIN.avgOrderVal * (1 - FIN.cogs/100));
+  const churn = FIN.churnRate / 100;
+  const avgLifetime = 1 / churn; // months
+  const impliedLTV = FIN.avgOrderVal * (1 - FIN.cogs/100) * avgLifetime;
+  const cohortTable = [1,3,6,12].map(m => {
+    const survived = Math.pow(1 - churn, m);
+    const revenue = FIN.avgOrderVal * (1 - churn) * ((1 - Math.pow(1-churn, m)) / churn);
+    const netVal = revenue * (1 - FIN.cogs/100) - cac;
+    return {m, survived: (survived*100).toFixed(0), revenue: Math.round(revenue), netVal: Math.round(netVal)};
+  });
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">CAC / LTV · 🎯</div>
+        <div>
+          <div class="card-title">CAC / LTV Model</div>
+          <div class="card-desc">The single most important ratio in your business. Understand it before you scale.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">📐 Inputs</div>
+        ${finInputRow('Customer Acquisition Cost (CAC)', 'cac', 100, 100000, 100)}
+        ${finInputRow('Lifetime Value (LTV)', 'ltv', 500, 500000, 500)}
+        ${finInputRow('Avg Order Value', 'avgOrderVal', 100, 50000, 100)}
+        ${finInputRow('Monthly Churn Rate', 'churnRate', 0.5, 30, 0.5, '%')}
+        ${finInputRow('COGS %', 'cogs', 5, 90, 1, '%')}
+
+        <div class="fin-section-title">🎯 The Key Ratios</div>
+        <div class="fin-grid">
+          <div class="fin-card" style="${ratio>=3?'border-color:rgba(61,214,140,.3)':'border-color:rgba(255,77,106,.3)'}">
+            <div class="fin-card-head"><span class="fin-card-icon">🏆</span><span class="fin-card-title">LTV : CAC Ratio</span></div>
+            <div class="fin-val ${ratio>=3?'green':ratio>=2?'gold':'red'}">${ratio.toFixed(1)}x</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">
+              ${ratio>=3?'✓ Healthy — above 3x threshold. Scale with confidence.':ratio>=2?'⚠ Acceptable — but under pressure. Fix CAC or LTV before scaling.':'✗ Danger zone — every customer you acquire destroys value.'}
+            </div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">⏱</span><span class="fin-card-title">CAC Payback Period</span></div>
+            <div class="fin-val ${paybackMonths<=12?'green':paybackMonths<=18?'gold':'red'}">${paybackMonths.toFixed(1)} mo</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${paybackMonths<=12?'✓ Under 12 months — good for bootstrapped ops.':paybackMonths<=18?'Acceptable for funded startups.':'Too long — cashflow will kill you before LTV is realised.'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📅</span><span class="fin-card-title">Avg Customer Lifetime</span></div>
+            <div class="fin-val">${avgLifetime.toFixed(1)} mo</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">At ${fmtPct(FIN.churnRate)} monthly churn</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">💡</span><span class="fin-card-title">Implied LTV (from churn)</span></div>
+            <div class="fin-val ${Math.abs(impliedLTV-ltv)/ltv < 0.3 ? 'green':'gold'}">${fmt(impliedLTV)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">Cross-check against your stated LTV of ${fmt(ltv)}</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title">📈 Cohort Economics</div>
+        <div class="fin-card">
+          <div class="fin-row" style="font-weight:600;color:var(--text);">
+            <span>Month</span><span>Retention %</span><span>Cum. Revenue</span><span>Net Value</span>
+          </div>
+          ${cohortTable.map(r => `
+            <div class="fin-row">
+              <span class="fin-row-k">Month ${r.m}</span>
+              <span class="fin-row-v ${+r.survived>70?'pos':'neg'}">${r.survived}%</span>
+              <span class="fin-row-v">${fmt(r.revenue)}</span>
+              <span class="fin-row-v ${r.netVal>0?'pos':'neg'}">${fmt(r.netVal)}</span>
+            </div>`).join('')}
+        </div>
+
+        <div class="fin-section-title">📋 India Benchmarks</div>
+        <div class="fin-card">
+          ${benchmarkRow('D2C LTV:CAC (healthy)', '>3x', ratio>=3?'green':'red')}
+          ${benchmarkRow('SaaS LTV:CAC (healthy)', '>5x', ratio>=5?'green':'red')}
+          ${benchmarkRow('FMCG repeat rate', '>30%/mo', FIN.repeatRate>=30?'green':'red')}
+          ${benchmarkRow('Quick Commerce CAC', '₹150-400', cac<400?'green':'neutral')}
+          ${benchmarkRow('D2C CAC (Meta/Google)', '₹500-2,500', cac<2500?'green':'red')}
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('cac_ltv')">🤖 Get AI Recommendations to Improve LTV:CAC →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── BREAKEVEN ANALYSIS ───────────────────────────────────────────────────────
+function renderBreakeven() {
+  const pricePerUnit = FIN.avgOrderVal;
+  const varCostPerUnit = pricePerUnit * FIN.cogs / 100;
+  const contribMarginPerUnit = pricePerUnit - varCostPerUnit;
+  const fixedCosts = FIN.teamCost + FIN.infraCost + FIN.mktgSpend;
+  const beUnits = fixedCosts / Math.max(1, contribMarginPerUnit);
+  const beRevenue = beUnits * pricePerUnit;
+  const currentUnits = FIN.revenue / pricePerUnit;
+  const mosUnits = currentUnits - beUnits;
+  const mosPct = (mosUnits / Math.max(1, currentUnits)) * 100;
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">Breakeven · 📍</div>
+        <div>
+          <div class="card-title">Breakeven Analysis</div>
+          <div class="card-desc">How many units do you need to sell before profit? Know this number cold.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">📐 Cost Structure</div>
+        ${finInputRow('Price per Unit / AOV', 'avgOrderVal', 100, 50000, 100)}
+        ${finInputRow('Variable Cost (COGS) %', 'cogs', 5, 90, 1, '%')}
+        ${finInputRow('Monthly Fixed: Team', 'teamCost', 25000, 5000000, 25000)}
+        ${finInputRow('Monthly Fixed: Infrastructure', 'infraCost', 5000, 500000, 5000)}
+        ${finInputRow('Monthly Fixed: Marketing', 'mktgSpend', 10000, 2000000, 10000)}
+        ${finInputRow('Current Monthly Revenue', 'revenue', 50000, 10000000, 50000)}
+
+        <div class="fin-grid" style="margin-top:4px;">
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📍</span><span class="fin-card-title">Break-even Units/Mo</span></div>
+            <div class="fin-val">${Math.ceil(beUnits).toLocaleString('en-IN')}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${fmt(beUnits * pricePerUnit)} monthly revenue</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">💰</span><span class="fin-card-title">Break-even Revenue</span></div>
+            <div class="fin-val gold">${fmt(beRevenue)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">Monthly revenue needed to cover all costs</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📐</span><span class="fin-card-title">Contribution Margin</span></div>
+            <div class="fin-val">${fmt(contribMarginPerUnit)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${fmtPct((contribMarginPerUnit/pricePerUnit)*100)} per unit sold</div>
+          </div>
+          <div class="fin-card" style="${mosUnits>0?'border-color:rgba(61,214,140,.3)':'border-color:rgba(255,77,106,.3)'}">
+            <div class="fin-card-head"><span class="fin-card-icon">${mosUnits>0?'🟢':'🔴'}</span><span class="fin-card-title">Margin of Safety</span></div>
+            <div class="fin-val ${mosUnits>0?'green':'red'}">${mosPct.toFixed(1)}%</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${mosUnits>0?`${Math.floor(mosUnits).toLocaleString('en-IN')} units above breakeven`:'Currently below breakeven — burning cash'}</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title">📊 Cost vs Revenue Visual</div>
+        ${waterfallBar('Fixed Costs (monthly)', fixedCosts, Math.max(FIN.revenue, fixedCosts*1.5), '#ff4d6a')}
+        ${waterfallBar('Break-even Revenue needed', beRevenue, Math.max(FIN.revenue, fixedCosts*1.5), '#f5c842')}
+        ${waterfallBar('Your current revenue', FIN.revenue, Math.max(FIN.revenue, fixedCosts*1.5), FIN.revenue>=beRevenue?'#3dd68c':'#ff4d6a')}
+
+        <div style="background:${mosUnits>0?'rgba(61,214,140,.07)':'rgba(255,77,106,.07)'};border:1px solid ${mosUnits>0?'rgba(61,214,140,.25)':'rgba(255,77,106,.25)'};border-radius:10px;padding:14px 16px;margin-top:16px;">
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:${mosUnits>0?'var(--green)':'var(--red)'};margin-bottom:6px;">
+            ${mosUnits>0?'✓ Above Breakeven':'✗ Below Breakeven'}
+          </div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.6;">
+            ${mosUnits>0
+              ? `You're selling ${Math.floor(mosUnits)} more units than needed. You have a ${fmtPct(mosPct)} margin of safety — revenue can drop by ${fmtPct(mosPct)} before you lose money.`
+              : `You need ${Math.ceil(Math.abs(mosUnits)).toLocaleString('en-IN')} more units per month (${fmt(Math.abs(mosUnits)*pricePerUnit)} more revenue) to break even.`}
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('breakeven')">🤖 Get AI Strategy to Hit Breakeven Faster →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── SCENARIO PLANNER ─────────────────────────────────────────────────────────
+function renderScenario() {
+  const scenarios = {
+    bear: {label:'🐻 Bear', growthRate:5,  churn:12, cac:1.5, ltv:0.7,  color:'var(--red)'},
+    base: {label:'📊 Base', growthRate:15, churn:6,  cac:1.0, ltv:1.0,  color:'var(--green)'},
+    bull: {label:'🐂 Bull', growthRate:30, churn:3,  cac:0.8, ltv:1.3,  color:'var(--gold)'},
+  };
+  const sc = scenarios[FIN.scenario];
+  const gr = 1 + sc.growthRate / 100;
+  let rev = FIN.revenue;
+  const months = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  const rows = months.map((m,i) => {
+    const r = Math.round(rev);
+    const cogs = Math.round(r * FIN.cogs / 100);
+    const gp = r - cogs;
+    const adjCac = FIN.cac * sc.cac;
+    const adjMktg = FIN.mktgSpend;
+    const ebitda = gp - FIN.opex/100*r - adjMktg - FIN.teamCost - FIN.infraCost;
+    rev *= gr;
+    return {m, r, gp, ebitda, adjCac};
+  });
+  const annualRev = rows.reduce((a,r)=>a+r.r,0);
+  const annualEBITDA = rows.reduce((a,r)=>a+r.ebitda,0);
+  const maxRev = Math.max(...rows.map(r=>r.r));
+  const firstProfitMonth = rows.findIndex(r=>r.ebitda>0);
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">Scenario Planner · 🔭</div>
+        <div>
+          <div class="card-title">Scenario Planner</div>
+          <div class="card-desc">Bear / Base / Bull 12-month projections. Know your range before you commit to a plan.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">🎭 Select Scenario</div>
+        <div class="scenario-btns">
+          ${Object.entries(scenarios).map(([k,s]) => `
+            <div class="scen-btn ${FIN.scenario===k?'active '+k:''}" onclick="FIN.scenario='${k}';renderScenario();">
+              <div style="font-size:18px;margin-bottom:4px;">${s.label.split(' ')[0]}</div>
+              <div style="font-weight:600;">${s.label.split(' ')[1]}</div>
+              <div style="font-size:10px;margin-top:3px;">${s.growthRate}% MoM growth</div>
+            </div>`).join('')}
+        </div>
+
+        <div class="fin-section-title">📐 Base Inputs</div>
+        ${finInputRow('Starting Monthly Revenue', 'revenue', 50000, 10000000, 50000)}
+        ${finInputRow('COGS %', 'cogs', 5, 90, 1, '%')}
+        ${finInputRow('Monthly Marketing', 'mktgSpend', 10000, 2000000, 10000)}
+        ${finInputRow('Monthly Team Cost', 'teamCost', 50000, 5000000, 25000)}
+
+        <div class="fin-section-title">📊 ${sc.label} — Revenue Trajectory</div>
+        ${rows.map(r => `
+          <div class="waterfall-bar">
+            <div class="wb-label">${r.m}</div>
+            <div class="wb-bar-wrap">
+              <div class="wb-bar-fill" style="width:${(r.r/maxRev*100).toFixed(0)}%;background:${sc.color};opacity:.75;"></div>
+            </div>
+            <div class="wb-val" style="font-size:11px;">${fmt(r.r)}</div>
+          </div>`).join('')}
+
+        <div class="fin-grid" style="margin-top:18px;">
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📅</span><span class="fin-card-title">Annual Revenue</span></div>
+            <div class="fin-val">${fmt(annualRev)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📐</span><span class="fin-card-title">Annual EBITDA</span></div>
+            <div class="fin-val ${annualEBITDA>0?'green':'red'}">${fmt(annualEBITDA)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">🏁</span><span class="fin-card-title">First Profitable Month</span></div>
+            <div class="fin-val ${firstProfitMonth>=0?'green':'red'}">${firstProfitMonth>=0?'Month '+(firstProfitMonth+1):'Not in Yr 1'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📈</span><span class="fin-card-title">MoM Growth Assumed</span></div>
+            <div class="fin-val gold">${sc.growthRate}%</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title">🆚 All Scenarios Side by Side</div>
+        <div class="fin-card">
+          <div class="fin-row" style="font-weight:600;color:var(--text);">
+            <span>Scenario</span><span>Annual Revenue</span><span>Annual EBITDA</span><span>Profit Month</span>
+          </div>
+          ${Object.entries(scenarios).map(([k,s]) => {
+            const g = 1 + s.growthRate/100;
+            let r2 = FIN.revenue;
+            const rws = months.map(()=>{const rr=Math.round(r2);r2*=g;return rr;});
+            const aRev = rws.reduce((a,r)=>a+r,0);
+            const aEBITDA = rws.reduce((a,r)=>{
+              const cogs=Math.round(r*FIN.cogs/100);
+              return a+(r-cogs-FIN.opex/100*r-FIN.mktgSpend-FIN.teamCost-FIN.infraCost);
+            },0);
+            const fp = rws.findIndex((r,i)=>{
+              const cogs=Math.round(r*FIN.cogs/100);
+              return (r-cogs-FIN.opex/100*r-FIN.mktgSpend-FIN.teamCost-FIN.infraCost)>0;
+            });
+            return `<div class="fin-row" style="${k===FIN.scenario?'background:var(--surface3);':''}">
+              <span style="color:${s.color};font-weight:600;">${s.label}</span>
+              <span class="fin-row-v">${fmt(aRev)}</span>
+              <span class="fin-row-v ${aEBITDA>0?'pos':'neg'}">${fmt(aEBITDA)}</span>
+              <span class="fin-row-v ${fp>=0?'pos':'neg'}">${fp>=0?'Month '+(fp+1):'Not in Yr 1'}</span>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('scenario')">🤖 Get AI View on Most Likely Scenario →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── BURN & RUNWAY ────────────────────────────────────────────────────────────
+function renderRunway() {
+  const totalMonthlyOut = FIN.teamCost + FIN.infraCost + FIN.mktgSpend;
+  const monthlyRevCoverage = FIN.revenue * (1 - FIN.cogs/100);
+  const netBurn = Math.max(0, totalMonthlyOut - monthlyRevCoverage);
+  const runway = netBurn > 0 ? Math.floor(FIN.currentCash / netBurn) : 999;
+  const dangerZone = runway < 6;
+  const warningZone = runway < 12;
+
+  // Month-by-month cash burn
+  const months = ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  const gr = 1 + FIN.growthRate / 100;
+  let cash = FIN.currentCash;
+  let rev = FIN.revenue;
+  const cashRows = months.map((m,i) => {
+    const r = Math.round(rev);
+    const inflow = r * (1 - FIN.cogs/100);
+    const outflow = totalMonthlyOut;
+    const net = inflow - outflow;
+    cash += net;
+    rev *= gr;
+    return {m, inflow: Math.round(inflow), outflow, net: Math.round(net), cashEnd: Math.round(cash)};
+  });
+  const runoutMonth = cashRows.findIndex(r => r.cashEnd <= 0);
+  const maxCash = Math.max(FIN.currentCash, ...cashRows.map(r=>r.cashEnd));
+
+  const c = document.getElementById('content');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-head">
+        <div class="card-badge" style="color:var(--violet);background:var(--violet-glow);border-color:rgba(167,139,250,.25);">Burn & Runway · 🛫</div>
+        <div>
+          <div class="card-title">Burn & Runway Calculator</div>
+          <div class="card-desc">How long can you survive? Know your number. Raise or cut before it's too late.</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fin-section-title">📐 Cash Position</div>
+        ${finInputRow('Cash in Bank / Fund Balance', 'currentCash', 100000, 50000000, 100000)}
+        ${finInputRow('Monthly Revenue', 'revenue', 50000, 10000000, 50000)}
+        ${finInputRow('Monthly Growth Rate', 'growthRate', 0, 30, 1, '%')}
+        ${finInputRow('COGS %', 'cogs', 5, 90, 1, '%')}
+        ${finInputRow('Monthly Team Cost', 'teamCost', 25000, 5000000, 25000)}
+        ${finInputRow('Monthly Infrastructure', 'infraCost', 5000, 500000, 5000)}
+        ${finInputRow('Monthly Marketing', 'mktgSpend', 0, 2000000, 10000)}
+
+        <div class="fin-grid" style="margin-top:4px;">
+          <div class="fin-card" style="${dangerZone?'border-color:rgba(255,77,106,.4)':warningZone?'border-color:rgba(245,200,66,.3)':'border-color:rgba(61,214,140,.3)'}">
+            <div class="fin-card-head"><span class="fin-card-icon">${dangerZone?'🔴':warningZone?'🟡':'🟢'}</span><span class="fin-card-title">Runway</span></div>
+            <div class="fin-val ${dangerZone?'red':warningZone?'gold':'green'}">${runway === 999 ? '∞' : runway + ' mo'}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${dangerZone?'CRITICAL — Start fundraising or cut costs NOW':warningZone?'Warning — Begin fundraise process. 12 months is minimum runway.':'Healthy — but always be fundraising.'}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">🔥</span><span class="fin-card-title">Net Monthly Burn</span></div>
+            <div class="fin-val ${netBurn===0?'green':'red'}">${netBurn===0?'₹0 (Cash flow+)':fmt(netBurn)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">Revenue covers ${fmtPct(Math.min(100, monthlyRevCoverage/totalMonthlyOut*100))} of outflows</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">💸</span><span class="fin-card-title">Total Monthly Outflow</span></div>
+            <div class="fin-val">${fmt(totalMonthlyOut)}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">Team ${fmt(FIN.teamCost)} + Infra ${fmt(FIN.infraCost)} + Mktg ${fmt(FIN.mktgSpend)}</div>
+          </div>
+          <div class="fin-card">
+            <div class="fin-card-head"><span class="fin-card-icon">📅</span><span class="fin-card-title">Cash Runs Out</span></div>
+            <div class="fin-val ${runoutMonth>=0?'red':'green'}">${runoutMonth>=0?'Month '+(runoutMonth+1):'Beyond Year 1'}</div>
+            <div style="font-size:11.5px;color:var(--text3);margin-top:4px;">${runoutMonth>=0?`At ${fmtPct(FIN.growthRate)}% monthly growth rate`:'With current growth, cash lasts through Year 1'}</div>
+          </div>
+        </div>
+
+        <div class="fin-section-title">📊 Cash Balance — 12-Month Projection</div>
+        ${cashRows.map(r => `
+          <div class="waterfall-bar">
+            <div class="wb-label">${r.m}</div>
+            <div class="wb-bar-wrap">
+              <div class="wb-bar-fill" style="width:${Math.max(0,(r.cashEnd/maxCash*100)).toFixed(0)}%;background:${r.cashEnd>0?'var(--violet)':'var(--red)'};opacity:.8;"></div>
+            </div>
+            <div class="wb-val" style="font-size:11px;color:${r.cashEnd>0?'var(--text)':'var(--red)'};">${fmt(r.cashEnd)}</div>
+          </div>`).join('')}
+
+        <div class="fin-section-title">🇮🇳 India Fundraising Context</div>
+        <div class="fin-card">
+          ${benchmarkRow('Fundraise with 18+ months runway', 'Best position', runway>=18?'green':'neutral')}
+          ${benchmarkRow('Fundraise with 12 months runway', 'Acceptable', runway>=12?'green':runway>=6?'neutral':'red')}
+          ${benchmarkRow('Start process when you have 9 months', 'India VCs take 3-6mo', runway>=9?'green':'red')}
+          ${benchmarkRow('Default risk threshold', '<6 months', runway>=6?'green':'red')}
+          ${benchmarkRow('Monthly burn (ideal for seed stage)', '<₹25L', totalMonthlyOut<2500000?'green':'neutral')}
+        </div>
+
+        <div style="margin-top:18px;">
+          <button class="btn btn-p" style="background:var(--violet);box-shadow:0 4px 16px rgba(167,139,250,.25);" onclick="runFinAI('runway')">🤖 Get AI Fundraising & Cost-Cut Strategy →</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── AI ANALYSIS FOR FINANCE TOOLS ───────────────────────────────────────────
+async function runFinAI(toolId) {
+  if (!getApiKey()) { toast('Enter your OpenRouter key first', 'err'); return; }
+  const b = S.brand;
+  const brandCtx = b.brand ? `Brand: ${b.brand} | Product: ${b.product} | Model: ${b.bizModel} | Stage: ${b.stage}` : 'No brand set yet.';
+
+  const finSnapshot = `
+Financial Inputs:
+- Monthly Revenue: ${fmt(FIN.revenue)}
+- COGS: ${FIN.cogs}%
+- OpEx: ${FIN.opex}%
+- CAC: ${fmt(FIN.cac)}
+- LTV: ${fmt(FIN.ltv)}
+- Avg Order Value: ${fmt(FIN.avgOrderVal)}
+- Monthly Churn: ${FIN.churnRate}%
+- Team Cost: ${fmt(FIN.teamCost)}/mo
+- Marketing Spend: ${fmt(FIN.mktgSpend)}/mo
+- Infrastructure: ${fmt(FIN.infraCost)}/mo
+- Cash in Bank: ${fmt(FIN.currentCash)}
+- Monthly Growth Rate: ${FIN.growthRate}%
+LTV:CAC Ratio: ${(FIN.ltv/FIN.cac).toFixed(2)}x
+Gross Margin: ${(100-FIN.cogs).toFixed(0)}%
+Net Burn: ~${fmt(Math.max(0, FIN.teamCost+FIN.infraCost+FIN.mktgSpend - FIN.revenue*(1-FIN.cogs/100)))}/mo
+`;
+
+  const toolPrompts = {
+    unit_econ: `Analyze these unit economics for an Indian startup and provide:\n## Verdict on Unit Economics Health\nIs this business model viable at scale? Direct answer.\n\n## Top 3 Levers to Improve Margins\nSpecific, actionable — ranked by impact. Include India-specific tactics (negotiating with Indian distributors, kirana trade margins, import duty on COGS, etc.)\n\n## The One Number to Fix First\nIf they can only improve ONE metric, what is it and how?\n\n## India-Specific Margin Reality\nWhat do margins actually look like for comparable Indian businesses in this category? What's the benchmark?\n\n## Brutal Truth\n2 hard realities about this cost structure.`,
+    p_and_l: `Analyze this 12-month P&L projection for an Indian startup and provide:\n## P&L Quality Assessment\nIs this trajectory credible? Where are the assumptions most vulnerable?\n\n## Revenue Quality\nIs the growth rate realistic for this category in India? Comp to peer companies.\n\n## Cost Structure Opinion\nWhat's too high? What's under-invested? Specific line items.\n\n## The Profitability Path\nExact steps to reach EBITDA positive — in order of priority.\n\n## Brutal Truth\n2 things this P&L is hiding or not accounting for.`,
+    cac_ltv: `Analyze this CAC/LTV model for an Indian startup:\n## LTV:CAC Assessment\nIs the ratio healthy for this business model? What does it mean for growth strategy?\n\n## How to Lower CAC in India\n3 specific tactics for the Indian market — include channel-specific benchmarks.\n\n## How to Increase LTV in India\n3 specific retention tactics calibrated to Indian consumer/buyer behavior.\n\n## Payback Period Reality Check\nIs the payback period manageable given typical Indian startup fundraising cycles?\n\n## Brutal Truth\n2 hard realities about this cohort economics.`,
+    breakeven: `Analyze this breakeven model for an Indian startup:\n## Time-to-Breakeven Assessment\nIs this timeline realistic? What's achievable in the Indian market context?\n\n## Top 3 Ways to Reach Breakeven Faster\nSpecific to this business model — include India-specific options (government schemes, distributor credit terms, bulk purchasing for COGS reduction, etc.)\n\n## Fixed Cost Reduction Opportunities\nWhich fixed costs are cuttable without damaging growth? Be specific.\n\n## Revenue Acceleration Tactics\nHow to increase revenue faster to hit breakeven — 3 India-specific moves.\n\n## Brutal Truth\n2 things founders typically miss about their breakeven calculation.`,
+    scenario: `Analyze these scenario projections for an Indian startup:\n## Most Likely Scenario\nBear/Base/Bull — which is most realistic and why, given India market conditions?\n\n## Key Assumptions to Watch\nWhat 3 variables, if wrong, flip the entire projection?\n\n## India-Specific Risk Factors\nWhat could push this toward the Bear scenario that founders often don't model?\n\n## Upside Catalysts\nWhat India-specific events could push toward Bull scenario?\n\n## Brutal Truth\n2 things about the projections that need revisiting.`,
+    runway: `Analyze this burn and runway situation for an Indian startup:\n## Runway Assessment\nIs this runway safe? What's the real risk given Indian fundraising timelines?\n\n## Immediate Cost-Cut Recommendations\nIf they need to extend runway by 6 months without killing growth — what to cut?\n\n## Indian Fundraising Reality\nGiven this burn rate and stage, what is the fundraising path? VC, angels, revenue-based financing, government grants (Startup India, SIDBI)?\n\n## The 90-Day Plan to Extend Runway\n3 specific actions in the next 90 days.\n\n## Brutal Truth\n2 hard truths about this cash position.`,
+  };
+
+  const prompt2 = `${brandCtx}\n\n${finSnapshot}\n\n${toolPrompts[toolId] || 'Analyze these financials and provide strategic recommendations for an Indian startup.'}`;
+
+  const c = document.getElementById('content');
+  // Find or append response box
+  let rbox = document.getElementById('finAIResponse');
+  if (!rbox) {
+    rbox = document.createElement('div');
+    rbox.id = 'finAIResponse';
+    rbox.className = 'rbox';
+    rbox.style.marginTop = '18px';
+    c.querySelector('.card-body')?.appendChild(rbox);
+  }
+  rbox.innerHTML = `<div class="loading"><div class="spin"></div><div><div class="ltxt">BrandOS Financial Advisor analyzing...</div><div class="lsub">Applying India market intelligence to your numbers</div></div></div>`;
+  rbox.scrollIntoView({behavior:'smooth', block:'start'});
+
+  try {
+    const out = await callAI(prompt2, SYSPROMPT);
+    rbox.innerHTML = `
+      <div class="rhead">
+        <div class="rlabel">Financial Analysis — ${FIN_TOOLS_META.find(t=>t.id===toolId)?.label}</div>
+        <button class="btn btn-g" style="font-size:11.5px;padding:5px 12px;" onclick="selectFinTool('${toolId}')">Recalculate ↺</button>
+      </div>
+      <div class="rcontent">${md(out)}</div>`;
+  } catch(err) {
+    rbox.innerHTML = `<div style="color:var(--red);padding:14px;">Error: ${escHtml(err.message)}</div>`;
+  }
+}
+
+// ── FINANCIAL MODEL ENGINE END ─────────────────────────────────────────────────
 
 // ── INIT ───────────────────────────────────────────────────────────────────────
 const didRestore = loadState();
@@ -1800,6 +3635,8 @@ if (didRestore && S.brand.brand) {
   // Restore to where they left off
   if (S.mode === 'execution') showExecEngine();
   else if (S.mode === 'solver') showSolver();
+  else if (S.mode === 'finance') showFinanceEngine();
+  else if (S.mode === 'research') showResearchEngine();
   else if (S.step > 0) goStep(S.step);
   else showWelcome();
   setTimeout(() => toast('Welcome back, ' + S.brand.brand + ' ✓', 'ok'), 400);
